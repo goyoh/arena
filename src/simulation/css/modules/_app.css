@@ -1,0 +1,161 @@
+.custom-menu {
+	position: relative;
+	top: 5rem;
+	left: 2.500rem;
+	width: 26.667rem;
+	height: 85%;
+	background-color: #444;
+	color: #fff;
+	overflow: hidden;
+
+	&__tabs {
+		position: relative;
+		width: 100%;
+		height: 4.000rem;
+		font-size: 1.167rem;
+		letter-spacing: -0.5px;
+		line-height: 1.2;
+		cursor: pointer;
+		z-index: 4;
+
+		li {
+			position: relative;
+			float: left;
+			width: 50%;
+			height: 100%;
+			padding: 0.7rem 1.333rem;
+			background-color: #333;
+
+			&.active,
+			&:hover {
+				background-color: #222;
+
+				&:before {
+					@mixin pseudo 0, 0;
+					bottom: -0.95rem;
+					left: 0;
+					right: 0;
+					margin: auto;
+					border-style: solid;
+					border-width: 1rem 1rem 0 1rem;
+					border-color: #222 transparent transparent transparent;
+				}
+			}
+		}
+	}
+
+	&__content {
+		display: none;
+		width: calc(100% - 2.324em);
+		margin: auto;
+		margin-top: 2.000rem;
+
+		&--mark {
+			border-top: none;
+		}
+
+		&.active {
+			display: block;
+		}
+	}
+
+	&__tap {
+		display: none;
+	}
+
+	&__inner {
+		margin-bottom: 1.000rem;
+
+		&--border {
+			border-top: 1px solid #888;
+		}
+	}
+
+	&__section {
+		padding: 0 0.7rem;
+		margin-top: 0.5rem;
+
+		&--border {
+			border-bottom: 1px dotted #888;
+		}
+	}
+
+	&__title {
+		margin-top: 0.25rem;
+		margin-bottom: 1.25rem;
+		font-size: 1.167rem;
+		padding: 0.25rem 1rem;
+		border-top: 1px solid #888;
+		border-bottom: 1px solid #888;
+	}
+
+	&__tab {
+		display: none;
+
+		&.active {
+			display: block;
+		}
+	}
+}
+
+.colour-name {
+	margin-bottom: 0.125rem;
+	font-size: 0.917rem;
+}
+
+.custom-display {
+	top: center;
+	top: 46.2%;
+	left: 0;
+	right: 0;
+	width: 26rem;
+	margin: auto;
+	text-align: center;
+
+	img {
+		width: 100%;
+	}
+
+	svg {
+		width: 72%;
+	}
+}
+
+.custom-display-core {
+	@mixin hide;
+}
+
+.custom-rotation {
+	position: absolute;
+	display: inline-block;
+	bottom: 5rem;
+	left: 0;
+	right: 0;
+	width: 13.333rem;
+	height: 3.333rem;
+	margin: auto;
+	background-color: #000000;
+	color: #fff;
+	font-size: 1.250rem;
+	text-align: center;
+	line-height: 2.5;
+	transition: opacity 0.3s ease-in-out-circ;
+	z-index: 99;
+	cursor: pointer;
+
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+.svg-text {
+	fill: #fff;
+	transform: translateX(-0.333rem);
+	font-size: 0.3333rem;
+}
+
+.notes {
+	width: 100%;
+	text-align: left;
+	color: #fff;
+}

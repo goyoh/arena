@@ -1,0 +1,31 @@
+.mark-text {
+  input[type="text"] {
+    height: calc(2.5rem - 2px);
+    padding: 0 0.5rem;
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+  }
+
+  input[type="submit"] {
+    width: 9.167rem;
+    height: 2.5rem;
+    background-color: #222;
+    color: #fff;
+    border: none;
+    transition: opacity 0.3s ease-in-out-circ;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  input.disabled {
+    ime-mode: disabled;
+  }
+
+  &__form {
+    padding: 0 1rem;
+    font-size: 0.917rem;
+  }
+}

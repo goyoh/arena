@@ -1,0 +1,54 @@
+.item-info {
+  position: absolute;
+  top: 12.5rem;
+  right: 5.5%;
+  min-width: 20.000rem;
+  color: #fff;
+
+  &__title {
+    width: 16.333rem;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &__type {
+    margin-bottom: 0;
+    font-size: 1.333em;
+  }
+
+  &__subtype {
+    margin-top: 0;
+  }
+
+  &__list {
+    margin-bottom: 1.5rem;
+    font-size: 0.917rem;
+    border-top: 1px solid #fff;
+  }
+
+  &__item {
+    border-bottom: 1px solid #fff;
+    padding: 0.5rem 0;
+  }
+
+  &__link {
+    display: inline-block;
+    width: 15.000rem;
+    height: 2.667rem;
+    background-color: #222222;
+    color: #fff;
+    text-align: center;
+    line-height: 2.8;
+    transition: opacity 0.3s ease-in-out-circ;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &.is-red {
+      background-color: $red;
+    }
+  }
+}

@@ -1,0 +1,135 @@
+{% block pageid %}simulation{% endblock %}
+{% block title %}simulation{% endblock %}
+
+{% extends 'layout/_layout.nunjucks' %}
+
+{% block content %}
+<main class="main main--simulation" id="main" role="main">
+	<article class="content content--simulation" id="content">
+		<nav class="content-navigation">
+			<ul class="u-clear">
+				<li><span>種類を選ぶ</span></li>
+				<li class="active"><span>カスタムする</span></li>
+				<li><span>オーダーする</span></li>
+			</ul>
+		</nav>
+
+		<section class="section section--custom is-swimwear js-get-height">
+			<div class="custom-menu" id="wear_1_01">
+				<ul class="custom-menu__tabs u-clear u-pc">
+					<li class="active" data-tab=".base-simulation">SWIM WEAR<br>SIMULATION</li>
+					<li data-tab=".custom-mark-simulation">MARK<br>SIMULATION</li>
+				</ul>
+
+				<div class="custom-menu__head u-sp">SWIM WEAR<br>SIMULATION</div>
+				<div class="custom-menu__tap is-hidden">（タップして開く）</div>
+
+				<div class="custom-menu__content custom-menu__content--base base-simulation active">
+					<div class="custom-menu__inner">
+						<h4 class="custom-menu__title">TYPE</h4>
+
+						{% include 'components/_type.nunjucks' %}
+					</div>
+
+					<div class="custom-menu__inner">
+						<h4 class="custom-menu__title">COLOR</h4>
+
+						{% include 'components/_bcolour.nunjucks' %}			
+					</div>
+
+					<p class="read-more js-read-more"></p>
+				</div>
+
+				<div class="custom-menu__head u-sp">MARK<br>SIMULATION</div>
+				<div class="custom-menu__tap">（タップして開く）</div>
+
+				<div class="custom-menu__content custom-menu__content--mark mark-simulation">
+					<div class="custom-menu__inner">
+						{% include 'components/_mark-condition.nunjucks' %}
+					</div>
+
+					<div class="custom-menu__inner">
+						<h4 class="custom-menu__title">マークの位置</h4>
+
+						{% include 'components/_mark-pos.nunjucks' %}
+					</div>
+
+					<div class="custom-menu__inner">
+						<h4 class="custom-menu__title">マークの書体</h4>
+
+						{% include 'components/_mark-family.nunjucks' %}
+					</div>
+
+					<div class="custom-menu__inner">
+						<h4 class="custom-menu__title">マークの色</h4>
+
+						{% include 'components/_mark-colour.nunjucks' %}
+					</div>
+
+					<div class="custom-menu__inner">
+						<h4 class="custom-menu__title">マークの名前</h4>
+
+						{% include 'components/_mark-text.nunjucks' %}
+					</div>
+
+					<p class="read-more js-read-more"></p>
+				</div>
+			</div>
+
+			<div class="item-info">
+				<h3 class="item-info__title"><img src="/simulation/assets/images/common/text-swimwear.png" alt="SWIMWEAR"></h3>
+				<p class="item-info__type">クロスタイプ</p>
+				<p class="item-info__subtype">OAR-4300<br>クロスジャケット　※裏地メッシュなし</p>
+
+				<ul class="item-info__list u-pc">
+					<li class="item-info__item">本体価格：￥13,000 +税</li>
+					<li class="item-info__item">SIZE：SS・S・M・L・O・XO・XA・XB</li>
+					<li class="item-info__item">MATERIAL：アリーナクロス</li>
+				</ul>
+
+				<div class="item-info__price u-sp">本体価格：￥13,000 +税</div>
+				<a href="" class="item-info__link is-red js-popup-trigger u-pc" data-popup=".popup--design-note">デザインに関する注意事項</a>
+
+				{% include 'components/_order-info.svg' %}
+			</div>
+
+			<div class="custom-display">
+				<div class="custom-display-core js-base-display">
+					{% include 'svg/item.svg' %}
+				</div>
+
+				<div class="notes">
+					<p class="notes__item">
+						<span class="u-asterisk">*</span><span>シミュレーション画像はイメージです。<br>実際の商品と色味やマーキングの大きさ、プリント柄の入り方等が異なる場合がございますので予めご了承下さい。</span>
+						<br>
+						<span class="u-asterisk">*</span><span>マークには細いフチがつきます。</span>
+					</p>
+					<p class="notes__item">詳細は「デザインに関する注意事項」をご確認下さい。</p>
+				</div>
+
+				<span class="custom-rotation u-sp js-rotation" data-rotation="front" data-svg="OAR-7010W"><i class="icon icon--rotation"></i>ROTATION</span>
+
+				<a href="" class="custom-info__link js-popup-trigger u-sp" data-popup=".popup--design-note">商品情報を見る</a>
+			</div>
+
+			<span class="custom-rotation u-pc js-rotation" data-rotation="front" data-svg="OAR-7010W"><i class="icon icon--rotation"></i>ROTATION</span>
+		</section>
+
+		<div class="popup popup--order-sheet js-popup">
+			{% include 'components/_order-sheet.nunjucks' %}
+		</div>
+
+		<div class="popup popup--mark-check js-popup">
+			{% include 'components/_mark-check.nunjucks' %}
+		</div>
+
+		<div class="popup popup--design-note js-popup">
+			{% include 'components/_design-note.nunjucks' %}
+		</div>
+	</article>
+</main>
+
+{% endblock %}
+
+{% block scripts %} 
+{% endblock %}

@@ -1,0 +1,98 @@
+.u-left {
+  float: left;
+}
+.u-right {
+  float: right;
+}
+.u-first-letter {
+  font-weight: bold;
+  font-size: 1.7em;
+}
+.u-filter--blur {
+  filter: blur(4px);
+}
+.u-filter--sepia {
+  filter: sepia(.8);
+}
+.u-text-center {
+  text-align: center;
+}
+.u-text-right {
+  text-align: right;
+}
+.u-center-vertical {
+  top: center;
+  width: 100%;
+}
+.u-inner {
+  width: 1020px;
+  margin: auto;
+}
+.u-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.u-pc {
+  display: block !important;
+  img {
+    width: 100%;
+  }
+}
+.u-sp {
+  display: none !important;
+  img {
+    width: 100%;
+  }
+}
+
+.u-colour {
+  &--black {
+    background-color: #211614;
+  }
+  &--red {
+    background-color: #E93235;
+  }
+  &--blue {
+    background-color: #0B6FB8;
+  }
+  &--pink {
+    background-color: #E30882;
+  }
+  &--dark-blue {
+    background-color: #0F204C;
+  }
+  &--water {
+    background-color: #60C0BC;
+  }
+  &--white {
+    background-color: #fff;
+  }
+}
+
+.u-font {
+  &--charlie {
+    font-family: 'Charlie Brown M54', san-serif;
+  }
+  &--dfp {
+    font-family: 'ＤＦＰ勘亭流', san-serif;
+  }
+  &--impact {
+    font-family: 'Impact', san-serif;
+  }
+  &--superstar {
+    font-family: 'Superstar M54', san-serif;
+  }
+  &--futura {
+    font-family: 'Futura', san-serif;
+  }
+  &--hiramin {
+    font-family: 'ヒラギノ明朝' serif;
+  }
+}
+
+.u-asterisk {
+  float: left;
+  margin: 1rem;
+  margin-left: 0;
+  margin-top: 0;
+}

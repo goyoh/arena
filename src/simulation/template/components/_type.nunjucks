@@ -1,0 +1,16 @@
+<div class="wear-type">						
+	<ul class="wear-type__list js-wear-type u-clear">
+		<li class="wear-type__item">
+			<a class="active" data-svg="OAR-7010W"><img src="/simulation/assets/images/customisation/custom1.png" alt="top"></a>
+		</li>
+		<li class="wear-type__item">
+			<a data-svg="item1-body"><img src="/simulation/assets/images/customisation/custom2.png" alt="top"></a>
+		</li>
+		<li class="wear-type__item is-no-option">
+			<img src="/simulation/assets/images/customisation/custom-none.png" alt="top">
+		</li>
+		<li class="wear-type__item is-no-option">
+			<img src="/simulation/assets/images/customisation/custom-none.png" alt="top">
+		</li>
+	</ul>
+</div>

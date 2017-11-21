@@ -1,0 +1,56 @@
+.order-info {
+  width: 100%;
+  margin-top: 2.667rem;
+  padding: 1.50rem 1.333rem;
+  background-color: color(#222 a(50%));
+  @mixin hide;
+
+  .button--close {
+    width: 30px;
+    height: 30px;
+    background-color: rgba(0,0,0,0.5);
+    background-image: url($root/icons/icon-close_sp.png);
+    background-size: 50%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: absolute;
+    top: 0;
+    right: 20px;
+    transform: translateY(-100%);
+    @mixin hide;
+
+    &.show {
+      background-image: url($root/icons/icon-open_sp.png);
+    }
+  }
+
+  &__item {
+    position: relative;
+    width: 100%;
+    height: 2.667em;
+    margin-top: 1rem;
+    text-align: center;
+    line-height: 2.8;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  &__link {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    font-size: 1rem;
+    background-color: #444;
+    color: #fff;
+    transition: all 0.4s ease-in-out-circ;
+
+    &:hover,
+    &.active {
+      background-color: #fff;
+      color: #444;
+    }
+  }
+}

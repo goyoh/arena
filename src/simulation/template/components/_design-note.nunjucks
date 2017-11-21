@@ -1,0 +1,62 @@
+<div class="design-note popup-inner">
+  <h3 class="design-note__head">デザインに関する注意事項</h3>
+  <a class="popup-close js-popup-close"></a>
+
+  <div class="design-note__inner">
+    <div class="design-note__desc">
+      <p><span class="u-asterisk">※</span>シミュレーション画像はイメージです。厳密に実際の商品と同じでなく、色味、マーキングの大きさ、プリント柄の入り方などが異なる場合があります。</p>
+      <p><span class="u-asterisk">※</span>書体06は小文字の指定ができません。</p>
+      <p><span class="u-asterisk">※</span>マークには細いフチがつきます。詳細は下記の通りです。</p>
+
+      <ul class="design-note__list">
+        <li class="design-note__item">
+          <span>・下記の品番では、マークのフチにAカラーがつきます。</span>
+          <div class="design-note__pack">
+            <p><span><img src="/simulation/assets/images/customisation/design-note/image1.jpg" alt="OAT-7062W、OAT-7062WJ、OAT-7063、OAT-7063J"></span>OAT-7062W、OAT-7062WJ、OAT-7063、OAT-7063J</p>
+            <p><span><img src="/simulation/assets/images/customisation/design-note/image2.jpg" alt="OAT-7064W、OAT-7064WJ、OAT-7065、OAT-7065J"></span>OAT-7064W、OAT-7064WJ、OAT-7065、OAT-7065J</p>
+            <p><span><img src="/simulation/assets/images/customisation/design-note/image3.jpg" alt="OAT-7070W、OAT-7070WJ、OAT-7071、OAT-7071J"></span>OAT-7070W、OAT-7070WJ、OAT-7071、OAT-7071J</p>
+            <p><span><img src="/simulation/assets/images/customisation/design-note/image4.jpg" alt="OAT-7072W、OAT-7072WJ、OAT-7073、OAT-7073J"></span>OAT-7072W、OAT-7072WJ、OAT-7073、OAT-7073J</p>
+            <p><span><img src="/simulation/assets/images/customisation/design-note/image5.jpg" alt="OAT-7074W、OAT-7074WJ、OAT-7075、OAT-7075J"></span>OAT-7074W、OAT-7074WJ、OAT-7075、OAT-7075J</p>
+          </div>
+        </li>
+        <li class="design-note__item">
+          <span>・下記の品番では、マークのフチにBカラーがつきます。</span>
+          <div class="design-note__pack">
+            <p><span><img src="/simulation/assets/images/customisation/design-note/image6.jpg" alt="OAT-7060W、OAT-7060WJ、OAT-7061、OAT-7061J"></span>OAT-7060W、OAT-7060WJ、OAT-7061、OAT-7061J</p>
+            <p><span><img src="/simulation/assets/images/customisation/design-note/image7.jpg" alt="OAT-7066W、OAT-7066WJ、OAT-7067、OAT-7067J"></span>OAT-7066W、OAT-7066WJ、OAT-7067、OAT-7067J</p>
+          </div>
+        </li>
+        <li class="design-note__item">
+          <span>・下記の品番では、マークのフチにグラデーションの一番上のカラーがつきます。</span>
+          <div class="design-note__pack">
+            <p><span><img src="/simulation/assets/images/customisation/design-note/image8.jpg" alt="OAT-7068W、OAT-7068WJ、OAT-7069、OAT-7069J"></span>OAT-7068W、OAT-7068WJ、OAT-7069、OAT-7069J</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="design-note__desc">
+      <p><span class="u-asterisk">※</span>ご指定の文字数によって、実施の商品とマーキングの大きさが異なります。<br>マーキングの大きさの目安は下記の通りです。</p>
+      <ul class="design-note__list">
+        <li class="design-note__item">
+          <span>8文字の場合</span>
+          <div class="design-note__pack design-note__pack--sized">
+            <img src="/simulation/assets/images/customisation/design-note/size1.png" alt="8文字の場合">
+          </div>
+        </li>
+        <li class="design-note__item">
+          <span>5文字の場合</span>
+          <div class="design-note__pack design-note__pack--sized">
+            <img src="/simulation/assets/images/customisation/design-note/size2.png" alt="5文字の場合">
+          </div>
+        </li>
+        <li class="design-note__item">
+          <span>2文字の場合</span>
+          <div class="design-note__pack design-note__pack--sized">
+            <img src="/simulation/assets/images/customisation/design-note/size3.png" alt="2文字の場合">
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

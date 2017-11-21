@@ -1,0 +1,50 @@
+.mark-condition {
+  a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 0 1rem;
+    background-color: #333;
+    color: #666;
+    line-height: 2.7;
+
+    &.active,
+    &:hover {
+      background-color: #222;
+      color: #fff;
+
+      .icon--tick {
+        border: 1px solid #fff;
+        background-image: url($root/icons/icon-tick.png);
+      }
+    }
+  }
+
+  .icon--tick {
+    width: 1.333rem;
+    height: 1.333rem;
+    margin-right: 0.5rem;
+    border: 1px solid #666666;
+    background-repeat: no-repeat;
+    background-size: cover;
+    vertical-align: sub;
+  }
+
+  &__list {
+    position: relative;
+    padding: 0.8rem 0;
+    border-top: 1px dotted #888;
+    border-bottom: 1px dotted #888;
+    z-index: 4;
+  }
+
+  &__item {
+    float: left;
+    width: 49%;
+    height: 2.5rem;
+
+    &:first-child {
+      margin-right: 2%;
+    }
+  }
+}

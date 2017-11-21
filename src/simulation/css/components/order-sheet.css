@@ -1,0 +1,108 @@
+.order-sheet {
+  &__head {
+    margin-top: 0;
+    padding: 1.333em 1.667em;
+    font-size: 1.333em;
+    border-bottom: 1px solid #666;
+  }
+
+  &__list {
+    padding: 0 1.667em;
+  }
+
+  &__item {
+    position: relative;
+    padding: 0.667em;
+    overflow: hidden;
+
+    &:hover,
+    &.active {
+      background-color: #333;
+    }
+
+    &:last-child {
+      border-bottom: 1px dotted #444;
+    }
+  }
+
+  &__image {
+    position: relative;
+    float: left;
+    width: 10%;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .order-sheet__item.active & {
+      &:before {
+        @mixin pseudo 2.833em, 2.417em;
+
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        background-image: url($root/icons/icon-tick.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: 2;
+      }
+    }
+  }
+
+  &__text {
+    top: center;
+    left: 11%;
+    float: left;
+    width: 90%;
+    padding-left: 1.333em;
+  }
+
+  &__title {
+    display: inline-block;
+    font-size: 18px;
+    line-height: 1;
+    margin-bottom: 0.3333em;
+  }
+
+  &__desc {
+    margin: 0;
+  }
+
+  &__pick {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 1.667em;
+    width: 6.667em;
+    height: 2.500em;
+    background-color: #444444;
+    margin: auto;
+    text-align: center;
+    line-height: 2.5;
+
+    &::before {
+      content: '選択';
+      display: inline-block;
+    }
+
+    .order-sheet__item.active & {
+      background-color: #222;
+
+      &::before {
+        content: '選択解除';
+      }
+    }
+  }
+}

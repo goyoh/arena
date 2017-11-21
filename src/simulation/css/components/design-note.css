@@ -1,0 +1,49 @@
+.design-note {
+  color: #fff;
+  overflow: auto;
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__head {
+    margin-top: 0;
+    padding: 1.333em 1.667em;
+    font-size: 1.333em;
+    border-bottom: 1px solid #666;
+  }
+
+  &__desc {
+    padding: 1em 2em;
+  }
+
+  &__item {
+  }
+
+  &__pack {
+    margin-bottom: 8px;
+    margin-left: 1.2rem;
+
+    &--sized {
+      display: inline-block;
+      padding: 0.5rem;
+      background-color: transparent;
+    }
+
+    p {
+      margin: 0;
+      margin-top: 4px;
+    }
+
+    span {
+      display: inline-block;
+      width: 80px;
+      margin-right: 1rem;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+}

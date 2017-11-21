@@ -1,0 +1,22 @@
+/* FONTS */
+$font-main: "HelveticaNeue", "Helvetica Neue", "Hiragino Kaku Gothic Pro", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+
+/* COLOURS */
+$colour-main: #313131;
+$colour-sub: #878787;
+$colour-bg: #1A1A1A;
+$colour-bg-sub: #f6f4f4;
+
+$colour-green: #c8ffc8;
+$colour-deep-green: #04F004;
+$colour-red: #FF6262;
+
+$colour-gray: #504f4f;
+$colour-light-gray: #b5b5b5;
+
+/* SIZE */
+$content-width: 740px;
+$content-top: 1.6em;
+
+/* OTHERS */
+$root: "/simulation/assets/images";
