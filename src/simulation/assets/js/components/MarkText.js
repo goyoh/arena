@@ -1,39 +1,63 @@
-export default class markText extends Base {
+import $ from 'jquery';
+import { TweenMax } from 'gsap';
+
+import Component from './Component';
+import OrderMenu from './OrderMenu';
+
+const Encoding = require('encoding-japanese');
+
+const fontServer = 'https://mark.arena-jp.com/simulation/servconst/MarkSample';
+
+export default class MarkText extends Component {
   constructor(props) {
     super(props);
+
+    this.render();
   }
 
-  load(e, url) {
-    $.ajax({
-      url: jdata,
-      dataType: 'json',
-    })
-    .done((data) => {
-      const validation = data.validate;
+  render() {
+    this.events();
+  }
 
-      if (validation) {
-        this.markTextToCanvas(text);
-
-        const markPopup = $(e.currentTarget).data('popup');
-
-        TweenMax.to(markPopup, 0.4, { y: '0%' });
-
-        $('.form-message').html('');
-      } else {
-        const message = data.message;
-
-        $('.form-message').html(message);
-      }
-    })
-    .fail(()=> {
-      console.log("error");
-    })
-    .always(()=> {
-      console.log("compconste");
+  events() {
+    $('.mark-text__form').on(window.eventtype, '.js-mark-submit', (e) => {
+      e.preventDefault();
+      this.setData(e);
     });
   }
 
+  load(e, tarUrl, text) {
+    $.ajax({
+      url: tarUrl,
+      dataType: 'json',
+    })
+      .done((data) => {
+        const validation = data.validate;
+
+        if (validation) {
+          this.markTextToCanvas(text);
+
+          const markPopup = $(e.currentTarget).data('popup');
+
+          TweenMax.to(markPopup, 0.4, { y: '0%' });
+
+          $('.form-message').html('');
+        } else {
+          const message = data.message;
+
+          $('.form-message').html(message);
+        }
+      })
+      .fail(() => {
+        console.log('error');
+      })
+      .always(() => {
+        console.log('compconste');
+      });
+  }
+
   setData(e) {
+    const text = $('.js-mark-text').val();
     const encodedText = encodeURIComponent(text);
 
     this.getMarkData().then((data) => {
@@ -44,24 +68,23 @@ export default class markText extends Base {
         &text=${encodedText}&json
       `;
 
-      this.load(e, jdata);
+      this.load(e, jdata, text);
     });
   }
 
   markTextToCanvas(text) {
-    const posData = Base.storageValue['pos'];
-    const familyData = Base.storageValue['font'];
-    const baseColourData = Base.storageValue['bcol'];
-    const colourData = Base.storageValue['col'];
+    const posData = Component.storageValue.pos;
+    const familyData = Component.storageValue.font;
+    const baseColourData = Component.storageValue.bcol;
+    const colourData = Component.storageValue.col;
 
     // convert text from UTF-8 to SJIS
     const str = text;
     if (str) {
-      const imageElem = document.querySelector('.js-mark-check-image'); //Image element
-      const str_array = Encoding.stringToCode(str);
-      const sjis_array = Encoding.convert(str_array, "SJIS", "UNICODE");
-      const convertedText = Encoding.codeToString(sjis_array);
-      const sjisText = Encoding.urlEncode(sjis_array);
+      const imageElem = document.querySelector('.js-mark-check-image'); // Image element
+      const strArray = Encoding.stringToCode(str);
+      const sjisArray = Encoding.convert(strArray, 'SJIS', 'UNICODE');
+      const sjisText = Encoding.urlEncode(sjisArray);
 
       imageElem.src = `
         ${fontServer}
@@ -74,11 +97,13 @@ export default class markText extends Base {
     }
 
     // show order info menu on the bottom right side
-    if (this.orderInfoActive && text) OrderMenu.orderInfo();
+    if (OrderMenu.orderInfoActive && text) OrderMenu.orderInfo();
 
     // set value on localStrage and change the order link
-    this.storageValue['mark'] = text;
+    Component.storageValue.mark = text;
     this.setLocalStrage();
     this.orderLinkChange('mark', text);
   }
 }
+
+Component.MarkText = MarkText;

@@ -30,22 +30,16 @@
     float: left;
     width: 10%;
 
-    img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-    }
-
+    /* img,
     canvas {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-    }
+    } */
 
     .order-sheet__item.active & {
-      &:before {
+      &::before {
         @mixin pseudo 2.833em, 2.417em;
 
         top: 0;
@@ -87,7 +81,7 @@
     right: 1.667em;
     width: 6.667em;
     height: 2.500em;
-    background-color: #444444;
+    background-color: #444;
     margin: auto;
     text-align: center;
     line-height: 2.5;

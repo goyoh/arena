@@ -1,7 +1,7 @@
 {% block pageid %}simulation{% endblock %}
 {% block title %}simulation{% endblock %}
 
-{% extends 'layout/_layout.nunjucks' %}
+{% extends 'layout/_layout.html' %}
 
 {% block content %}
 <main class="main main--simulation" id="main" role="main">
@@ -14,11 +14,11 @@
 			</ul>
 		</nav>
 
-		<section class="section section--custom is-swimwear js-get-height">
-			<div class="custom-menu" id="wear_1_01">
+		<section class="section section--custom is-swimwear js-get-height" data-component="SimulationCommon">
+			<div class="custom-menu" id="wear-26">
 				<ul class="custom-menu__tabs u-clear u-pc">
 					<li class="active" data-tab=".base-simulation">SWIM WEAR<br>SIMULATION</li>
-					<li data-tab=".custom-mark-simulation">MARK<br>SIMULATION</li>
+					<li data-tab=".mark-simulation">MARK<br>SIMULATION</li>
 				</ul>
 
 				<div class="custom-menu__head u-sp">SWIM WEAR<br>SIMULATION</div>
@@ -28,16 +28,14 @@
 					<div class="custom-menu__inner">
 						<h4 class="custom-menu__title">TYPE</h4>
 
-						{% include 'components/_type.nunjucks' %}
+						{% include 'components/_type.html' %}
 					</div>
 
 					<div class="custom-menu__inner">
 						<h4 class="custom-menu__title">COLOR</h4>
 
-						{% include 'components/_bcolour.nunjucks' %}			
+						{% include 'components/_bcolour.html' %}			
 					</div>
-
-					<p class="read-more js-read-more"></p>
 				</div>
 
 				<div class="custom-menu__head u-sp">MARK<br>SIMULATION</div>
@@ -45,35 +43,34 @@
 
 				<div class="custom-menu__content custom-menu__content--mark mark-simulation">
 					<div class="custom-menu__inner">
-						{% include 'components/_mark-condition.nunjucks' %}
+						{% include 'components/_mark-condition.html' %}
 					</div>
 
 					<div class="custom-menu__inner">
 						<h4 class="custom-menu__title">マークの位置</h4>
 
-						{% include 'components/_mark-pos.nunjucks' %}
+						{% include 'components/_mark-pos.html' %}
 					</div>
 
 					<div class="custom-menu__inner">
 						<h4 class="custom-menu__title">マークの書体</h4>
 
-						{% include 'components/_mark-family.nunjucks' %}
+						{% include 'components/_mark-family.html' %}
 					</div>
 
 					<div class="custom-menu__inner">
 						<h4 class="custom-menu__title">マークの色</h4>
 
-						{% include 'components/_mark-colour.nunjucks' %}
+						{% include 'components/_mark-colour.html' %}
 					</div>
 
 					<div class="custom-menu__inner">
 						<h4 class="custom-menu__title">マークの名前</h4>
 
-						{% include 'components/_mark-text.nunjucks' %}
+						{% include 'components/_mark-text.html' %}
 					</div>
-
-					<p class="read-more js-read-more"></p>
 				</div>
+				<p class="read-more js-read-more"></p>
 			</div>
 
 			<div class="item-info">
@@ -90,21 +87,12 @@
 				<div class="item-info__price u-sp">本体価格：￥13,000 +税</div>
 				<a href="" class="item-info__link is-red js-popup-trigger u-pc" data-popup=".popup--design-note">デザインに関する注意事項</a>
 
-				{% include 'components/_order-info.svg' %}
+				{% include 'components/_order-info.html' %}
 			</div>
 
 			<div class="custom-display">
 				<div class="custom-display-core js-base-display">
 					{% include 'svg/item.svg' %}
-				</div>
-
-				<div class="notes">
-					<p class="notes__item">
-						<span class="u-asterisk">*</span><span>シミュレーション画像はイメージです。<br>実際の商品と色味やマーキングの大きさ、プリント柄の入り方等が異なる場合がございますので予めご了承下さい。</span>
-						<br>
-						<span class="u-asterisk">*</span><span>マークには細いフチがつきます。</span>
-					</p>
-					<p class="notes__item">詳細は「デザインに関する注意事項」をご確認下さい。</p>
 				</div>
 
 				<span class="custom-rotation u-sp js-rotation" data-rotation="front" data-svg="OAR-7010W"><i class="icon icon--rotation"></i>ROTATION</span>
@@ -116,15 +104,39 @@
 		</section>
 
 		<div class="popup popup--order-sheet js-popup">
-			{% include 'components/_order-sheet.nunjucks' %}
+			{% include 'components/_order-sheet.html' %}
 		</div>
 
 		<div class="popup popup--mark-check js-popup">
-			{% include 'components/_mark-check.nunjucks' %}
+			{% include 'components/_mark-check.html' %}
 		</div>
 
 		<div class="popup popup--design-note js-popup">
-			{% include 'components/_design-note.nunjucks' %}
+			{% include 'components/_design-note.html' %}
+		</div>
+
+		<div class="popup popup--system-requirements js-popup">
+			<div class="popup-inner">
+				<p class="order-sheet__head system-requirements__head">動作環境</p>
+				<a class="popup-close js-popup-close"></a>
+
+				<div class="docs-section">
+					<h2>当サイトは、ご利用環境として下記を推奨しています。</h2>
+					<h3>パソコン</h3>
+					<ul>
+						<li>Internet Explorer 10 以上</li>
+						<li>Firefox 51 以上</li>
+						<li>Chrome 56 以上</li>
+						<li>Safari 9.1.3（Mac）</li>
+					</ul>
+					<br>
+					<h3>モバイルデバイス</h3>
+					<ul>
+						<li>Apple iOS 9 以上（Safari）</li>
+						<li>Android 5 以上（Chrome）</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</article>
 </main>

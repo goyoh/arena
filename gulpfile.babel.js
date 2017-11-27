@@ -28,14 +28,14 @@ const functions = require('postcss-functions');
 const compiler = webpack(webpackConfig);
 
 const paths = {
-  buildRoot: 'html',
+  buildRoot: 'html/simulation',
   buildAssets: 'html/simulation/assets',
   srcRoot: 'src/simulation',
   srcAssets: 'src/simulation/assets',
-  tmp: '.tmp',
+  tmp: '.tmp/simulation',
 };
 
-const projectName = 'C is';
+const projectName = 'Arena';
 
 const banner = ['/**',
   ' * <%= pkg.name %> - <%= pkg.title %>',
@@ -185,7 +185,7 @@ gulp.task('serve', ['nunjucks', 'postcss', 'fonts'], () => {
     port: process.env.PORT || 9000,
     ui: { port: Number(process.env.PORT || 9000) + 1 },
     server: {
-      baseDir: [paths.tmp, paths.srcRoot],
+      baseDir: ['.tmp', 'src'],
       // middleware: [
       //   webpackDevMiddleware,
       //   require('webpack-hot-middleware')(compiler),

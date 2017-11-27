@@ -27,44 +27,51 @@
 		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
 
+		<div class="loader" id="loader">
+			<div class="loader__inner">
+				<span class="loader__count js-loader-count"></span>
+			</div>
+		</div>
+
 		<header class="header clear" role="banner">
 			<a class="header__logo" href="/simulation">
 				<img src="/simulation/assets/images/common/header-logo.png" alt="CUSTOM ORDER">
 			</a>
 			<a href="" class="navigation-trigger u-sp" id="navigation-trigger"><i></i></a>
+
 			<nav class="navigation u-sp" id="navigation" role="navigation">
 				<h5 class="navigation__head">ウェアの種類を選ぶ</h5>
 				<ul class="navigation__wear-list">
 					<li>
-						<a class="navigation-link" href="">Swim Wear</a>
+						<a class="navigation__link" href="">Swim Wear</a>
 					</li>
 					<li>
-						<a class="navigation-link" href="">Team Wear</a>
+						<a class="navigation__link" href="">Team Wear</a>
 					</li>
 				</ul>
 
 				<h5 class="navigation__head">保存したStyle</h5>
 				<ul class="navigation-style__list js-style-list">
-					<li class="active">
+					<li class="navigation-style__item active">
 						<span class="navigation-style__head">Style1</span>
 						<p class="navigation-style__desc">OAR-4300　BU02　<br>クロスジャケット</p>
 						<!-- <a href="" class="button button--remove">削除</a> -->
 					</li>
-					<li class="registered">
+					<li class="navigation-style__item registered">
 						<span class="navigation-style__head">Style2</span>
 						<p class="navigation-style__desc">OAR-4300　BU02　<br>クロスジャケット</p>
 						<a href="" class="button button--remove">削除</a>
 					</li>
-					<li class="registered">
+					<li class="navigation-style__item registered">
 						<span class="navigation-style__head">Style3</span>
 						<p class="navigation-style__desc">OAR-4300　BU02　<br>クロスジャケット</p>
 						<a href="" class="button button--remove">削除</a>
 					</li>
-					<li>
+					<li class="navigation-style__item">
 						<span class="navigation-style__head">Style4</span>
 						<p class="navigation-style__desc">- 未保存 -</p>
 					</li>
-					<li>
+					<li class="navigation-style__item">
 						<span class="navigation-style__head">Style5</span>
 						<p class="navigation-style__desc">- 未保存 -</p>
 					</li>
@@ -72,25 +79,24 @@
 
 				<h5 class="navigation__head">はじめてのお客様へ</h5>
 				<a href="https://custom.arena-jp.com/help/index.html" target="_blank">HELP</a>
-
-				<footer class="footer is-pc is-tb clear" role="contentinfo">
-					<div class="footer__logo">
-						<img src="/simulation/assets/images/common/footer-logo.png" alt="copyright">
-					</div>
-				</footer>
 			</nav>
+
 			<div class="header__menu">
 				<div class="header-style js-style-list">
 					<p class="header-style__title">Style:</p>
-					<ul class="clear header-style__list">
-						<li><a class="registered active" href="">Style1</a></li>
-						<li><a class="registered" href="">Style2</a></li>
-						<li><a class="registered" href="">Style3</a></li>
-						<li><a href="">Style4</a></li>
-						<li><a href="">Style5</a></li>
+					<ul class="u-clear header-style__list">
+						<li class="header-style__item" data-number="1"><a class="registered active" href="">Style1</a></li>
+						<li class="header-style__item" data-number="2"><a class="registered" href="">Style2</a></li>
+						<li class="header-style__item" data-number="3"><a class="registered" href="">Style3</a></li>
+						<li class="header-style__item" data-number="4"><a href="">Style4</a></li>
+						<li class="header-style__item" data-number="5"><a href="">Style5</a></li>
 					</ul>
 				</div>
-				<a href="https://custom.arena-jp.com/help/index.html" target="_blank">・HELP</a>
+
+				<div class="header__help">
+					<a href="https://custom.arena-jp.com/help/index.html" target="_blank">・HELP</a>
+					<a href="javascript:void(0);" class="js-popup-trigger" data-popup=".popup--system-requirements">・動作環境</a>
+				</div>
 			</div>
 		</header>
 
@@ -98,13 +104,13 @@
 			{% block content %} {% endblock %}
 		</div>
 
-		<footer class="footer u-pc u-tb clear" role="contentinfo">
+		<footer class="footer u-clear" role="contentinfo">
 			<div class="footer__logo">
 				<img src="/simulation/assets/images/common/footer-logo.png" alt="copyright">
 			</div>
 		</footer>
 
-		<script src="/simulation/assets/js/scripts.min.js"></script>
+		<script src="/simulation/assets/js/main.js"></script>
 		
 		{% block scripts %} {% endblock %}
 

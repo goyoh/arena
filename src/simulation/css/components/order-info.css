@@ -1,23 +1,24 @@
 .order-info {
   width: 100%;
   margin-top: 2.667rem;
-  padding: 1.50rem 1.333rem;
+  padding: 1.5rem 1.333rem;
   background-color: color(#222 a(50%));
+
   @mixin hide;
 
   .button--close {
     width: 30px;
     height: 30px;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     background-image: url($root/icons/icon-close_sp.png);
     background-size: 50%;
-    background-position: 50%;
     background-repeat: no-repeat;
     background-position: center center;
     position: absolute;
     top: 0;
     right: 20px;
     transform: translateY(-100%);
+
     @mixin hide;
 
     &.show {

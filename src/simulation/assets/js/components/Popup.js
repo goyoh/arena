@@ -1,4 +1,7 @@
-export default const Popup = {
+import $ from 'jquery';
+import { TweenMax } from 'gsap';
+
+const Popup = {
   popup: (e) => {
     e.preventDefault();
 
@@ -9,5 +12,7 @@ export default const Popup = {
   popupClose: (e) => {
     e.preventDefault();
     TweenMax.to('.js-popup', 0.4, { y: '100%' });
-  }
+  },
 };
+
+export default Popup;

@@ -18,13 +18,13 @@ const babelConfig = Object.assign({}, pkg.babel, {
 });
 
 const config = {
-  context: path.resolve(__dirname, './src'),
+  context: path.resolve(__dirname, './src/simulation'),
 
   entry: './assets/js/scripts.js',
 
   output: {
-    path: path.resolve(__dirname, './.tmp/assets/js'),
-    publicPath: isDebug ? `http://localhost:${process.env.PORT || 9000}/assets/js/` : '/assets/js/',
+    path: path.resolve(__dirname, './.tmp/simulation/assets/js'),
+    publicPath: isDebug ? `http://localhost:${process.env.PORT || 9000}/simulation/assets/js/` : '/simulation/assets/js/',
     filename: isDebug ? '[name].js?[hash]' : '[name].[hash].js',
     chunkFilename: isDebug ? '[id].js?[chunkhash]' : '[id].[chunkhash].js',
     sourcePrefix: '  ',

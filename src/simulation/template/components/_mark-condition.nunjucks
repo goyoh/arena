@@ -1,6 +1,0 @@
-<div class="mark-condition">            
-  <ul class="mark-condition__list u-clear js-mark-condition">
-    <li><a data-mark="on"><i class="icon icon--tick"></i>マークあり</a></li>
-    <li><a class="active" data-mark="off"><i class="icon icon--tick"></i>マークなし</a></li>
-  </ul>
-</div>

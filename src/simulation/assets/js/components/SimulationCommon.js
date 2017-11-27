@@ -1,62 +1,61 @@
-import BaseColour from './components/BaseColour';
+import $ from 'jquery';
+import { TweenMax } from 'gsap';
+import { mobilecheck, getUrlVars } from '../app/globals';
+import Component from './Component';
 
-export default class Common extends Base {
+import BaseColour from './BaseColour';
+import ScrollEvents from './ScrollEvents';
+import OrderMenu from './OrderMenu';
+
+const uploadPath = '1/simulation/wpcms/wp-content/uploads/sites/2/';
+
+export default class SimulationCommon extends Component {
   constructor(props) {
     super(props);
 
     const slug = window.location.href.split('?')[0].split('/').pop();
-    this.jsonPath = `/simulation/wp-json/wp/v2/posts/?slug=${slug}`;
-    
-    this.events();
+    // this.jsonPath = `https://custom.arena-jp.com/simulation/wp-json/wp/v2/posts/?slug=${slug}`;
+    this.jsonPath = 'https://custom.arena-jp.com/simulation/wp-json/wp/v2/posts/?slug=oar-7010w';
+
     this.render();
   }
 
   render() {
     this.setStyleByCookie();
+    this.events();
 
-    new BaseColour({
+    this.baseColour = new BaseColour({
       jsonUrl: this.jsonPath,
       callback: () => {
         this.markSetAsStart();
         TweenMax.to('.js-base-display', 0.4, { autoAlpha: 1 });
-      }
+      },
     });
   }
 
   events() {
-    //mark events
-    $('.js-colour--mark').on(eventtype, 'li', (event) => {
-      this.changeColours(event);
+    // mark events
+    $('.js-colour--mark').on(window.eventtype, 'li', (e) => {
+      this.changeColours(e);
       return false;
-    });
-    $('.js-mark-pick').on(eventtype, 'a', (event) => {
-      this.markPick(event);
-      return false;
-    });
-    $('.custom-pick__input').on(eventtype, '.js-mark-submit', (event) => {
-      this.markText(event);
-      return false;
-    });
-    $('.js-mark-pos').on(eventtype, 'a', (event) => {
-      this.markPosPick(event);
-      return false;
-    });
-    $('.js-mark-family').on('change', 'input', (event) => {
-      this.markFamily(event);
     });
 
-    $('.custom-menu__tabs').on(eventtype, 'li', (event)=> {
-      this.tabs(event);
+    $('.custom-menu__tabs').on(window.eventtype, 'li', (e) => {
+      this.tabs(e);
+    });
+
+    $(document).on(window.eventtype, '.js-rotation', (e) => {
+      this.rotation(e);
     });
 
     if (mobilecheck()) {
-      $(document).on(eventtype2, '.custom-menu__head', (event) =>{
-        this.tapMenu(event);
+      $(document).on('touchstart', '.custom-menu__head', (e) => {
+        this.tapMenu(e);
       });
     }
   }
 
-  tabs (event) {
+  tabs(event) {
     const tabName = $(event.currentTarget).attr('data-tab');
     $('.custom-menu__tabs li').add('.custom-menu__content').removeClass('active');
     $(event.currentTarget).addClass('active');
@@ -66,7 +65,7 @@ export default class Common extends Base {
     this.updateScrollBar();
   }
 
-  tapMenu(event) {
+  tapMenu = (event) => {
     const $el = $('.custom-menu__content');
     const $tar = $(event.currentTarget).next().next();
     const $tapNav = $('.custom-menu__tap');
@@ -78,45 +77,53 @@ export default class Common extends Base {
     $tapTar.addClass('is-hidden');
   }
 
-  modals(event) {
-    event.preventDefault();
-
-    const modalTar = $(event.currentTarget).attr('data-modal');
-    
-    if (!$(event.currentTarget).hasClass('active')) {
-      $(event.currentTarget).addClass('active');
-      TweenMax.to(modalTar, 0.4, { autoAlpha: 1 });
-    } else {
-      $(event.currentTarget).removeClass('active');
-      TweenMax.to(modalTar, 0.4, { autoAlpha: 0 });
-    }
-
-    $('.content').on(eventtype, ':not(.modal)', () => {
-      this.modalClose(event.currentTarget, modalTar);
-    });
-  }
-
-  modalClose(el, target) {
+  modalClose = (el, target) => {
     $(el).removeClass('active');
     TweenMax.to(target, 0.4, { autoAlpha: 0 });
   }
 
-  rotation (e) {
+  modals(e) {
+    e.preDefault();
+
+    const modalTar = $(e.currentTarget).attr('data-modal');
+
+    if (!$(e.currentTarget).hasClass('active')) {
+      $(e.currentTarget).addClass('active');
+      TweenMax.to(modalTar, 0.4, { autoAlpha: 1 });
+    } else {
+      $(e.currentTarget).removeClass('active');
+      TweenMax.to(modalTar, 0.4, { autoAlpha: 0 });
+    }
+
+    $('.content').on(window.eventtype, ':not(.modal)', () => {
+      this.modalClose(e.currentTarget, modalTar);
+    });
+  }
+
+  rotation(e) {
     e.preventDefault();
 
     const data = $('.js-rotation').data('svg');
     const rotationDir = $('.js-rotation').data('rotation');
 
+    const storageKey = JSON.parse(localStorage.getItem(this.pageID));
+    const key = storageKey.mark;
+
     // front or back
     if (rotationDir === 'front') {
-      $('.js-base-display').load(`${this.uploadPath}${data}_back.svg`, () => {
+      $('.js-base-display').load(`${uploadPath}${data}_back.svg`, () => {
         this.restyle();
+
+        Component.component.MarkText.markTextToCanvas(key);
       });
+
       $('.js-rotation').data('rotation', 'back');
     } else {
-      $('.js-base-display').load(`${this.uploadPath}${data}.svg`, () => {
+      $('.js-base-display').load(`${uploadPath}${data}.svg`, () => {
         this.restyle();
+        Component.component.MarkText.markTextToCanvas(key);
       });
+
       $('.js-rotation').data('rotation', 'front');
     }
   }
@@ -126,21 +133,22 @@ export default class Common extends Base {
 
     // add mark text info at start
     if (vars.mark && vars.mark !== '') {
-      Base.storageValue['mark'] = vars.mark;
-      Base.orderLink['mark'] = vars.mark;
+      Component.storageValue.mark = vars.mark;
+      Component.orderLink.mark = vars.mark;
     }
 
     // apply if there are queries
-    if (vars.pos && vars.pos !== '') { 
-      //set initial localStrage
+    if (vars.pos && vars.pos !== '') {
+      // set initial localStrage
       if (vars.mark && vars.mark !== '') {
         OrderMenu.orderInfo();
       }
 
       this.reloadPage();
     } else {
-      //apply no-mark option to dom and localStrage
-      this.markPick($('.js-mark-pick .active'));
+      // apply no-mark option to dom and localStrage
+      const $el = $('.js-mark-condition .active');
+      Component.component.MarkCondition.setData($el);
     }
 
     if ($('.js-mark-family input:checked').data('max-lang') === 'en') {
@@ -148,25 +156,11 @@ export default class Common extends Base {
     }
   }
 
-  markTab(event) {
+  markTab = (event) => {
     const target = $(event.currentTarget).data('tab');
 
     $('.js-custom-pick-tab').add('.js-mark-tab-trigger').removeClass('active');
     $(target).add(event.currentTarget).addClass('active');
-  }
-
-  markSVGRemove() {
-    $.each(this.markOptions, (index, el) => {
-      const $path = $(`#position-${el}`);
-      TweenMax.set($path.children().find('path'), { display: 'none' });
-    });
-  }
-
-  markSVGShow() {
-    $.each(this.markOptions, (index, el) => {
-      const $path = $(`#position-${el}`);
-      TweenMax.set($path.children().find('path'), { display: 'inherit' });
-    });
   }
 
   reloadPage() {
@@ -177,9 +171,9 @@ export default class Common extends Base {
     const vars = getUrlVars();
 
     if (vars.pos) {
-      $posEl = $('.js-mark-pos').find(`*[data-pos=${vars.pos}]`);
+      $posEl = $('.js-mark-position').find(`*[data-pos=${vars.pos}]`);
     } else {
-      $posEl = $('.js-mark-pos .active');
+      $posEl = $('.js-mark-position .active');
     }
 
     if (vars.font) {
@@ -194,8 +188,12 @@ export default class Common extends Base {
       $colEl = $('.js-colour--mark').find('li.active');
     }
 
-    this.markPosPick($posEl);
-    this.markFamily($familyEl);
+    Component.component.MarkPosition.setData($posEl);
+    Component.component.MarkFamily.setData($familyEl);
     this.changeColours($colEl);
+
+    if (getUrlVars().mark) Component.component.MarkText.markTextToCanvas();
   }
 }
+
+Component.SimulationCommon = SimulationCommon;

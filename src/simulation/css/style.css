@@ -1,20 +1,21 @@
 
-/*SCSS MIXINS*/
+/* SCSS MIXINS */
 
 @import 'mixins/_vendor.css';
 @import 'mixins/_position.css';
 @import 'mixins/_grid.css';
 
 
-/*CONFIG MODULES*/
+/* CONFIG MODULES */
 
 @import 'modules/_vars.css';
 @import 'modules/_clearfix.css';
 @import 'modules/_normalize.css';
 @import 'modules/_defaults.css';
+@import 'modules/_utilities.css';
 
 
-/*PARTIALS*/
+/* PARTIALS */
 
 @import 'partials/_header.css';
 @import 'partials/_nav.css';
@@ -23,7 +24,7 @@
 @import 'partials/_footer.css';
 
 
-/*OBJECTS & MODULES*/
+/* OBJECTS & MODULES */
 
 @import 'modules/_buttons.css';
 @import 'modules/_inputs.css';
@@ -31,11 +32,26 @@
 @import 'modules/_typography.css';
 @import 'modules/_misc.css';
 @import 'modules/_app.css';
-
 @import 'modules/_breakpoints.css';
 @import 'modules/_print.css';
 
 
-/*VENDOR*/
+/* COMPONENTS */
+
+@import 'components/bcolour.css';
+@import 'components/design-note.css';
+@import 'components/item-info.css';
+@import 'components/mark-colour.css';
+@import 'components/mark-condition.css';
+@import 'components/mark-family.css';
+@import 'components/mark-position.css';
+@import 'components/mark-print.css';
+@import 'components/mark-text.css';
+@import 'components/order-info.css';
+@import 'components/order-sheet.css';
+@import 'components/wear-type.css';
+
+
+/* VENDOR */
 
 @import 'vendor/_external.css';

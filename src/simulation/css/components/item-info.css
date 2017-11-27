@@ -1,8 +1,8 @@
 .item-info {
   position: absolute;
-  top: 12.5rem;
+  top: 11rem;
   right: 5.5%;
-  min-width: 20.000rem;
+  min-width: 28rem;
   color: #fff;
 
   &__title {
@@ -35,20 +35,21 @@
 
   &__link {
     display: inline-block;
-    width: 15.000rem;
+    width: 15rem;
     height: 2.667rem;
-    background-color: #222222;
+    background-color: #222;
     color: #fff;
     text-align: center;
     line-height: 2.8;
-    transition: opacity 0.3s ease-in-out-circ;
-
-    &:hover {
-      opacity: 0.8;
-    }
+    transition: all 0.4s ease-in-out-circ;
 
     &.is-red {
-      background-color: $red;
+      background-color: $colour-red;
+    }
+
+    &:hover {
+      background-color: #fff;
+      color: $colour-main;
     }
   }
 }

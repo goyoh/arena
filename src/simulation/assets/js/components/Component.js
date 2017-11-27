@@ -1,19 +1,19 @@
 import $ from 'jquery';
 import { TweenMax } from 'gsap';
-import Ps from 'perfect-scrollbar';
+import { readCookie } from '../app/globals';
+import ScrollEvents from './ScrollEvents';
 
-import { readCookie } from './globals';
-
-export default class Base {
+export default class Component {
   constructor() {
     this.currentURL = window.location.href;
     this.uploadPath = '/simulation/wpcms/wp-content/uploads/';
     this.markOptions = ['a', 'b', 'c', 'j', 'k', 'd', 'i', 'l', 'e', 'm', 'n', 'f', 'l', 'g', 'o'];
     this.pageID = $('.custom-menu').attr('id');
-    this.styleName = $('.js-order-save').attr('data-style');
+    this.styleName = $('.js-order-save').data('style');
   }
 
-  static styleNum;
+  static component = {};
+  static styleNum = 0;
   static orderLink = {};
   static newOrderLink = {};
   static storageValue = {};
@@ -39,38 +39,30 @@ export default class Base {
     $.each(cookies, (i) => {
       // apply the style which ain't 0 in Cookie
       if (readCookie.getItem(`style${i + 1}`) === '0') {
-        Base.styleNum = i + 1;
+        Component.styleNum = i + 1;
         // return false;
       }
     });
   }
 
   setLocalStrage() {
-    localStorage.setItem(this.pageID, JSON.stringify(Base.storageValue));
+    localStorage.setItem(this.pageID, JSON.stringify(Component.storageValue));
   }
 
   orderLinkChange(key, val) {
-    Base.orderLink[key] = val;
+    Component.orderLink[key] = val;
     this.currentURL = this.currentURL.split(/[?#]/)[0];
 
-    const styleNumData = Base.styleNum || '';
+    const styleNumData = Component.styleNum || '';
     const styleData = this.styleName || '';
 
-    const posData = Base.orderLink.pos || '';
-    const familyData = Base.orderLink.font || '';
-    const baseColourData = Base.orderLink.bcol || '';
-    const colourData = Base.orderLink.col || '';
-    const markData = Base.orderLink.mark || '';
+    const posData = Component.orderLink.pos || '';
+    const familyData = Component.orderLink.font || '';
+    const baseColourData = Component.orderLink.bcol || '';
+    const colourData = Component.orderLink.col || '';
+    const markData = Component.orderLink.mark || '';
 
-    Base.newOrderLink = `
-      ${this.currentURL}
-      ?style${styleNumData}=${styleData}
-      &bcol=${baseColourData}
-      &pos=${posData}
-      &font=${familyData}
-      &col=${colourData}
-      &mark=${markData}
-    `;
+    Component.newOrderLink = `${this.currentURL}?style${styleNumData}=${styleData}&bcol=${baseColourData}&pos=${posData}&font=${familyData}&col=${colourData}&mark=${markData}`;
 
     const directLink = `
       https://custom.arena-jp.com/order/index.php?module=Flash&action=CreateStyle&style1=
@@ -78,7 +70,7 @@ export default class Base {
     `;
 
     $('.js-order-sheet-direct').attr('href', directLink);
-    $('.js-order-save').attr('href', Base.newOrderLink);
+    $('.js-order-save').attr('href', Component.newOrderLink);
 
     $('.js-facebook-link').attr('href', `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`${this.currentURL}?bcol=${baseColourData}&pos=${posData}&font=${familyData}&col=${colourData}&mark=${markData}`)}`);
     $('.js-twitter-link').attr('href', `https://twitter.com/home?status=${encodeURIComponent(`${this.currentURL}?bcol=${baseColourData}&pos=${posData}&font=${familyData}&col=${colourData}&mark=${markData}`)}`);
@@ -88,11 +80,11 @@ export default class Base {
   getMarkData = () => (
     new Promise((resolve) => {
       const colourData = $('.js-colour--mark').find('li.active').data('colour');
-      const posData = $('.js-mark-pos .active').data('pos');
+      const posData = $('.js-mark-position .active').data('pos');
       const rotationData = $('.js-rotation').data('rotation');
       const markText = $('.js-mark-text').val();
 
-      const $position = $('.js-mark-pos').find(`[data-pos="${posData}"]`);
+      const $position = $('.js-mark-position').find(`[data-pos="${posData}"]`);
 
       const $family = $('.js-mark-family input:checked');
       const lang = $family.data('max-lang');
@@ -131,6 +123,7 @@ export default class Base {
     // const $svg = $('.js-base-display').find('svg');
     const tar = $tarEl.parent().data('target');
     let $svgPath;
+    console.log($tarEl.parent());
 
     const cate = $tarEl.parent().data('cate');
     const colour = $tarEl.data('colour');
@@ -147,7 +140,7 @@ export default class Base {
 
       $svgPath = $(tar).children(markFont).find('path');
       // set localStrage and change the order link
-      Base.storageValue[cate] = code;
+      Component.storageValue[cate] = code;
       this.setLocalStrage();
     } else {
       $svgPath = $(tar).children();
@@ -175,7 +168,7 @@ export default class Base {
         if ($(el).is('.js-colour')) {
           // apply if it's a mark
           if ($(el).is('.js-colour--mark')) {
-            const markFont = $('.custom-pick__fonts input:checked').val();
+            const markFont = $('.js-mark-family input:checked').val();
             const $tarEl = $(tar).children(markFont).find('path');
 
             const colour = $(el).find(`[data-code="${key}"]`).data('colour');
@@ -201,8 +194,16 @@ export default class Base {
   }
 
   updateScrollBar = () => {
-    // update the scrollbar height
-    const el = document.querySelector('.custom-menu');
-    // Ps.update(el);
+    ScrollEvents.updateScrollBar();
+  }
+
+  turnOff() { }
+
+  turnOn() { }
+
+  resize(wdt, hgt) { }
+
+  destroy() {
+    super.destroy();
   }
 }

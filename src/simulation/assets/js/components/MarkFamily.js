@@ -1,37 +1,58 @@
-export default class markFamily extends Base {
+import $ from 'jquery';
+import { TweenMax } from 'gsap';
+
+import Component from './Component';
+
+export default class MarkFamily extends Component {
   constructor(props) {
     super(props);
+
+    this.render();
   }
 
-  setData(event) {
-    const $tarEl = (event.currentTarget) ? $(event.currentTarget) : event;
+  render() {
+    this.events();
+  }
 
-    // initialise input
-    $('.js-mark-family input').prop('checked', false);
-    $('.js-mark-family li').removeClass('active');
+  events() {
+    $('.js-mark-family').on('change', 'input', (e) => {
+      this.setData(e);
+    });
+  }
 
-    if ($tarEl.data('max-lang') == 'en') {
+  setData(e) {
+    const $tarEl = (e.currentTarget) ? $(e.currentTarget) : e;
+
+    if ($tarEl.data('max-lang') === 'en') {
       $('.js-mark-text').addClass('disabled');
     } else {
       $('.js-mark-text').removeClass('disabled');
     }
 
     this.getMarkData().then((data) => {
+      // initialise input
+      $('.js-mark-family input').prop('checked', false);
+      $('.js-mark-family li').removeClass('active');
+      $tarEl.prop('checked', true);
+      $tarEl.parent().addClass('active');
+
       $.each(this.markOptions, (index, el) => {
         const $path = $(`#position-${el}`);
         TweenMax.set($path.children().find('path'), { fill: 'none' });
       });
 
-      if (data.pos) {
-        const tar = `#position-${data.pos.toLowerCase()}`;
+      if (data.position) {
+        const tar = `#position-${data.position.toLowerCase()}`;
         const $el = $(tar).children(data.family).find('path');
         TweenMax.set($el, { fill: data.colour });
       }
 
-      //update localStrage and the order link
+      // update localStrage and the order link
       this.orderLinkChange('font', data.family);
-      Base.storageValue['font'] = data.family;
+      Component.storageValue.font = data.family;
       this.setLocalStrage();
     });
   }
 }
+
+Component.MarkFamily = MarkFamily;
