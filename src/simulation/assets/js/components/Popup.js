@@ -5,7 +5,7 @@ const Popup = {
   popup: (e) => {
     e.preventDefault();
 
-    const popupTar = $(e.currentTarget).attr('data-popup');
+    const popupTar = $(e.currentTarget).data('popup');
     TweenMax.to(popupTar, 0.4, { y: '0%' });
   },
 

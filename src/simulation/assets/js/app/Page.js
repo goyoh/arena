@@ -1,22 +1,21 @@
 import $ from 'jquery';
-import route from 'riot-route';
 import imagesLoaded from 'imagesloaded';
-import { TweenMax } from 'gsap';
+// import route from 'riot-route';
 
-import { mobilecheck } from '../app/globals';
+import { mobilecheck } from './globals';
+
+import { loaderProgress, loaderOut } from './Loader';
 
 import Component from '../components/Component';
 import ScrollEvents from '../components/ScrollEvents';
 import Popup from '../components/Popup';
 import OrderMenu from '../components/OrderMenu';
-import SimulationCommon from '../components/SimulationCommon';
 
+import SimulationCommon from '../components/SimulationCommon';
 import MarkCondition from '../components/MarkCondition';
 import MarkFamily from '../components/MarkFamily';
 import MarkText from '../components/MarkText';
 import MarkPosition from '../components/MarkPosition';
-
-'use strict';
 
 const globalEvents = () => {
   // $(document).on(window.eventtype2, '.js-rotation', (event) => {
@@ -34,12 +33,16 @@ export default class Page {
     this.components = Component.component;
     this.templates = [];
 
-    route((collection) => {
-      this.render(collection);
-    });
+    const slug = window.location.pathname.replace(/\//g, '');
+    console.log(slug);
 
-    route.base('/simulation');
-    route.start(true);
+    // route((collection) => {
+    //   this.render(collection);
+    // });
+
+    // route.base('/simulation');
+    // route.start(true);
+    this.render(slug);
   }
 
   render(slug) {
@@ -48,10 +51,12 @@ export default class Page {
       ScrollEvents.scrollNavDisplay();
       this.events();
 
-      if (slug && slug !== '') {
+      if (slug && slug !== 'simulation') {
         OrderMenu.styleRegistration();
 
         if (!mobilecheck()) ScrollEvents.scrollBarStyle();
+      } else {
+        loaderOut();
       }
     });
   }
@@ -86,15 +91,6 @@ export default class Page {
     }
   }
 
-  loaderProgress = (amount) => {
-    const val = Math.round(amount);
-    $('.js-loader-count').html(val);
-  }
-
-  loaderOut = () => {
-    TweenMax.to('.loader', 0.6, { autoAlpha: 0 });
-  }
-
   preLoad() {
     const loadingImages = imagesLoaded(this.$view.find('.js-preload').toArray(), { background: true });
 
@@ -112,16 +108,14 @@ export default class Page {
       if (this.loader.images.length > 0) {
         this.loader.on('progress', (instance) => {
           const progress = (instance.progressedCount / instance.images.length) * 100;
-          this.loaderProgress(progress);
+          loaderProgress(progress);
         }).on('always', () => {
           $('body').removeClass('load-start').addClass('load-completed');
-          this.loaderOut();
 
           resolve(true);
         });
       } else {
-        this.loaderProgress(100);
-        this.loaderOut();
+        loaderProgress(100);
         $('body').removeClass('load-start').addClass('load-completed');
 
         resolve(true);

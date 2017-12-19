@@ -5,18 +5,28 @@
     background-color: transparent;
     border: 1px solid #fff;
     color: #fff;
+    transition: all 0.3s ease-in-out-circ;
+
+    &:active,
+    &:focus {
+      border: 1px solid $colour-red;
+      outline: none;
+      background-color: #fff;
+      color: $colour-main;
+    }
   }
 
   input[type="submit"] {
     width: 9.167rem;
     height: 2.5rem;
-    background-color: #222;
+    background-color: $colour-button;
     color: #fff;
     border: none;
-    transition: opacity 0.3s ease-in-out-circ;
+    transition: all 0.3s ease-in-out-circ;
 
     &:hover {
-      opacity: 0.8;
+      background-color: #fff;
+      color: $colour-main;
     }
   }
 

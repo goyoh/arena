@@ -28,15 +28,12 @@ const OrderMenu = {
   },
 
   styleRegistration: () => {
-    if (mobilecheck()) {
-      $('.navigation-style__list').on(eventtype, '.button--remove', (e) => {
-        this.removeFn(e);
-      });
-    } else {
-      $('.header-style__list').on(eventtype, '.icon', (e) => {
-        this.removeFn(e);
-      });
-    }
+    const $container = (mobilecheck()) ? $('.navigation-style__list') : $('.header-style__list');
+    const tar = (mobilecheck()) ? '.button--remove' : '.icon';
+
+    $container.on(eventtype, tar, (e) => {
+      this.removeFn(e);
+    });
   },
 
   orderInfo: () => {
@@ -96,7 +93,7 @@ const OrderMenu = {
     let styleInfo = '';
 
     $('.js-order-sheet-list li.active').each((i, el) => {
-      styleInfo = `${styleInfo}&${decodeURIComponent($(el).attr('data-style'))}`;
+      styleInfo = `${styleInfo}&${decodeURIComponent($(el).data('style'))}`;
     });
 
     if ($('.js-order-sheet-list li.active').length > 0) {

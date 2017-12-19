@@ -10,7 +10,7 @@ const ScrollEvents = {
     const headerHeight = $('.header').outerHeight();
     const bannerHeight = $(tar).find('.item-head').outerHeight();
 
-    const tarTop = ($(tar).offset().top + bannerHeight) - (headerHeight + 2);
+    const tarTop = ($(tar).offset().top + bannerHeight) - headerHeight;
 
     $('html, body').animate({ scrollTop: tarTop });
   },
@@ -30,7 +30,7 @@ const ScrollEvents = {
     const elTop = $(e.currentTarget).scrollTop();
 
     const alphaVal = elTop === 0 ? 1 : 0;
-    TweenMax.to('.js-read-more', 0.4, { autoAlpha: alphaVal });
+    TweenMax.set('.js-read-more', { autoAlpha: alphaVal });
   },
 
   scrollBottom: (e) => {
@@ -50,7 +50,7 @@ const ScrollEvents = {
   updateScrollBar: () => {
     // update the scrollbar height
     const el = document.querySelector('.custom-menu');
-    this.ps.update(el);
+    // this.ps.update(el);
   },
 };
 

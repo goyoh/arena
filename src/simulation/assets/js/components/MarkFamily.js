@@ -30,6 +30,7 @@ export default class MarkFamily extends Component {
     }
 
     this.getMarkData().then((data) => {
+      const font = data.family.replace('.mrk', '');
       // initialise input
       $('.js-mark-family input').prop('checked', false);
       $('.js-mark-family li').removeClass('active');
@@ -48,8 +49,8 @@ export default class MarkFamily extends Component {
       }
 
       // update localStrage and the order link
-      this.orderLinkChange('font', data.family);
-      Component.storageValue.font = data.family;
+      this.orderLinkChange('font', font);
+      Component.storageValue.font = font;
       this.setLocalStrage();
     });
   }

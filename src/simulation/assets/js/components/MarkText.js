@@ -26,18 +26,18 @@ export default class MarkText extends Component {
     });
   }
 
-  load(e, tarUrl, text) {
+  load(...props) {
     $.ajax({
-      url: tarUrl,
+      url: props.jdata,
       dataType: 'json',
     })
       .done((data) => {
         const validation = data.validate;
 
         if (validation) {
-          this.markTextToCanvas(text);
+          this.markTextToCanvas(props.text);
 
-          const markPopup = $(e.currentTarget).data('popup');
+          const markPopup = $(props.e.currentTarget).data('popup');
 
           TweenMax.to(markPopup, 0.4, { y: '0%' });
 
@@ -61,22 +61,13 @@ export default class MarkText extends Component {
     const encodedText = encodeURIComponent(text);
 
     this.getMarkData().then((data) => {
-      const jdata = `
-        /simulation/validation/
-        ?lang=${data.language}
-        &max=${data.length}
-        &text=${encodedText}&json
-      `;
-
-      this.load(e, jdata, text);
+      const jdata = `/simulation/validation/?lang=${data.language}&max=${data.length}&text=${encodedText}&json`;
+      this.load({ e, jdata, text });
     });
   }
 
   markTextToCanvas(text) {
-    const posData = Component.storageValue.pos;
-    const familyData = Component.storageValue.font;
-    const baseColourData = Component.storageValue.bcol;
-    const colourData = Component.storageValue.col;
+    const { pos, font, bcol, col } = Component.storageValue;
 
     // convert text from UTF-8 to SJIS
     const str = text;
@@ -86,14 +77,7 @@ export default class MarkText extends Component {
       const sjisArray = Encoding.convert(strArray, 'SJIS', 'UNICODE');
       const sjisText = Encoding.urlEncode(sjisArray);
 
-      imageElem.src = `
-        ${fontServer}
-        ?bcol=${baseColourData}
-        &pos=${posData}
-        &font=${familyData}
-        &col=${colourData}
-        &mark=${sjisText}
-      `;
+      imageElem.src = `${fontServer}?bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&mark=${sjisText}`;
     }
 
     // show order info menu on the bottom right side

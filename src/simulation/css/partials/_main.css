@@ -182,7 +182,7 @@
   &__lubi {
     margin: 0;
     font-size: 9px;
-    color: #85a4cB;
+    color: #85a4cb;
     line-height: 1;
   }
 }
@@ -209,6 +209,7 @@
     margin-left: 4px;
     background-color: #666;
     text-align: center;
+    transition: background 0.4s ease;
 
     &:first-child {
       margin-left: 0;
@@ -216,11 +217,6 @@
 
     &:hover {
       background-color: #fff;
-
-      .item-list__desc {
-        background-color: #ccc;
-        color: #252525;
-      }
     }
   }
 
@@ -246,27 +242,36 @@
     width: 100%;
     height: 24px;
     background-color: #252525;
+    transition: all 0.4s ease;
+
+    .item-list li:hover & {
+      background-color: #ccc;
+      color: #252525;
+    }
   }
 }
 
-.print-item-list {
+.print-item-list--multi-row {
   .print-item {
-    display: inline-block;
-    margin: 0 4px;
+    margin: 0.5rem 0;
 
     img {
-      width: 68.5%;
+      width: 76.5%;
     }
   }
+}
 
-  &--multi-row {
-    .print-item {
-      margin: 0.5rem 0;
+.print-item {
+  display: inline-block;
+  margin: 0 4px;
+  transition: opacity 0.4s ease;
 
-      img {
-        width: 76.5%;
-      }
-    }
+  img {
+    width: 68.5%;
+  }
+
+  &:hover {
+    opacity: 0.6;
   }
 }
 
@@ -350,7 +355,7 @@
   }
 
   &__desc {
-    padding: 0 16px ;
+    padding: 0 16px;
   }
 
   &__notes {

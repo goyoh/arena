@@ -1,13 +1,15 @@
 import $ from 'jquery';
 import { TweenMax } from 'gsap';
 import { mobilecheck, getUrlVars } from '../app/globals';
+import { loaderOut, spinner } from '../app/Loader';
 import Component from './Component';
 
 import BaseColour from './BaseColour';
 import ScrollEvents from './ScrollEvents';
 import OrderMenu from './OrderMenu';
 
-const uploadPath = '1/simulation/wpcms/wp-content/uploads/sites/2/';
+// const uploadPath = '1/simulation/wpcms/wp-content/uploads/sites/2/';
+const uploadPath = 'https://custom.arena-jp.com/simulation/wpcms/wp-content/uploads/';
 
 export default class SimulationCommon extends Component {
   constructor(props) {
@@ -28,7 +30,12 @@ export default class SimulationCommon extends Component {
       jsonUrl: this.jsonPath,
       callback: () => {
         this.markSetAsStart();
-        TweenMax.to('.js-base-display', 0.4, { autoAlpha: 1 });
+        TweenMax.to('.js-base-display', 0.4, {
+          autoAlpha: 1,
+          onComplete: () => {
+            loaderOut();
+          },
+        });
       },
     });
   }
@@ -56,7 +63,7 @@ export default class SimulationCommon extends Component {
   }
 
   tabs(event) {
-    const tabName = $(event.currentTarget).attr('data-tab');
+    const tabName = $(event.currentTarget).data('tab');
     $('.custom-menu__tabs li').add('.custom-menu__content').removeClass('active');
     $(event.currentTarget).addClass('active');
     $(tabName).addClass('active');
@@ -85,7 +92,7 @@ export default class SimulationCommon extends Component {
   modals(e) {
     e.preDefault();
 
-    const modalTar = $(e.currentTarget).attr('data-modal');
+    const modalTar = $(e.currentTarget).data('modal');
 
     if (!$(e.currentTarget).hasClass('active')) {
       $(e.currentTarget).addClass('active');
@@ -103,25 +110,30 @@ export default class SimulationCommon extends Component {
   rotation(e) {
     e.preventDefault();
 
+    spinner.in();
+
     const data = $('.js-rotation').data('svg');
     const rotationDir = $('.js-rotation').data('rotation');
 
     const storageKey = JSON.parse(localStorage.getItem(this.pageID));
     const key = storageKey.mark;
 
+    const callback = () => {
+      this.restyle();
+      Component.component.MarkText.markTextToCanvas(key);
+      spinner.out();
+    };
+
     // front or back
     if (rotationDir === 'front') {
       $('.js-base-display').load(`${uploadPath}${data}_back.svg`, () => {
-        this.restyle();
-
-        Component.component.MarkText.markTextToCanvas(key);
+        callback();
       });
 
       $('.js-rotation').data('rotation', 'back');
     } else {
       $('.js-base-display').load(`${uploadPath}${data}.svg`, () => {
-        this.restyle();
-        Component.component.MarkText.markTextToCanvas(key);
+        callback();
       });
 
       $('.js-rotation').data('rotation', 'front');
@@ -164,29 +176,10 @@ export default class SimulationCommon extends Component {
   }
 
   reloadPage() {
-    let $posEl;
-    let $familyEl;
-    let $colEl;
-
     const vars = getUrlVars();
-
-    if (vars.pos) {
-      $posEl = $('.js-mark-position').find(`*[data-pos=${vars.pos}]`);
-    } else {
-      $posEl = $('.js-mark-position .active');
-    }
-
-    if (vars.font) {
-      $familyEl = $('.js-mark-family li').find(`*[data-code=${String(vars.font)}]`);
-    } else {
-      $familyEl = $('.js-mark-family input:checked');
-    }
-
-    if (vars.col) {
-      $colEl = $('.js-colour--mark').find(`*[data-code=${vars.col}]`);
-    } else {
-      $colEl = $('.js-colour--mark').find('li.active');
-    }
+    const $posEl = vars.pos ? $('.js-mark-position').find(`*[data-pos="${vars.pos}"]`) : $('.js-mark-position .active');
+    const $familyEl = vars.font ? $('.js-mark-family li').find(`*[data-code="${String(vars.font)}"]`) : $('.js-mark-family input:checked');
+    const $colEl = vars.col ? $('.js-colour--mark').find(`*[data-code="${vars.col}"]`) : $('.js-colour--mark').find('li.active');
 
     Component.component.MarkPosition.setData($posEl);
     Component.component.MarkFamily.setData($familyEl);

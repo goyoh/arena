@@ -53,57 +53,41 @@ export default class Component {
     Component.orderLink[key] = val;
     this.currentURL = this.currentURL.split(/[?#]/)[0];
 
-    const styleNumData = Component.styleNum || '';
-    const styleData = this.styleName || '';
+    const styleNum = Component.styleNum || '';
+    const style = this.styleName || '';
+    const { pos, font, bcol, col, mark } = Component.orderLink;
 
-    const posData = Component.orderLink.pos || '';
-    const familyData = Component.orderLink.font || '';
-    const baseColourData = Component.orderLink.bcol || '';
-    const colourData = Component.orderLink.col || '';
-    const markData = Component.orderLink.mark || '';
+    const directLinkServer = 'https://custom.arena-jp.com/order/index.php?module=Flash&action=CreateStyle&style1=';
+    const directLink = `${directLinkServer}${style},${bcol},${pos},${font},${col},${mark}`;
 
-    Component.newOrderLink = `${this.currentURL}?style${styleNumData}=${styleData}&bcol=${baseColourData}&pos=${posData}&font=${familyData}&col=${colourData}&mark=${markData}`;
-
-    const directLink = `
-      https://custom.arena-jp.com/order/index.php?module=Flash&action=CreateStyle&style1=
-      ${styleData},${baseColourData},${posData},${familyData},${colourData},${markData}
-    `;
+    const snsLink = encodeURIComponent(`${this.currentURL}?bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&mark=${mark}`);
+    Component.newOrderLink = `${this.currentURL}?style${styleNum}=${style}&bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&mark=${mark}`;
 
     $('.js-order-sheet-direct').attr('href', directLink);
     $('.js-order-save').attr('href', Component.newOrderLink);
 
-    $('.js-facebook-link').attr('href', `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`${this.currentURL}?bcol=${baseColourData}&pos=${posData}&font=${familyData}&col=${colourData}&mark=${markData}`)}`);
-    $('.js-twitter-link').attr('href', `https://twitter.com/home?status=${encodeURIComponent(`${this.currentURL}?bcol=${baseColourData}&pos=${posData}&font=${familyData}&col=${colourData}&mark=${markData}`)}`);
-    $('.js-line-link').attr('href', `http://line.me/R/msg/text/?${encodeURIComponent(`${this.currentURL}?bcol=${baseColourData}&pos=${posData}&font=${familyData}&col=${colourData}&mark=${markData}`)}`);
+    $('.js-facebook-link').attr('href', `https://www.facebook.com/sharer/sharer.php?u=${snsLink}`);
+    $('.js-twitter-link').attr('href', `https://twitter.com/home?status=${snsLink}`);
+    $('.js-line-link').attr('href', `http://line.me/R/msg/text/?${snsLink}`);
   }
 
   getMarkData = () => (
     new Promise((resolve) => {
-      const colourData = $('.js-colour--mark').find('li.active').data('colour');
-      const posData = $('.js-mark-position .active').data('pos');
-      const rotationData = $('.js-rotation').data('rotation');
-      const markText = $('.js-mark-text').val();
+      const colour = $('.js-colour--mark').find('li.active').data('colour');
+      const position = $('.js-mark-position .active').data('pos');
+      const rotation = $('.js-rotation').data('rotation');
+      const text = $('.js-mark-text').val();
 
-      const $position = $('.js-mark-position').find(`[data-pos="${posData}"]`);
+      const $position = $('.js-mark-position').find(`[data-pos="${position}"]`);
 
       const $family = $('.js-mark-family input:checked');
-      const lang = $family.data('max-lang');
-      const familyData = $family.val();
-      const familyCode = $family.data('code');
+      const language = $family.data('max-lang');
+      const family = $family.val();
+      const code = $family.data('code');
 
-      const textLength = $position.attr(`data-max-${lang}`);
+      const length = $position.attr(`data-max-${language}`);
 
-      const data = {
-        // condition: markCondition,
-        colour: colourData,
-        text: markText,
-        position: posData,
-        family: familyData,
-        code: familyCode,
-        language: lang,
-        length: textLength,
-        rotation: rotationData,
-      };
+      const data = { colour, text, position, family, code, language, length, rotation };
 
       resolve(data);
     })
@@ -123,7 +107,6 @@ export default class Component {
     // const $svg = $('.js-base-display').find('svg');
     const tar = $tarEl.parent().data('target');
     let $svgPath;
-    console.log($tarEl.parent());
 
     const cate = $tarEl.parent().data('cate');
     const colour = $tarEl.data('colour');
@@ -138,10 +121,11 @@ export default class Component {
       $colourEl.find('li').removeClass('active');
       $tarEl.addClass('active');
 
-      $svgPath = $(tar).children(markFont).find('path');
       // set localStrage and change the order link
       Component.storageValue[cate] = code;
       this.setLocalStrage();
+
+      $svgPath = $(tar).children(markFont).find('path');
     } else {
       $svgPath = $(tar).children();
     }

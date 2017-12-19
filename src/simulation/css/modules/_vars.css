@@ -4,12 +4,14 @@ $font-main: "HelveticaNeue", "Helvetica Neue", "Hiragino Kaku Gothic Pro", 'TeXG
 /* COLOURS */
 $colour-main: #313131;
 $colour-sub: #878787;
-$colour-bg: #1A1A1A;
+$colour-bg: #1a1a1a;
 $colour-bg-sub: #f6f4f4;
 
+$colour-button: #222;
+
 $colour-green: #c8ffc8;
-$colour-deep-green: #04F004;
-$colour-red: #FF6262;
+$colour-deep-green: #04f004;
+$colour-red: #ff6262;
 
 $colour-gray: #504f4f;
 $colour-light-gray: #b5b5b5;

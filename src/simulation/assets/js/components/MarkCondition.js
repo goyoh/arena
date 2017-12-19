@@ -34,10 +34,8 @@ export default class MarkCondition extends Component {
     this.getMarkData().then((data) => {
       if (condition === 'on') {
         this.markOn(data);
-      } else {
-        if (!this.markPickActive) {
-          this.markOff(data);
-        }
+      } else if (!this.markPickActive) {
+        this.markOff(data);
       }
     });
 
@@ -67,12 +65,12 @@ export default class MarkCondition extends Component {
     $('.mark-simulation').css('overflow', 'hidden');
 
     // update the order link (remove mark data)
-    const styleNumData = Component.styleNum || '';
-    const styleData = this.styleName || '';
-    const baseColourData = Component.orderLink.bcol || '';
+    const styleNum = Component.styleNum || '';
+    const style = this.styleName || '';
+    const baseColour = Component.orderLink.bcol || '';
 
     this.currentURL = this.currentURL.split(/[?#]/)[0];
-    const orderLinkOrginal = `${this.currentURL}?style${styleNumData}=${styleData}&bcol=${baseColourData}`;
+    const orderLinkOrginal = `${this.currentURL}?style${styleNum}=${style}&bcol=${baseColour}`;
     $('.js-order-save').attr('href', orderLinkOrginal);
 
     // set value on localStrage and change the order link
@@ -92,7 +90,7 @@ export default class MarkCondition extends Component {
       const $posEl = $(posTar).children(data.family).find('path');
 
       TweenMax.set($posEl, { fill: data.colour });
-      $('.js-colour--mark').attr('data-target', posTar);
+      $('.js-colour--mark').data('target', posTar);
     }
 
     // apply if mark data already exists in localStrage

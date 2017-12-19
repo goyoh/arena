@@ -123,7 +123,7 @@ export default class ColourFunction extends Component {
         if (window.location.search && getUrlVars().bcol) {
           const cData = getUrlVars().bcol;
 
-          $.each(colourCode[cData], (cIndex, cEl)=> {
+          $.each(colourCode[cData], (cIndex) => {
             const hexCodes = colourCode[cData][cIndex].hex;
             const cElChild = $(`.js-colour-scheme .js-colour${cIndex + 1}`).find(`*[data-colour="${hexCodes}"]`);
             $(cElChild).trigger(window.eventtype);
@@ -141,8 +141,8 @@ export default class ColourFunction extends Component {
       $('.js-colour-scheme').on(window.eventtype, 'li', (e) => {
         // e.preventDefault();
 
-        const level = parseInt($(e.currentTarget).parents('ul').attr('data-level'));
-        const clickColour = $(e.currentTarget).attr('data-colour');
+        const level = parseInt($(e.currentTarget).parents('ul').data('level'));
+        const clickColour = $(e.currentTarget).data('colour');
         let parentColour = clickColour;
         let availableIndex = [];
 
@@ -150,7 +150,7 @@ export default class ColourFunction extends Component {
         $(e.currentTarget).addClass('active');
 
         if (level > 1) {
-          let anotherParentColour = $('.js-colour1 li.active').eq(0).attr('data-colour');
+          let anotherParentColour = $('.js-colour1 li.active').eq(0).data('colour');
 
           for (let i = 1; i < level; i += 1) {
             const colourIndex = window[`colour${i}`].multiIndexOf(anotherParentColour);
@@ -168,7 +168,7 @@ export default class ColourFunction extends Component {
               availableIndex = temp;
             }
 
-            anotherParentColour = $(`.js-colour${(i + 1)} li.active`).eq(0).attr('data-colour');
+            anotherParentColour = $(`.js-colour${(i + 1)} li.active`).eq(0).data('colour');
           }
         }
         for (let i = level; i < window.totalColour; i += 1) {
@@ -199,14 +199,14 @@ export default class ColourFunction extends Component {
           });
           // 下のレベルの先頭の色にアクティブ化する
           $(`.js-colour${(i + 1)} li:not(.hide)`).eq(0).addClass('active');
-          parentColour = $(`.js-colour${(i + 1)} li:not(.hide)`).eq(0).attr('data-colour');
+          parentColour = $(`.js-colour${(i + 1)} li:not(.hide)`).eq(0).data('colour');
         }
 
         availableIndex = [];
         let compareIndex = [];
 
         for (let i = window.totalColour; i >= 1; i -= 1) {
-          const childColour = $(`.js-colour${i} li.active`).eq(0).attr('data-colour');
+          const childColour = $(`.js-colour${i} li.active`).eq(0).data('colour');
 
           if (i == window.totalColour) {
             availableIndex = window[`colour${i}`].multiIndexOf(childColour);
@@ -219,15 +219,18 @@ export default class ColourFunction extends Component {
                 temp.push(value);
               }
             });
+
             availableIndex = temp;
           }
         }
         availableIndex = availableIndex[0];
-        $('#colour-code').text(`色番:${window.colourCodeName[availableIndex]}`);
 
-        Component.storageValue.bcol = window.colourCodeName[availableIndex];
-        Component.orderLink.bcol = window.colourCodeName[availableIndex];
-        this.orderLinkChange('bcol', window.colourCodeName[availableIndex]);
+        const colourCodeName = window.colourCodeName[availableIndex];
+
+        $('#colour-code').text(`色番:${colourCodeName}`);
+        Component.storageValue.bcol = colourCodeName;
+        Component.orderLink.bcol = colourCodeName;
+        this.orderLinkChange('bcol', colourCodeName);
 
         this.setLocalStrage();
         this.restyle();

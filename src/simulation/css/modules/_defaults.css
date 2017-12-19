@@ -1,21 +1,21 @@
 * {
-  -webkit-font-smoothing:antialiased;
-  font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   box-sizing: border-box;
 }
 
 html {
-  font-size: responsive 10px 14px;
-  font-range: 1040px 1920px;
+  font-size: responsive 8px 18px;
+  font-range: 960px 1920px;
 }
 
 body {
   font-weight: 800;
   line-height: 1.6;
-  font-family: $main-font;
-  color: $main-colour;
-  background-color: $bg-colour;
+  font-family: $font-main;
+  color: $colour-main;
+  background-color: $colour-bg;
   overflow-x: hidden;
 }
 
@@ -24,7 +24,7 @@ button,
 input,
 select,
 textarea {
-  color: $main-colour;
+  color: $colour-main;
 }
 
 hr {
@@ -38,7 +38,7 @@ hr {
 
 a {
   text-decoration: none;
-  color: $main-colour;
+  color: $colour-main;
   cursor: pointer;
 }
 
@@ -259,7 +259,7 @@ ul {
 :--heading {
   margin-top: 0;
   font-weight: 800;
-  font-family: $main-font;
+  font-family: $font-main;
 }
 
 h1 {

@@ -39,7 +39,8 @@
     position: relative;
     display: inline-block;
     opacity: 0.3;
-    cursor: pointer;
+    cursor: default;
+    pointer-events: none;
 
     &::before {
       content: url($root/arrows/arrow-right.png);
@@ -55,6 +56,9 @@
 
     &.active,
     &.registered {
+      cursor: pointer;
+      pointer-events: auto;
+
       + .icon {
         width: 1.25rem;
         height: 1.25rem;
