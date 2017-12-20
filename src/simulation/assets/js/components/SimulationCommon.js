@@ -55,28 +55,27 @@ export default class SimulationCommon extends Component {
       this.rotation(e);
     });
 
+    $(document).on(window.eventtype, '.js-modal', this.modals);
+
     if (mobilecheck()) {
-      $(document).on('touchstart', '.custom-menu__head', (e) => {
-        this.tapMenu(e);
-      });
+      $(document).on('touchstart', '.custom-menu__head', this.tapMenu);
     }
   }
 
-  tabs(event) {
-    const tabName = $(event.currentTarget).data('tab');
+  tabs(e) {
+    const tabName = $(e.currentTarget).data('tab');
     $('.custom-menu__tabs li').add('.custom-menu__content').removeClass('active');
-    $(event.currentTarget).addClass('active');
-    $(tabName).addClass('active');
+    $(e.currentTarget).add(tabName).addClass('active');
 
     ScrollEvents.scrollNavDisplay();
     this.updateScrollBar();
   }
 
-  tapMenu = (event) => {
+  tapMenu = (e) => {
     const $el = $('.custom-menu__content');
-    const $tar = $(event.currentTarget).next().next();
+    const $tar = $(e.currentTarget).next().next();
     const $tapNav = $('.custom-menu__tap');
-    const $tapTar = $(event.currentTarget).next();
+    const $tapTar = $(e.currentTarget).next();
 
     $el.removeClass('active');
     $tar.addClass('active');
@@ -84,27 +83,23 @@ export default class SimulationCommon extends Component {
     $tapTar.addClass('is-hidden');
   }
 
-  modalClose = (el, target) => {
-    $(el).removeClass('active');
-    TweenMax.to(target, 0.4, { autoAlpha: 0 });
-  }
+  modals = (e) => {
+    e.preventDefault();
 
-  modals(e) {
-    e.preDefault();
+    const $tar = $(e.currentTarget);
+    const modal = $tar.data('modal');
+    const alphaVal = !$tar.hasClass('active') ? 1 : 0;
 
-    const modalTar = $(e.currentTarget).data('modal');
+    $tar.toggleClass('active');
+    TweenMax.to(modal, 0.4, { autoAlpha: alphaVal });
 
-    if (!$(e.currentTarget).hasClass('active')) {
-      $(e.currentTarget).addClass('active');
-      TweenMax.to(modalTar, 0.4, { autoAlpha: 1 });
-    } else {
-      $(e.currentTarget).removeClass('active');
-      TweenMax.to(modalTar, 0.4, { autoAlpha: 0 });
-    }
+    const modalClose = () => {
+      $tar.removeClass('active');
+      TweenMax.to(modal, 0.4, { autoAlpha: 0 });
+      $('.content').off(window.eventtype, modalClose);
+    };
 
-    $('.content').on(window.eventtype, ':not(.modal)', () => {
-      this.modalClose(e.currentTarget, modalTar);
-    });
+    $('.content').on(window.eventtype, ':not(.modal)', modalClose);
   }
 
   rotation(e) {
@@ -124,20 +119,14 @@ export default class SimulationCommon extends Component {
       spinner.out();
     };
 
-    // front or back
-    if (rotationDir === 'front') {
-      $('.js-base-display').load(`${uploadPath}${data}_back.svg`, () => {
-        callback();
-      });
+    const svg = rotationDir === 'front' ? '_back.svg' : '';
+    const dir = rotationDir === 'front' ? 'back' : 'front';
 
-      $('.js-rotation').data('rotation', 'back');
-    } else {
-      $('.js-base-display').load(`${uploadPath}${data}.svg`, () => {
-        callback();
-      });
+    $('.js-base-display').load(`${uploadPath}${data}${svg}`, () => {
+      callback();
+    });
 
-      $('.js-rotation').data('rotation', 'front');
-    }
+    $('.js-rotation').data('rotation', dir);
   }
 
   markSetAsStart() {
@@ -168,11 +157,11 @@ export default class SimulationCommon extends Component {
     }
   }
 
-  markTab = (event) => {
-    const target = $(event.currentTarget).data('tab');
+  markTab = (e) => {
+    const target = $(e.currentTarget).data('tab');
 
     $('.js-custom-pick-tab').add('.js-mark-tab-trigger').removeClass('active');
-    $(target).add(event.currentTarget).addClass('active');
+    $(target).add(e.currentTarget).addClass('active');
   }
 
   reloadPage() {
@@ -185,7 +174,7 @@ export default class SimulationCommon extends Component {
     Component.component.MarkFamily.setData($familyEl);
     this.changeColours($colEl);
 
-    if (getUrlVars().mark) Component.component.MarkText.markTextToCanvas();
+    if (vars.mark) Component.component.MarkText.markTextToCanvas();
   }
 }
 

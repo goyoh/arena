@@ -7,13 +7,24 @@
     margin-left: -0.567rem;
     margin-bottom: 0.5rem;
 
+    @mixin breakpoint phone {
+      width: 100%;
+      margin-left: 0;
+    }
+
     li {
       width: 3.333rem;
       height: 1.333rem;
-      margin-bottom:  0.567rem;
+      margin-bottom: 0.567rem;
       margin-left: 0.567rem;
       border: 1px solid #999;
       cursor: pointer;
+
+      @mixin breakpoint phone {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 0.75rem;
+      }
 
       &:hover,
       &.active {
@@ -23,6 +34,16 @@
       &.hide {
         display: none;
       }
+    }
+  }
+
+  &__section {
+    @mixin breakpoint tablet {
+      padding: 0 0.7rem;
+    }
+
+    @mixin breakpoint phone {
+      padding: 0 0.5rem;
     }
   }
 }

@@ -8,6 +8,18 @@
   color: #fff;
   overflow: hidden;
 
+  @mixin breakpoint tablet {
+    width: 28%;
+  }
+
+  @mixin breakpoint phone {
+    float: left;
+    top: 8rem;
+    left: 0;
+    width: 28%;
+    overflow: hidden;
+  }
+
   &__tabs {
     position: relative;
     width: 100%;
@@ -56,17 +68,76 @@
     padding: 1.56rem;
     padding-top: 2rem;
 
+    @mixin breakpoint tablet {
+      width: calc(100% - 2.066rem);
+    }
+
+    @mixin breakpoint phone {
+      position: relative;
+      display: block;
+      width: 90%;
+      height: 0;
+      margin-top: 0;
+      border: none;
+      overflow: auto;
+    }
+
     &--mark {
       border-top: none;
     }
 
     &.active {
       display: block;
+
+      @mixin breakpoint phone {
+        height: calc(100% - 12.6rem);
+      }
+    }
+  }
+
+  &__head {
+    @mixin breakpoint phone {
+      position: relative;
+      height: 4.2rem;
+      margin-bottom: 1rem;
+      padding: 0.5rem 0.75rem;
+      background-color: #222;
+      font-size: 1.222rem;
+      line-height: 1.2;
+    }
+
+    &::before {
+      @mixin breakpoint phone {
+        content: '';
+        position: absolute;
+        bottom: -0.7rem;
+        left: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        margin: auto;
+        border-style: solid;
+        border-width: 0.825rem 0.825rem 0;
+        border-color: #222 transparent transparent;
+      }
     }
   }
 
   &__tap {
     display: none;
+
+    @mixin breakpoint phone {
+      display: block;
+      margin-bottom: 0.5rem;
+      text-align: center;
+      font-size: 0.925rem;
+    }
+
+    &.is-hidden {
+      @mixin breakpoint phone {
+        display: none;
+      }
+    }
   }
 
   &__inner {
@@ -118,6 +189,20 @@
   margin: auto;
   text-align: center;
 
+  @mixin breakpoint tablet {
+    width: 33.6% !important;
+  }
+
+  @mixin breakpoint phone {
+    top: 29%;
+    left: auto;
+    right: 0;
+    width: 72% !important;
+    padding: 0 5%;
+    padding-bottom: 13%;
+    transform: none;
+  }
+
   img {
     width: 100%;
   }
@@ -148,6 +233,10 @@
   transition: all 0.3s ease-in-out-circ;
   z-index: 99;
   cursor: pointer;
+
+  @mixin breakpoint phone {
+    bottom: 1rem;
+  }
 
   &:hover {
     background-color: #fff;

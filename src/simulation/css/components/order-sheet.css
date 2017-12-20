@@ -30,6 +30,11 @@
     float: left;
     width: 10%;
 
+    @mixin breakpoint phone {
+      width: 15%;
+      padding-top: 15%;
+    }
+
     /* img,
     canvas {
       position: absolute;
@@ -61,6 +66,11 @@
     float: left;
     width: 90%;
     padding-left: 1.333em;
+
+    @mixin breakpoint phone {
+      left: 18%;
+      width: 85%;
+    }
   }
 
   &__title {
@@ -68,6 +78,10 @@
     font-size: 18px;
     line-height: 1;
     margin-bottom: 0.3333em;
+
+    @mixin breakpoint phone {
+      font-size: 12px;
+    }
   }
 
   &__desc {

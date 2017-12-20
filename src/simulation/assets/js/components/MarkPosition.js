@@ -16,38 +16,40 @@ export default class MarkPosition extends Component {
   events() {
     $('.js-mark-position').on(window.eventtype, 'a', (e) => {
       e.preventDefault();
-      this.setData(e);
+      const $el = $(e.currentTarget);
+      this.setData($el);
     });
   }
 
-  setData(e) {
-    const $tarEl = (e.currentTarget) ? $(e.currentTarget) : e;
-    const cate = $tarEl.parents('ul').data('cate');
-    const side = $tarEl.data('side');
+  setData($e) {
+    const cate = $e.parents('ul').data('cate');
+    const side = $e.data('side');
 
     $('.js-mark-position a').removeClass('active');
-    $tarEl.addClass('active');
+    $e.addClass('active');
 
     this.getMarkData().then((data) => {
+      const { position, family, colour, rotation } = data;
+
       $.each(this.markOptions, (index, el) => {
         const $path = $(`#position-${el}`);
         TweenMax.set($path.children().find('path'), { fill: 'none' });
       });
 
-      if (data.position) {
-        const tar = `#position-${data.position.toLowerCase()}`;
-        const $el = $(tar).children(data.family).find('path');
-        TweenMax.set($el, { fill: data.colour });
+      if (position) {
+        const tar = `#position-${position.toLowerCase()}`;
+        const $path = $(tar).children(family).find('path');
+        TweenMax.set($path, { fill: colour });
 
         $('.js-colour--mark').data('target', tar);
 
         // rotation the item if the mark is positioned on the opposite side
-        if (side !== data.rotation) this.rotation();
+        if (side !== rotation) this.rotation();
       }
 
       // update localStrage and the order link
-      this.orderLinkChange(cate, data.position);
-      Component.storageValue[cate] = data.position;
+      this.orderLinkChange(cate, position);
+      Component.storageValue[cate] = position;
       this.setLocalStrage();
     });
   }

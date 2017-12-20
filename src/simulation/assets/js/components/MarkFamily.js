@@ -16,36 +16,33 @@ export default class MarkFamily extends Component {
 
   events() {
     $('.js-mark-family').on('change', 'input', (e) => {
-      this.setData(e);
+      const $el = $(e.currentTarget);
+      this.setData($el);
     });
   }
 
-  setData(e) {
-    const $tarEl = (e.currentTarget) ? $(e.currentTarget) : e;
-
-    if ($tarEl.data('max-lang') === 'en') {
-      $('.js-mark-text').addClass('disabled');
-    } else {
-      $('.js-mark-text').removeClass('disabled');
-    }
+  setData($e) {
+    $('.js-mark-text').toggleClass('disabled', $e.data('max-lang') === 'en');
 
     this.getMarkData().then((data) => {
-      const font = data.family.replace('.mrk', '');
+      const { family, position, colour } = data;
+      const font = family.replace('.mrk', '');
+
       // initialise input
       $('.js-mark-family input').prop('checked', false);
       $('.js-mark-family li').removeClass('active');
-      $tarEl.prop('checked', true);
-      $tarEl.parent().addClass('active');
+      $e.prop('checked', true);
+      $e.parent().addClass('active');
 
       $.each(this.markOptions, (index, el) => {
         const $path = $(`#position-${el}`);
         TweenMax.set($path.children().find('path'), { fill: 'none' });
       });
 
-      if (data.position) {
-        const tar = `#position-${data.position.toLowerCase()}`;
-        const $el = $(tar).children(data.family).find('path');
-        TweenMax.set($el, { fill: data.colour });
+      if (position) {
+        const tar = `#position-${position.toLowerCase()}`;
+        const $path = $(tar).children(family).find('path');
+        TweenMax.set($path, { fill: colour });
       }
 
       // update localStrage and the order link

@@ -20,15 +20,12 @@ const ScrollEvents = {
     // const innerElHeight = $('.custom-menu__content.active').height();
 
     const elTop = $('.custom-menu').scrollTop();
-
     const alphaVal = elTop === 0 ? 1 : 0;
-
     TweenMax.set('.js-read-more', { autoAlpha: alphaVal });
   },
 
   scrollNav: (e) => {
     const elTop = $(e.currentTarget).scrollTop();
-
     const alphaVal = elTop === 0 ? 1 : 0;
     TweenMax.set('.js-read-more', { autoAlpha: alphaVal });
   },
@@ -49,8 +46,8 @@ const ScrollEvents = {
 
   updateScrollBar: () => {
     // update the scrollbar height
-    const el = document.querySelector('.custom-menu');
-    // this.ps.update(el);
+    // const el = document.querySelector('.custom-menu');
+    if (this.ps) this.ps.update();
   },
 };
 

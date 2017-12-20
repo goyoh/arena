@@ -2,7 +2,7 @@ import $ from 'jquery';
 import imagesLoaded from 'imagesloaded';
 // import route from 'riot-route';
 
-import { mobilecheck } from './globals';
+import { mobilecheck, getSize, navigationMenu, browserDetect } from './globals';
 
 import { loaderProgress, loaderOut } from './Loader';
 
@@ -16,15 +16,6 @@ import MarkCondition from '../components/MarkCondition';
 import MarkFamily from '../components/MarkFamily';
 import MarkText from '../components/MarkText';
 import MarkPosition from '../components/MarkPosition';
-
-const globalEvents = () => {
-  // $(document).on(window.eventtype2, '.js-rotation', (event) => {
-  //   this.rotation(event);
-  // });
-  // $(document).on(window.eventtype, '.js-modal', (event)=> {
-  //   this.modals(event);
-  // });
-};
 
 export default class Page {
   constructor() {
@@ -46,6 +37,11 @@ export default class Page {
   }
 
   render(slug) {
+    getSize();
+    navigationMenu();
+    const browserName = browserDetect.toLowerCase();
+    document.body.className = `${document.body.className} ${browserName}`;
+
     this.loadComponent();
     this.preLoad().then(() => {
       ScrollEvents.scrollNavDisplay();
@@ -71,6 +67,7 @@ export default class Page {
     $('.js-order-sheet-list').on(window.eventtype, 'li', OrderMenu.orderSheetList);
     $('.js-order-info').on('click', '.js-order-info-close--sp', OrderMenu.orderInfoShow);
     $('.custom-menu').on('scroll', ScrollEvents.scrollNav);
+    window.onresize = getSize;
   }
 
   loadComponent() {

@@ -5,8 +5,22 @@
   min-width: 28rem;
   color: #fff;
 
+  @mixin breakpoint phone {
+    position: relative;
+    float: left;
+    top: 5rem;
+    right: 0;
+    left: 3.2rem;
+    max-width: 22rem;
+    min-width: 0;
+  }
+
   &__title {
     width: 16.333rem;
+
+    @mixin breakpoint phone {
+      display: none;
+    }
 
     img {
       width: 100%;
@@ -16,10 +30,18 @@
   &__type {
     margin-bottom: 0;
     font-size: 1.333em;
+
+    @mixin breakpoint phone {
+      margin-top: 0.25rem;
+    }
   }
 
   &__subtype {
     margin-top: 0;
+
+    @mixin breakpoint phone {
+      margin-bottom: 0;
+    }
   }
 
   &__list {
@@ -42,6 +64,17 @@
     text-align: center;
     line-height: 2.8;
     transition: all 0.4s ease-in-out-circ;
+
+    @mixin breakpoint phone {
+      position: absolute;
+      bottom: -3rem;
+      left: 0;
+      right: 0;
+      width: 13.333rem;
+      height: 3.333rem;
+      margin: auto;
+      font-size: 1.25rem;
+    }
 
     &.is-red {
       background-color: $colour-red;

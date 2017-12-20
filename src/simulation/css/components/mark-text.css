@@ -7,6 +7,10 @@
     color: #fff;
     transition: all 0.3s ease-in-out-circ;
 
+    @mixin breakpoint phone {
+      width: 100%;
+    }
+
     &:active,
     &:focus {
       border: 1px solid $colour-red;
@@ -24,6 +28,15 @@
     border: none;
     transition: all 0.3s ease-in-out-circ;
 
+    @mixin breakpoint tablet {
+      width: 8.567rem;
+    }
+
+    @mixin breakpoint phone {
+      width: 100%;
+      margin-top: 4px;
+    }
+
     &:hover {
       background-color: #fff;
       color: $colour-main;
@@ -37,5 +50,13 @@
   &__form {
     padding: 0 1rem;
     font-size: 0.917rem;
+
+    @mixin breakpoint tablet {
+      padding: 0 0.7rem;
+    }
+
+    @mixin breakpoint phone {
+      padding: 0;
+    }
   }
 }

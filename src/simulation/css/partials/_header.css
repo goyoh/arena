@@ -15,10 +15,25 @@
 
   &__logo {
     float: left;
+
+    @mixin breakpoint phone {
+      display: inline-block;
+      height: 50%;
+    }
+
+    img {
+      @mixin breakpoint phone {
+        height: 100%;
+      }
+    }
   }
 
   &__menu {
     float: right;
+
+    @mixin breakpoint phone {
+      display: none;
+    }
   }
 
   &__help {

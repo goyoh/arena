@@ -164,6 +164,20 @@
   text-align: center;
   z-index: 9;
 
+  @mixin breakpoint desktop {
+    overflow: hidden;
+  }
+
+  @mixin breakpoint tablet {
+    overflow: hidden;
+  }
+
+  @mixin breakpoint phone {
+    width: 92.5%;
+    margin-left: 3rem;
+    font-size: 1rem;
+  }
+
   li {
     position: relative;
     float: left;
@@ -174,6 +188,19 @@
     padding-left: 3rem;
     text-align: left;
     color: #999;
+
+    @mixin breakpoint tablet {
+      width: calc(33.333% + 1rem);
+      margin-left: -1rem;
+    }
+
+    @mixin breakpoint phone {
+      width: 33.333%;
+      height: 2rem;
+      padding: 0.2rem 1rem;
+      margin-right: 1.5rem;
+      margin-left: -1.5rem;
+    }
 
     &:first-child {
       &::before {

@@ -5,6 +5,10 @@
   &__inner {
     display: flex;
     justify-content: space-between;
+
+    @mixin breakpoint phone {
+      display: block;
+    }
   }
 
   &__head {

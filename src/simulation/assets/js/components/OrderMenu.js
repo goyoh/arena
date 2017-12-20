@@ -11,19 +11,21 @@ const OrderMenu = {
   orderLinkActive: false,
 
   removeFn: (e) => {
-    const $tar = (mobilecheck()) ? $(e.currentTarget).parent() : $(e.currentTarget).parent().find('a');
-    const styleName = (mobilecheck()) ? $tar.children('.navigation-style__head').text().toLowerCase() : $tar.text().toLowerCase();
-    const num = $(e.currentTarget).parent().data('number');
+    const $tar = $(e.currentTarget);
+    const $el = (mobilecheck()) ? $tar.parent() : $tar.parent().find('a');
+    const $style = (mobilecheck()) ? $el.children('.navigation-style__head') : $el;
+    const styleName = $style.text().toLowerCase();
+    const num = $tar.parent().data('number');
     const $styleList = $(`.js-order-sheet-list li[data-number=${num}]`);
 
     $styleList.remove();
 
-    $tar.removeClass('registered').removeClass('active');
+    $el.removeClass('registered').removeClass('active');
     readCookie.setItem(styleName, 0, null, '/simulation/');
 
     if (mobilecheck()) {
-      $(e.currentTarget).parent().find('.navigation-style__desc').html('- 未保存 -');
-      $(e.currentTarget).remove();
+      $tar.parent().find('.navigation-style__desc').html('- 未保存 -');
+      $tar.remove();
     }
   },
 
@@ -61,15 +63,11 @@ const OrderMenu = {
   orderInfoShow: (e) => {
     e.preventDefault();
 
-    if (this.orderInfoActive) {
-      TweenMax.to('.js-order-info', 0.4, { y: '100%' });
-      $(e.currentTarget).addClass('show');
-      this.orderInfoActive = false;
-    } else {
-      TweenMax.to('.js-order-info', 0.4, { y: '0%' });
-      $(e.currentTarget).removeClass('show');
-      this.orderInfoActive = true;
-    }
+    const yValue = this.orderInfoActive ? '100%' : '0%';
+    TweenMax.to('.js-order-info', 0.4, { y: yValue });
+    $(e.currentTarget).toggleClass('show');
+
+    this.orderInfoActive = !this.orderInfoActive;
   },
 
   orderSheet: (e) => {
@@ -80,25 +78,26 @@ const OrderMenu = {
   },
 
   orderSheetList: (e) => {
-    if ($(e.currentTarget).hasClass('active')) {
-      $(e.currentTarget).removeClass('active');
-    } else {
-      $(e.currentTarget).addClass('active');
-    }
+    $(e.currentTarget).toggleClass('active');
+
+    // if ($(e.currentTarget).hasClass('active')) {
+    //   $(e.currentTarget).removeClass('active');
+    // } else {
+    //   $(e.currentTarget).addClass('active');
+    // }
   },
 
   orderLinkMake: (e) => {
     e.preventDefault();
     const sendURL = $(e.currentTarget).data('send');
+    const $items = $('.js-order-sheet-list li.active');
     let styleInfo = '';
 
-    $('.js-order-sheet-list li.active').each((i, el) => {
+    $items.each((i, el) => {
       styleInfo = `${styleInfo}&${decodeURIComponent($(el).data('style'))}`;
     });
 
-    if ($('.js-order-sheet-list li.active').length > 0) {
-      window.location.href = `https:${sendURL}${styleInfo}`;
-    }
+    if ($items.length > 0) window.location.href = `https:${sendURL}${styleInfo}`;
   },
 };
 

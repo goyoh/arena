@@ -23,6 +23,7 @@
 
     &::before {
       @mixin pseudo 100%, 100%;
+
       top: 0;
       left: 0;
       background-image: url($root/bg/pattern1.png);
@@ -70,6 +71,7 @@
 
   &::before {
     @mixin pseudo 100%, 100%;
+
     top: 0;
     left: 0;
     width: 100%;
@@ -85,11 +87,18 @@
     height: 100%;
     z-index: 3;
   }
+
   &__inner {
     width: 90%;
     height: 30%;
     padding: 1.75rem;
     z-index: 2;
+
+    @mixin breakpoint phone {
+      width: 92.5%;
+      height: 9rem;
+      padding: 2.75rem 1.25rem;
+    }
 
     .menu-door--swimwear & {
       right: 0;
@@ -107,6 +116,11 @@
     background-color: #005eb8;
     mix-blend-mode: multiply;
 
+    @mixin breakpoint phone {
+      width: 90%;
+      height: 9rem;
+    }
+
     .menu-door--swimwear & {
       right: 0;
       left: auto;
@@ -116,6 +130,26 @@
   &__title {
     img {
       width: 70.8%;
+
+      @mixin breakpoint phone {
+        width: 100%;
+      }
+    }
+  }
+
+  &__desc {
+    @mixin breakpoint phone {
+      position: absolute;
+      right: 0;
+      bottom: -16.666%;
+      left: 0;
+      width: 90%;
+      height: 33%;
+      margin: auto;
+      background: #000;
+      font-size: 11px;
+      text-align: center;
+      line-height: 2.7;
     }
   }
 }
@@ -131,8 +165,13 @@
   color: #fff;
   background-size: cover;
 
-  &:before {
+  @mixin breakpoint phone {
+    padding: 3rem 0;
+  }
+
+  &::before {
     @mixin pseudo 100%, 100%;
+
     top: 0;
     left: 0;
     background-image: url($root/bg/pattern1.png);
@@ -152,6 +191,10 @@
 
     img {
       width: 392px;
+
+      @mixin breakpoint phone {
+        width: 60%;
+      }
     }
   }
 
@@ -172,11 +215,38 @@
     float: left;
     width: 50%;
     margin-bottom: 42px;
+
+    @mixin breakpoint tablet {
+      width: 48%;
+    }
+
+    @mixin breakpoint phone {
+      float: none;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+
+    &:nth-child(2n) {
+      @mixin breakpoint tablet {
+        margin-left: 3.8%;
+      }
+    }
   }
 
   &__title {
     font-size: 26px;
     margin-bottom: 0;
+
+    @mixin breakpoint phone {
+      font-size: 16px;
+    }
+
+    img {
+      @mixin breakpoint phone {
+        max-height: 1.75rem;
+        max-width: 86%;
+      }
+    }
   }
 
   &__lubi {
@@ -184,6 +254,12 @@
     font-size: 9px;
     color: #85a4cb;
     line-height: 1;
+  }
+
+  &__desc {
+    @mixin breakpoint tablet {
+      min-height: 3.2rem;
+    }
   }
 }
 
@@ -211,8 +287,30 @@
     text-align: center;
     transition: background 0.4s ease;
 
+    @mixin breakpoint tablet {
+      width: calc(25% - 3.333px);
+    }
+
+    @mixin breakpoint phone {
+      width: calc(50% - 4px);
+      height: 96px;
+      margin-bottom: 1rem;
+    }
+
     &:first-child {
       margin-left: 0;
+    }
+
+    &:nth-child(2n + 1) {
+      @mixin breakpoint phone {
+        margin-left: 0;
+      }
+    }
+
+    .item-collection .item-list & {
+      @mixin breakpoint tablet {
+        width: calc(50% - 4px);
+      }
     }
 
     &:hover {
@@ -233,6 +331,23 @@
     position: relative;
     width: 100%;
     height: 136px;
+
+    @mixin breakpoint phone {
+      height: 71px;
+    }
+
+    .u-center-vertical {
+      @mixin breakpoint phone {
+        height: 80%;
+      }
+    }
+
+    img {
+      @mixin breakpoint phone {
+        max-height: 100%;
+        max-width: 90%;
+      }
+    }
   }
 
   &__desc {
@@ -243,6 +358,19 @@
     height: 24px;
     background-color: #252525;
     transition: all 0.4s ease;
+
+    @mixin breakpoint phone {
+      line-height: 2.3;
+    }
+
+    &--long {
+      li {
+        @mixin breakpoint phone {
+          width: 100%;
+          margin-left: 0;
+        }
+      }
+    }
 
     .item-list li:hover & {
       background-color: #ccc;
@@ -265,6 +393,17 @@
   display: inline-block;
   margin: 0 4px;
   transition: opacity 0.4s ease;
+
+  @mixin breakpoint phone {
+    width: 10%;
+    margin: 0;
+  }
+
+  .print-item-list--multi-row & {
+    @mixin breakpoint phone {
+      margin: 0.5rem 0;
+    }
+  }
 
   img {
     width: 68.5%;

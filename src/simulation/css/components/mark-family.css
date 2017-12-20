@@ -3,10 +3,26 @@
     max-width: 68%;
     display: inline-block;
     margin-left: 5px;
+
+    @mixin breakpoint phone {
+      width: 100%;
+    }
+  }
+
+  input {
+    @mixin breakpoint phone {
+      position: absolute;
+      visibility: hidden;
+      opacity: 0;
+    }
   }
 
   img {
     width: 100%;
+
+    @mixin breakpoint desktop {
+      vertical-align: text-top;
+    }
   }
 
   &__list {
@@ -16,5 +32,37 @@
     float: left;
     width: 33.3333%;
     margin-bottom: 2%;
+
+    @mixin breakpoint desktop {
+      width: 50%;
+    }
+
+    @mixin breakpoint notdesktop {
+      width: 100%;
+    }
+
+    @mixin breakpoint phone {
+      position: relative;
+      float: none;
+      border: 1px solid #888;
+      text-align: center;
+    }
+
+    &.font--fancy {
+      @mixin breakpoint desktop {
+        width: 100%;
+      }
+
+      @mixin breakpoint notdesktop {
+        width: 100%;
+      }
+    }
+
+    &:hover,
+    &.active {
+      @mixin breakpoint phone {
+        border: 1px solid #fff;
+      }
+    }
   }
 }

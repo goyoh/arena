@@ -9,7 +9,6 @@ export default class MarkCondition extends Component {
     super(props);
 
     this.markPickActive = false;
-    this.reloadPage = props.reloadPage;
     this.render();
   }
 
@@ -20,22 +19,22 @@ export default class MarkCondition extends Component {
   events() {
     $('.js-mark-condition').on(window.eventtype, 'a', (e) => {
       e.preventDefault();
-      this.setData(e);
+      const $el = $(e.currentTarget);
+      this.setData($el);
     });
   }
 
-  setData(e) {
-    const $tarEl = (e.currentTarget) ? $(e.currentTarget) : e;
-    const condition = $tarEl.data('mark');
+  setData($e) {
+    const condition = $e.data('mark');
 
     $('.js-mark-condition a').removeClass('active');
-    $tarEl.addClass('active');
+    $e.addClass('active');
 
     this.getMarkData().then((data) => {
       if (condition === 'on') {
         this.markOn(data);
       } else if (!this.markPickActive) {
-        this.markOff(data);
+        this.markOff();
       }
     });
 
@@ -67,10 +66,10 @@ export default class MarkCondition extends Component {
     // update the order link (remove mark data)
     const styleNum = Component.styleNum || '';
     const style = this.styleName || '';
-    const baseColour = Component.orderLink.bcol || '';
+    const bcol = Component.orderLink.bcol || '';
 
     this.currentURL = this.currentURL.split(/[?#]/)[0];
-    const orderLinkOrginal = `${this.currentURL}?style${styleNum}=${style}&bcol=${baseColour}`;
+    const orderLinkOrginal = `${this.currentURL}?style${styleNum}=${style}&bcol=${bcol}`;
     $('.js-order-save').attr('href', orderLinkOrginal);
 
     // set value on localStrage and change the order link
@@ -81,15 +80,16 @@ export default class MarkCondition extends Component {
   }
 
   markOn(data) {
+    const { position, colour, family } = data;
     // remove overlay
     $('.mark-simulation').css('overflow', 'auto');
     $('.overlay--inactive').remove();
 
-    if (data.position) {
-      const posTar = `#position-${data.position.toLowerCase()}`;
-      const $posEl = $(posTar).children(data.family).find('path');
+    if (position) {
+      const posTar = `#position-${position.toLowerCase()}`;
+      const $posEl = $(posTar).children(family).find('path');
 
-      TweenMax.set($posEl, { fill: data.colour });
+      TweenMax.set($posEl, { fill: colour });
       $('.js-colour--mark').data('target', posTar);
     }
 

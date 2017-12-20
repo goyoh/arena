@@ -8,6 +8,11 @@
     color: #666;
     line-height: 2.7;
 
+    @mixin breakpoint phone {
+      padding: 0 0.5rem;
+      line-height: 3;
+    }
+
     &.active,
     &:hover {
       background-color: #222;
@@ -28,6 +33,10 @@
     background-repeat: no-repeat;
     background-size: cover;
     vertical-align: sub;
+
+    @mixin breakpoint phone {
+      vertical-align: middle;
+    }
   }
 
   &__list {
@@ -42,6 +51,14 @@
     float: left;
     width: 49%;
     height: 2.5rem;
+
+    @mixin breakpoint phone {
+      float: none;
+      width: 100%;
+      margin: 0;
+      margin-bottom: 4px;
+      font-size: 8px;
+    }
 
     &:first-child {
       margin-right: 2%;

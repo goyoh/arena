@@ -163,6 +163,10 @@ ul {
   z-index: 99;
   transform: translateY(100%);
 
+  @mixin breakpoint phone {
+    z-index: 992;
+  }
+
   &--order-sheet {
     color: #fff;
   }
@@ -187,8 +191,20 @@ ul {
     background-color: #222;
     font-size: 12px;
 
+    @mixin breakpoint phone {
+      width: 100%;
+      top: 4.3rem;
+      bottom: auto;
+      height: calc(100% - 4.3rem);
+      font-size: 8px;
+    }
+
     .popup--design-note & {
       width: 1040px;
+
+      @mixin breakpoint phone {
+        width: 100%;
+      }
     }
   }
 
@@ -203,6 +219,10 @@ ul {
     background-size: cover;
     background-repeat: no-repeat;
     cursor: pointer;
+
+    @mixin breakpoint phone {
+      top: 0.8rem;
+    }
   }
 }
 
@@ -250,9 +270,33 @@ ul {
   background-position: center;
   cursor: pointer;
 
+  @mixin breakpoint phone {
+    display: none;
+    bottom: -1px;
+    background-color: #444;
+    background-image: none;
+  }
+
   &.hide {
     background-color: #393939;
     background-image: url($root/arrows/arrow-down_inactive.png);
+  }
+
+  &::before {
+    @mixin breakpoint phone {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      margin: auto;
+      border-style: solid;
+      border-width: 6px 6px 0;
+      border-color: #fff transparent transparent;
+    }
   }
 }
 

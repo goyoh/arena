@@ -5,6 +5,16 @@
   background-color: color(#222 a(50%));
 
   @mixin hide;
+  @mixin breakpoint phone {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(34, 34, 34, 0.8);
+    z-index: 990;
+    transform: translateY(100%);
+    visibility: visible;
+    opacity: 1;
+  }
 
   .button--close {
     width: 30px;

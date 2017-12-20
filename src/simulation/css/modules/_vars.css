@@ -17,8 +17,20 @@ $colour-gray: #504f4f;
 $colour-light-gray: #b5b5b5;
 
 /* SIZE */
+$size-hd: 1600px;
+$size-desktop: 1025px;
+$size-tablet-hol: 1024px;
+$size-tablet: 768px;
+$size-phone: 415px;
+$size-iphone5: 326px;
+
 $content-width: 740px;
 $content-top: 1.6em;
 
+$mod: 24px;
+$gutter: 2 * $mod;
+$footer-height: 2 * $mod;
+
 /* OTHERS */
 $root: "/simulation/assets/images";
+$elements: section, slider, hero, infobar, btn, header, footer, nav, side-panel, filter, menu, lightbox, cookies, loader, rotate-device, browsehappy;

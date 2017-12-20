@@ -31,6 +31,7 @@ export default class Component {
         styleLinkURL = `${styleLinkURL}&style${i + 1}=${res}`;
       }
     });
+
     return styleLinkURL;
   }
 
@@ -59,7 +60,6 @@ export default class Component {
 
     const directLinkServer = 'https://custom.arena-jp.com/order/index.php?module=Flash&action=CreateStyle&style1=';
     const directLink = `${directLinkServer}${style},${bcol},${pos},${font},${col},${mark}`;
-
     const snsLink = encodeURIComponent(`${this.currentURL}?bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&mark=${mark}`);
     Component.newOrderLink = `${this.currentURL}?style${styleNum}=${style}&bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&mark=${mark}`;
 

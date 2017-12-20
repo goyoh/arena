@@ -61,7 +61,8 @@ export default class MarkText extends Component {
     const encodedText = encodeURIComponent(text);
 
     this.getMarkData().then((data) => {
-      const jdata = `/simulation/validation/?lang=${data.language}&max=${data.length}&text=${encodedText}&json`;
+      const { language, length } = data;
+      const jdata = `/simulation/validation/?lang=${language}&max=${length}&text=${encodedText}&json`;
       this.load({ e, jdata, text });
     });
   }
@@ -70,10 +71,9 @@ export default class MarkText extends Component {
     const { pos, font, bcol, col } = Component.storageValue;
 
     // convert text from UTF-8 to SJIS
-    const str = text;
-    if (str) {
+    if (text) {
       const imageElem = document.querySelector('.js-mark-check-image'); // Image element
-      const strArray = Encoding.stringToCode(str);
+      const strArray = Encoding.stringToCode(text);
       const sjisArray = Encoding.convert(strArray, 'SJIS', 'UNICODE');
       const sjisText = Encoding.urlEncode(sjisArray);
 
