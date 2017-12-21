@@ -1,4 +1,11 @@
 .order-sheet {
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
   &__head {
     margin-top: 0;
     padding: 1.333em 1.667em;
@@ -29,6 +36,11 @@
     position: relative;
     float: left;
     width: 10%;
+
+    @mixin breakpoint tablet-port {
+      width: 15%;
+      padding-top: 15%;
+    }
 
     @mixin breakpoint phone {
       width: 15%;
@@ -67,6 +79,11 @@
     width: 90%;
     padding-left: 1.333em;
 
+    @mixin breakpoint tablet-port {
+      left: 18%;
+      width: 85%;
+    }
+
     @mixin breakpoint phone {
       left: 18%;
       width: 85%;
@@ -78,6 +95,10 @@
     font-size: 18px;
     line-height: 1;
     margin-bottom: 0.3333em;
+
+    @mixin breakpoint tablet-port {
+      font-size: 12px;
+    }
 
     @mixin breakpoint phone {
       font-size: 12px;
@@ -94,7 +115,7 @@
     bottom: 0;
     right: 1.667em;
     width: 6.667em;
-    height: 2.500em;
+    height: 2.5em;
     background-color: #444;
     margin: auto;
     text-align: center;

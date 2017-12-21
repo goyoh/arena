@@ -4,12 +4,22 @@
     display: inline-block;
     margin-left: 5px;
 
+    @mixin breakpoint tablet-port {
+      width: 100%;
+    }
+
     @mixin breakpoint phone {
       width: 100%;
     }
   }
 
   input {
+    @mixin breakpoint tablet-port {
+      position: absolute;
+      visibility: hidden;
+      opacity: 0;
+    }
+
     @mixin breakpoint phone {
       position: absolute;
       visibility: hidden;
@@ -41,6 +51,13 @@
       width: 100%;
     }
 
+    @mixin breakpoint tablet-port {
+      position: relative;
+      float: none;
+      border: 1px solid #888;
+      text-align: center;
+    }
+
     @mixin breakpoint phone {
       position: relative;
       float: none;
@@ -60,6 +77,10 @@
 
     &:hover,
     &.active {
+      @mixin breakpoint tablet-port {
+        border: 1px solid #fff;
+      }
+
       @mixin breakpoint phone {
         border: 1px solid #fff;
       }

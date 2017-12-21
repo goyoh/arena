@@ -94,6 +94,10 @@
     padding: 1.75rem;
     z-index: 2;
 
+    @mixin breakpoint tablet-port {
+      height: 20%;
+    }
+
     @mixin breakpoint phone {
       width: 92.5%;
       height: 9rem;
@@ -115,6 +119,10 @@
     margin: auto;
     background-color: #005eb8;
     mix-blend-mode: multiply;
+
+    @mixin breakpoint tablet-port {
+      height: 20%;
+    }
 
     @mixin breakpoint phone {
       width: 90%;
@@ -216,6 +224,11 @@
     width: 50%;
     margin-bottom: 42px;
 
+    @mixin breakpoint tablet-port {
+      width: 48%;
+      min-height: 294px;
+    }
+
     @mixin breakpoint tablet {
       width: 48%;
     }
@@ -227,6 +240,10 @@
     }
 
     &:nth-child(2n) {
+      @mixin breakpoint tablet-port {
+        margin-left: 4%;
+      }
+
       @mixin breakpoint tablet {
         margin-left: 3.8%;
       }
@@ -257,6 +274,10 @@
   }
 
   &__desc {
+    @mixin breakpoint tablet-port {
+      min-height: 3.2rem;
+    }
+
     @mixin breakpoint tablet {
       min-height: 3.2rem;
     }
@@ -287,6 +308,10 @@
     text-align: center;
     transition: background 0.4s ease;
 
+    @mixin breakpoint tablet-port {
+      width: calc(25% - 3.333px);
+    }
+
     @mixin breakpoint tablet {
       width: calc(25% - 3.333px);
     }
@@ -308,6 +333,10 @@
     }
 
     .item-collection .item-list & {
+      @mixin breakpoint tablet-port {
+        width: calc(50% - 4px);
+      }
+
       @mixin breakpoint tablet {
         width: calc(50% - 4px);
       }
@@ -346,6 +375,12 @@
       @mixin breakpoint phone {
         max-height: 100%;
         max-width: 90%;
+      }
+
+      .item-collection.is-col2 .item-list .item-list__image & {
+        @mixin breakpoint tablet-port {
+          width: 80%;
+        }
       }
     }
   }

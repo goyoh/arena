@@ -6,8 +6,6 @@ import OrderMenu from './OrderMenu';
 
 const Encoding = require('encoding-japanese');
 
-const fontServer = 'https://mark.arena-jp.com/simulation/servconst/MarkSample';
-
 export default class MarkText extends Component {
   constructor(props) {
     super(props);
@@ -76,6 +74,7 @@ export default class MarkText extends Component {
       const strArray = Encoding.stringToCode(text);
       const sjisArray = Encoding.convert(strArray, 'SJIS', 'UNICODE');
       const sjisText = Encoding.urlEncode(sjisArray);
+      const fontServer = 'https://mark.arena-jp.com/simulation/servconst/MarkSample';
 
       imageElem.src = `${fontServer}?bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&mark=${sjisText}`;
     }

@@ -5,13 +5,14 @@ const Popup = {
   popup: (e) => {
     e.preventDefault();
 
-    const popupTar = $(e.currentTarget).data('popup');
-    TweenMax.to(popupTar, 0.4, { y: '0%' });
+    this.popupTar = $(e.currentTarget).data('popup');
+
+    TweenMax.to(this.popupTar, 0.4, { y: '0%' });
   },
 
   popupClose: (e) => {
     e.preventDefault();
-    TweenMax.to('.js-popup', 0.4, { y: '100%' });
+    TweenMax.to(this.popupTar, 0.4, { y: '100%' });
   },
 };
 

@@ -89,12 +89,14 @@ const OrderMenu = {
 
   orderLinkMake: (e) => {
     e.preventDefault();
+
     const sendURL = $(e.currentTarget).data('send');
     const $items = $('.js-order-sheet-list li.active');
     let styleInfo = '';
 
     $items.each((i, el) => {
-      styleInfo = `${styleInfo}&${decodeURIComponent($(el).data('style'))}`;
+      const style = decodeURIComponent($(el).data('style'));
+      styleInfo = `${styleInfo}&${style}`;
     });
 
     if ($items.length > 0) window.location.href = `https:${sendURL}${styleInfo}`;

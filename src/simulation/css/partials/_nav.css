@@ -189,6 +189,11 @@
     text-align: left;
     color: #999;
 
+    @mixin breakpoint tablet-port {
+      width: calc(33.333% + 0.5rem);
+      margin-left: -0.5rem;
+    }
+
     @mixin breakpoint tablet {
       width: calc(33.333% + 1rem);
       margin-left: -1rem;

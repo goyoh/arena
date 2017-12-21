@@ -6,6 +6,10 @@
     display: flex;
     justify-content: space-between;
 
+    @mixin breakpoint tablet-port {
+      display: block;
+    }
+
     @mixin breakpoint phone {
       display: block;
     }
@@ -14,6 +18,7 @@
   &__head {
     margin-top: 0;
     padding: 1.333em 1.667em;
+    padding-top: 40px;
     font-size: 1.333em;
     border-bottom: 1px solid #666;
   }

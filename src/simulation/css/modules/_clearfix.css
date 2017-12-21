@@ -1,15 +1,18 @@
 %clear {
-	content:' ';
-	display:table;
+  content: ' ';
+  display: table;
 }
 
 .u-clear {
-	*zoom:1;
-	&:before {
-		@extend %clear;
-	}
-	&:after {
-		@extend %clear;
-		clear:both;
-	}
+  *zoom: 1;
+
+  &::before {
+    @extend %clear;
+  }
+
+  &::after {
+    @extend %clear;
+
+    clear: both;
+  }
 }

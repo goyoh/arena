@@ -26,8 +26,7 @@
     margin: auto;
   }
 
-  &__list {
-  }
+  &__list {}
 
   &__item {
     position: relative;
@@ -37,5 +36,41 @@
     margin-bottom: 2%;
     padding-top: 23%;
     text-align: center;
+
+    @mixin breakpoint tablet-port {
+      width: 48%;
+      height: 45px;
+      padding-top: 48%;
+      overflow: hidden;
+    }
+
+    @mixin breakpoint phone {
+      width: 48%;
+      height: 45px;
+      padding-top: 48%;
+      overflow: hidden;
+    }
+
+    &:nth-child(4n + 1) {
+      margin-left: 0;
+
+      @mixin breakpoint tablet-port {
+        margin-left: 2%;
+      }
+
+      @mixin breakpoint phone {
+        margin-left: 2%;
+      }
+    }
+
+    &:nth-child(2n + 1) {
+      @mixin breakpoint tablet-port {
+        margin-left: 0;
+      }
+
+      @mixin breakpoint phone {
+        margin-left: 0;
+      }
+    }
   }
 }

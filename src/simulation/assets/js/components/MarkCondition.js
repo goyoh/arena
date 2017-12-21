@@ -8,7 +8,7 @@ export default class MarkCondition extends Component {
   constructor(props) {
     super(props);
 
-    this.markPickActive = false;
+    this.markConditionActive = false;
     this.render();
   }
 
@@ -33,7 +33,7 @@ export default class MarkCondition extends Component {
     this.getMarkData().then((data) => {
       if (condition === 'on') {
         this.markOn(data);
-      } else if (!this.markPickActive) {
+      } else if (!this.markConditionActive) {
         this.markOff();
       }
     });
@@ -76,7 +76,7 @@ export default class MarkCondition extends Component {
     if (!OrderMenu.orderInfoActive) OrderMenu.orderInfo();
 
     this.markSVGRemove();
-    this.markPickActive = true;
+    this.markConditionActive = true;
   }
 
   markOn(data) {
@@ -106,7 +106,7 @@ export default class MarkCondition extends Component {
     Component.component.SimulationCommon.reloadPage();
 
     this.markSVGShow();
-    this.markPickActive = false;
+    this.markConditionActive = false;
   }
 }
 

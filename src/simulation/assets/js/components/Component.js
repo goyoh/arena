@@ -153,11 +153,11 @@ export default class Component {
           // apply if it's a mark
           if ($(el).is('.js-colour--mark')) {
             const markFont = $('.js-mark-family input:checked').val();
-            const $tarEl = $(tar).children(markFont).find('path');
+            const $path = $(tar).children(markFont).find('path');
 
             const colour = $(el).find(`[data-code="${key}"]`).data('colour');
 
-            $tarEl.each((i, chilel) => {
+            $path.each((i, chilel) => {
               this.colourDraw(chilel, colour);
             });
           } else if ($(el).is('.js-colour--gradation')) {

@@ -8,6 +8,11 @@
     color: #666;
     line-height: 2.7;
 
+    @mixin breakpoint tablet-port {
+      padding: 0 0.5rem;
+      font-size: 11px;
+    }
+
     @mixin breakpoint phone {
       padding: 0 0.5rem;
       line-height: 3;
@@ -34,6 +39,10 @@
     background-size: cover;
     vertical-align: sub;
 
+    @mixin breakpoint tablet-port {
+      vertical-align: middle;
+    }
+
     @mixin breakpoint phone {
       vertical-align: middle;
     }
@@ -51,6 +60,14 @@
     float: left;
     width: 49%;
     height: 2.5rem;
+
+    @mixin breakpoint tablet-port {
+      float: none;
+      width: 100%;
+      margin: 0;
+      margin-bottom: 4px;
+      font-size: 8px;
+    }
 
     @mixin breakpoint phone {
       float: none;

@@ -20,6 +20,10 @@
       border: 1px solid #999;
       cursor: pointer;
 
+      @mixin breakpoint tablet {
+        margin-bottom: 0.5rem;
+      }
+
       @mixin breakpoint phone {
         width: 100%;
         margin: 0;
@@ -33,6 +37,12 @@
 
       &.hide {
         display: none;
+      }
+
+      &:nth-child(6n) {
+        @mixin breakpoint tablet {
+          margin-left: 0;
+        }
       }
     }
   }

@@ -1,0 +1,20 @@
+.mark-check {
+  &__head {
+    @mixin breakpoint phone {
+      font-size: 10px;
+    }
+  }
+
+  &__image {
+    @mixin breakpoint phone {
+      margin-top: 40px;
+      margin-bottom: 16px;
+    }
+
+    img {
+      @mixin breakpoint phone {
+        width: 50%;
+      }
+    }
+  }
+}

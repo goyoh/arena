@@ -8,6 +8,11 @@
   color: #fff;
   overflow: hidden;
 
+  @mixin breakpoint tablet-port {
+    float: left;
+    width: 30%;
+  }
+
   @mixin breakpoint tablet {
     width: 28%;
   }
@@ -68,6 +73,17 @@
     padding: 1.56rem;
     padding-top: 2rem;
 
+    @mixin breakpoint tablet-port {
+      position: relative;
+      width: 90%;
+      height: calc(100% - 1.7rem);
+      margin-top: 0;
+      padding-top: 24px;
+      padding-bottom: 24px;
+      border: none;
+      overflow: auto;
+    }
+
     @mixin breakpoint tablet {
       width: calc(100% - 2.066rem);
     }
@@ -96,6 +112,13 @@
   }
 
   &__head {
+    @mixin breakpoint tablet-port {
+      height: 3.4rem;
+      background-color: #222;
+      padding: 0.5rem 0.75rem;
+      line-height: 1.2;
+    }
+
     @mixin breakpoint phone {
       position: relative;
       height: 4.2rem;
@@ -164,6 +187,19 @@
     padding: 0.25rem 1rem;
     border-top: 1px solid #888;
     border-bottom: 1px solid #888;
+
+    @mixin breakpoint tablet {
+      padding: 0.25rem 0.7rem;
+    }
+
+    @mixin breakpoint tablet-port {
+      padding: 0 0.5rem;
+    }
+
+    @mixin breakpoint phone {
+      padding: 0 0.5rem;
+      font-size: 1rem;
+    }
   }
 
   &__tab {
@@ -193,6 +229,16 @@
     width: 33.6% !important;
   }
 
+  @mixin breakpoint tablet-port {
+    top: 35%;
+    left: auto;
+    right: 0;
+    width: 65% !important;
+    padding: 0 5%;
+    padding-bottom: 13%;
+    transform: none;
+  }
+
   @mixin breakpoint phone {
     top: 29%;
     left: auto;
@@ -209,6 +255,10 @@
 
   svg {
     width: 72%;
+
+    @mixin breakpoint tablet-port {
+      width: 68%;
+    }
   }
 }
 
@@ -234,6 +284,10 @@
   z-index: 99;
   cursor: pointer;
 
+  @mixin breakpoint tablet-port {
+    bottom: 5rem;
+  }
+
   @mixin breakpoint phone {
     bottom: 1rem;
   }
@@ -241,6 +295,72 @@
   &:hover {
     background-color: #fff;
     color: $colour-main;
+  }
+}
+
+.read-more {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0;
+  right: 0;
+  width: 90%;
+  height: 1.667rem;
+  margin: auto;
+  background-color: #333;
+  background-image: url($root/arrows/arrow-down.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+
+  @mixin breakpoint tablet-port {
+    display: none;
+    bottom: -1px;
+    background-color: #444;
+    background-image: none;
+  }
+
+  @mixin breakpoint phone {
+    display: none;
+    bottom: -1px;
+    background-color: #444;
+    background-image: none;
+  }
+
+  &.hide {
+    background-color: #393939;
+    background-image: url($root/arrows/arrow-down_inactive.png);
+  }
+
+  &::before {
+    @mixin breakpoint tablet-port {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      margin: auto;
+      border-style: solid;
+      border-width: 6px 6px 0;
+      border-color: #fff transparent transparent;
+    }
+
+    @mixin breakpoint phone {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      margin: auto;
+      border-style: solid;
+      border-width: 6px 6px 0;
+      border-color: #fff transparent transparent;
+    }
   }
 }
 

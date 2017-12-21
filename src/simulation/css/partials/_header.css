@@ -98,6 +98,10 @@
     display: inline-block;
     margin: 0;
     margin-right: 1.333rem;
+
+    @mixin breakpoint tablet-port {
+      margin-right: 1rem;
+    }
   }
 
   &__list {
@@ -117,6 +121,10 @@
     display: inline-block;
     border-right: 1px dotted #aaa;
     padding: 0 1rem;
+
+    @mixin breakpoint tablet-port {
+      padding: 0 0.6rem;
+    }
 
     &:first-child {
       border-left: 1px dotted #aaa;

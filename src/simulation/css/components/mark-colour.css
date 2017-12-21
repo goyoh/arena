@@ -7,6 +7,11 @@
     margin-left: -0.567rem;
     margin-bottom: 0.5rem;
 
+    @mixin breakpoint tablet-port {
+      width: 100%;
+      margin-left: 0;
+    }
+
     @mixin breakpoint phone {
       width: 100%;
       margin-left: 0;
@@ -19,6 +24,16 @@
       margin-left: 0.567rem;
       border: 1px solid #999;
       cursor: pointer;
+
+      @mixin breakpoint tablet {
+        margin-bottom: 0.5rem;
+      }
+
+      @mixin breakpoint tablet-port {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 0.75rem;
+      }
 
       @mixin breakpoint phone {
         width: 100%;
@@ -34,12 +49,22 @@
       &.hide {
         display: none;
       }
+
+      &:nth-child(6n) {
+        @mixin breakpoint tablet {
+          margin-left: 0;
+        }
+      }
     }
   }
 
   &__section {
     @mixin breakpoint tablet {
       padding: 0 0.7rem;
+    }
+
+    @mixin breakpoint tablet-port {
+      padding: 0 0.5rem;
     }
 
     @mixin breakpoint phone {

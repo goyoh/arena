@@ -206,6 +206,11 @@ ul {
         width: 100%;
       }
     }
+
+    .docs-section {
+      color: #fff;
+      padding: 1em 2em;
+    }
   }
 
   &-close {
@@ -253,50 +258,6 @@ ul {
     text-align: center;
     padding: 1.4rem 0;
     line-height: 1;
-  }
-}
-
-.read-more {
-  position: absolute;
-  bottom: 0.5rem;
-  left: 0;
-  right: 0;
-  width: 90%;
-  height: 1.667rem;
-  margin: auto;
-  background-color: #333;
-  background-image: url($root/arrows/arrow-down.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
-
-  @mixin breakpoint phone {
-    display: none;
-    bottom: -1px;
-    background-color: #444;
-    background-image: none;
-  }
-
-  &.hide {
-    background-color: #393939;
-    background-image: url($root/arrows/arrow-down_inactive.png);
-  }
-
-  &::before {
-    @mixin breakpoint phone {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      width: 0;
-      height: 0;
-      margin: auto;
-      border-style: solid;
-      border-width: 6px 6px 0;
-      border-color: #fff transparent transparent;
-    }
   }
 }
 
