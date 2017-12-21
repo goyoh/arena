@@ -156,21 +156,13 @@
 .content-navigation {
   position: fixed;
   top: 5.8rem;
-  left: 0;
+  left: 1.4rem;
   right: 0;
   width: 90%;
   margin: auto;
   font-size: 1.083rem;
   text-align: center;
   z-index: 9;
-
-  @mixin breakpoint desktop {
-    overflow: hidden;
-  }
-
-  @mixin breakpoint tablet {
-    overflow: hidden;
-  }
 
   @mixin breakpoint phone {
     width: 92.5%;
@@ -184,8 +176,6 @@
     width: calc(33.333% + 1.3rem);
     height: 2.667rem;
     margin-left: -1.4rem;
-    padding: 0.6rem 1rem;
-    padding-left: 3rem;
     text-align: left;
     color: #999;
 
@@ -219,6 +209,16 @@
       &::before {
         opacity: 0.7;
       }
+
+      a {
+        color: #fff;
+      }
+    }
+
+    &:hover {
+      a {
+        color: #fff;
+      }
     }
 
     &::before {
@@ -232,12 +232,25 @@
   }
 
   a {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
     color: #aaa;
-    text-decoration: underline;
+    z-index: 2;
+
+    span {
+      text-decoration: underline;
+    }
   }
 
   span {
+    display: inline-block;
     position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem 1rem;
+    padding-left: 3rem;
     z-index: 2;
   }
 }

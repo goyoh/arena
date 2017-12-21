@@ -10,6 +10,7 @@ export default class ColourFunction extends Component {
     this.callback = options.callback || '';
     this.colourFunction();
   }
+
   colourFunction() {
     // JSON データ取得
     fetch(this.jsonUrl, {
@@ -22,22 +23,23 @@ export default class ColourFunction extends Component {
       const colourCode = data[0].meta.codes;
       // カラーのレベル数を取得する
       $.each(colourCode, (index, value) => {
-        window.totalColour = value.length;
+        this.totalColour = value.length;
         return false;
       });
 
-      window.keycodeUpper = 65;
-      window.keycodeLower = 97;
+      this.keycodeUpper = 65;
+      this.keycodeLower = 97;
 
-      for (let i = 1; i <= window.totalColour; i += 1) {
-        window[`colour${i}`] = [];
-        window[`label${i}`] = [];
+      for (let i = 1; i <= this.totalColour; i += 1) {
+        this[`colour${i}`] = [];
+        this[`label${i}`] = [];
         // DOMに設定用
-        window[`domColour${i}`] = [];
-        window[`domLabel${i}`] = [];
+        this[`domColour${i}`] = [];
+        this[`domLabel${i}`] = [];
       }
-      window.colour = [];
-      window.colourCodeName = [];
+
+      this.colour = [];
+      this.colourCodeName = [];
 
       $.each(colourCode, (index, value) => {
         // 総合カラーリスト
@@ -45,28 +47,29 @@ export default class ColourFunction extends Component {
         $.each(value, (i, v) => {
           temp.push(v.hex);
         });
-        window.colour.push(temp);
-        window.colourCodeName.push(index);
+        this.colour.push(temp);
+        this.colourCodeName.push(index);
         // レベル毎のカラーリスト
-        for (let i = 1; i <= window.totalColour; i += 1) {
+        for (let i = 1; i <= this.totalColour; i += 1) {
           if (typeof (value[i - 1]) != 'undefined') {
-            window[`colour${i}`].push(value[i - 1].hex);
-            window[`label${i}`].push(value[i - 1].label);
-            if ($.inArray(value[i - 1].hex, window[`domColour${i}`]) == -1) {
-              window[`domColour${i}`].push(value[i - 1].hex);
-              window[`domLabel${i}`].push(value[i - 1].label);
+            this[`colour${i}`].push(value[i - 1].hex);
+            this[`label${i}`].push(value[i - 1].label);
+            if ($.inArray(value[i - 1].hex, this[`domColour${i}`]) == -1) {
+              this[`domColour${i}`].push(value[i - 1].hex);
+              this[`domLabel${i}`].push(value[i - 1].label);
             }
           } else {
-            window[`colour${i}`].push('');
-            window[`label${i}`].push('');
+            this[`colour${i}`].push('');
+            this[`label${i}`].push('');
             console.log(`データが足りていないカラーコードあります：${index}`);
           }
         }
       });
-      for (let i = 1; i <= window.totalColour; i += 1) {
+
+      for (let i = 1; i <= this.totalColour; i += 1) {
         // DOMに設定
-        const ttl = String.fromCharCode(window.keycodeUpper + (i - 1));
-        const target = String.fromCharCode(window.keycodeLower + (i - 1));
+        const ttl = String.fromCharCode(this.keycodeUpper + (i - 1));
+        const target = String.fromCharCode(this.keycodeLower + (i - 1));
         let txt;
 
         if (data[0].meta.gradation) {
@@ -108,7 +111,7 @@ export default class ColourFunction extends Component {
         }
 
         $('.js-colour-scheme').append(txt);
-        $.each(window[`domColour${i}`], (index, value) => {
+        $.each(this[`domColour${i}`], (index, value) => {
           txt = `<li class="" data-code="" data-colour="${value}" style="background:${value};"></li>`;
           $(`.js-colour${i}`).append(txt);
         });
@@ -153,7 +156,7 @@ export default class ColourFunction extends Component {
           let anotherParentColour = $('.js-colour1 li.active').eq(0).data('colour');
 
           for (let i = 1; i < level; i += 1) {
-            const colourIndex = window[`colour${i}`].multiIndexOf(anotherParentColour);
+            const colourIndex = this[`colour${i}`].multiIndexOf(anotherParentColour);
 
             if (!availableIndex.length) {
               availableIndex = colourIndex;
@@ -171,12 +174,13 @@ export default class ColourFunction extends Component {
             anotherParentColour = $(`.js-colour${(i + 1)} li.active`).eq(0).data('colour');
           }
         }
-        for (let i = level; i < window.totalColour; i += 1) {
+
+        for (let i = level; i < this.totalColour; i += 1) {
           // 下のレベルの色をリセット
           $(`.js-colour${(i + 1)} li`).removeClass('active');
           $(`.js-colour${(i + 1)} li`).addClass('hide');
 
-          const colourIndex = window[`colour${i}`].multiIndexOf(parentColour);
+          const colourIndex = this[`colour${i}`].multiIndexOf(parentColour);
 
           if (!availableIndex.length) {
             availableIndex = colourIndex;
@@ -192,9 +196,10 @@ export default class ColourFunction extends Component {
 
             availableIndex = temp;
           }
+
           $.each(availableIndex, (index, value) => {
             // 押下可能な下のレベルの色を表示する
-            const nextColour = window[`colour${(i + 1)}`][value];
+            const nextColour = this[`colour${(i + 1)}`][value];
             $(`.js-colour${(i + 1)} li[data-colour="${nextColour}"]`).removeClass('hide');
           });
           // 下のレベルの先頭の色にアクティブ化する
@@ -205,13 +210,13 @@ export default class ColourFunction extends Component {
         availableIndex = [];
         let compareIndex = [];
 
-        for (let i = window.totalColour; i >= 1; i -= 1) {
+        for (let i = this.totalColour; i >= 1; i -= 1) {
           const childColour = $(`.js-colour${i} li.active`).eq(0).data('colour');
 
-          if (i == window.totalColour) {
-            availableIndex = window[`colour${i}`].multiIndexOf(childColour);
+          if (i == this.totalColour) {
+            availableIndex = this[`colour${i}`].multiIndexOf(childColour);
           } else {
-            compareIndex = window[`colour${i}`].multiIndexOf(childColour);
+            compareIndex = this[`colour${i}`].multiIndexOf(childColour);
             const temp = [];
 
             $.each(availableIndex, (index, value) => {
@@ -223,9 +228,10 @@ export default class ColourFunction extends Component {
             availableIndex = temp;
           }
         }
+
         availableIndex = availableIndex[0];
 
-        const colourCodeName = window.colourCodeName[availableIndex];
+        const colourCodeName = this.colourCodeName[availableIndex];
 
         $('#colour-code').text(`色番:${colourCodeName}`);
         Component.storageValue.bcol = colourCodeName;

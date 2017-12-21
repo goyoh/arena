@@ -10,7 +10,7 @@
 
 @media only screen and (max-width: 415px) {
   html {
-    font-size: 10px;
+    font-size: 2.5vw;
   }
 
   .u-pc {
@@ -26,11 +26,11 @@
   }
 }
 
-@media only screen and (max-width: 400px) {
+/* @media only screen and (max-width: 400px) {
   .custom-display svg {
     width: 100%;
   }
-}
+} */
 
 @media only screen and (max-width: 326px) {
   html {

@@ -29,6 +29,7 @@ const spinner = {
   out: () => {
     TweenMax.to(this.el.spinner, 0.4, {
       opacity: 0,
+      delay: 0.3,
       onComplete: () => {
         document.body.removeChild(this.el.spinner);
       },

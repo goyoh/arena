@@ -38,16 +38,12 @@
       &.hide {
         display: none;
       }
-
-      &:nth-child(6n) {
-        @mixin breakpoint tablet {
-          margin-left: 0;
-        }
-      }
     }
   }
 
   &__section {
+    margin-top: 0.5rem;
+
     @mixin breakpoint tablet {
       padding: 0 0.7rem;
     }
@@ -55,5 +51,9 @@
     @mixin breakpoint phone {
       padding: 0 0.5rem;
     }
+  }
+
+  &__name {
+    margin-bottom: 0.5rem;
   }
 }

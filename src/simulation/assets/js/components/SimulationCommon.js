@@ -9,7 +9,8 @@ import ScrollEvents from './ScrollEvents';
 import OrderMenu from './OrderMenu';
 
 // const uploadPath = '1/simulation/wpcms/wp-content/uploads/sites/2/';
-const uploadPath = 'https://custom.arena-jp.com/simulation/wpcms/wp-content/uploads/';
+// const uploadPath = 'https://custom.arena-jp.com/simulation/wpcms/wp-content/uploads/';
+const uploadPath = '/simulation/assets/images/svgs/';
 
 export default class SimulationCommon extends Component {
   constructor(props) {
@@ -57,6 +58,8 @@ export default class SimulationCommon extends Component {
 
     $(document).on(window.eventtype, '.js-modal', this.modals);
 
+    $(document).on(window.eventtype, '.js-base-display', this.imageModal);
+
     if (mobilecheck()) {
       $(document).on('touchstart', '.custom-menu__head', this.tapMenu);
     }
@@ -83,6 +86,31 @@ export default class SimulationCommon extends Component {
     $tapTar.addClass('is-hidden');
   }
 
+  imageModal = (e) => {
+    const $el = $(e.currentTarget);
+    const $tar = $el.find('svg');
+
+    this.modalImage = document.createElement('div');
+    this.modalImage.className = 'zoomed-image';
+    this.modalImage.innerHTML = $tar.parent().html();
+    this.modalImage.addEventListener('click', this.imageModalClose);
+
+    TweenMax.set('.js-base-display', { opacity: 0 });
+
+    document.body.appendChild(this.modalImage);
+  }
+
+  imageModalClose = () => {
+    this.modalImage.removeEventListener('click', this.imageModalClose);
+    TweenMax.set('.js-base-display', { opacity: 1 });
+    TweenMax.to(this.modalImage, 0.4, {
+      opacity: 0,
+      onComplete: () => {
+        document.body.removeChild(this.modalImage);
+      },
+    });
+  }
+
   modals = (e) => {
     e.preventDefault();
 
@@ -107,8 +135,9 @@ export default class SimulationCommon extends Component {
 
     spinner.in();
 
-    const data = $('.js-rotation').data('svg');
-    const rotationDir = $('.js-rotation').data('rotation');
+    const $tar = $(e.currentTarget);
+    const data = $tar.data('svg');
+    const rotationDir = $tar.data('rotation');
 
     const storageKey = JSON.parse(localStorage.getItem(this.pageID));
     const key = storageKey.mark;
@@ -119,14 +148,14 @@ export default class SimulationCommon extends Component {
       spinner.out();
     };
 
-    const svg = rotationDir === 'front' ? '_back.svg' : '';
+    const svg = rotationDir === 'front' ? '_back.svg' : '.svg';
     const dir = rotationDir === 'front' ? 'back' : 'front';
 
     $('.js-base-display').load(`${uploadPath}${data}${svg}`, () => {
       callback();
     });
 
-    $('.js-rotation').data('rotation', dir);
+    $tar.data('rotation', dir);
   }
 
   markSetAsStart() {

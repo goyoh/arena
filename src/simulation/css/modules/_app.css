@@ -1,25 +1,26 @@
 .custom-menu {
   position: relative;
   top: 5.5rem;
-  left: 5%;
+  left: calc(5% - 0.7rem);
   width: 26.667rem;
   height: 85%;
   background-color: #444;
   color: #fff;
   overflow: hidden;
 
+  @mixin breakpoint tablet {
+    width: 23.667rem;
+    overflow: auto;
+  }
+
   @mixin breakpoint tablet-port {
     float: left;
     width: 30%;
   }
 
-  @mixin breakpoint tablet {
-    width: 28%;
-  }
-
   @mixin breakpoint phone {
     float: left;
-    top: 8rem;
+    top: 6rem;
     left: 0;
     width: 28%;
     overflow: hidden;
@@ -84,16 +85,14 @@
       overflow: auto;
     }
 
-    @mixin breakpoint tablet {
-      width: calc(100% - 2.066rem);
-    }
-
     @mixin breakpoint phone {
       position: relative;
       display: block;
+      top: 0;
       width: 90%;
       height: 0;
       margin-top: 0;
+      padding: 0;
       border: none;
       overflow: auto;
     }
@@ -121,9 +120,9 @@
 
     @mixin breakpoint phone {
       position: relative;
-      height: 4.2rem;
+      height: auto;
       margin-bottom: 1rem;
-      padding: 0.5rem 0.75rem;
+      padding: 0.75rem;
       background-color: #222;
       font-size: 1.222rem;
       line-height: 1.2;
@@ -224,6 +223,7 @@
   width: 26rem;
   margin: auto;
   text-align: center;
+  cursor: zoom-in;
 
   @mixin breakpoint tablet {
     width: 33.6% !important;
@@ -240,12 +240,13 @@
   }
 
   @mixin breakpoint phone {
-    top: 29%;
-    left: auto;
+    position: relative;
+    width: 68%;
+    top: 0;
+    left: 0;
     right: 0;
-    width: 72% !important;
-    padding: 0 5%;
-    padding-bottom: 13%;
+    margin-right: 0;
+    padding: 0;
     transform: none;
   }
 
@@ -258,6 +259,11 @@
 
     @mixin breakpoint tablet-port {
       width: 68%;
+    }
+
+    @mixin breakpoint phone {
+      height: 54.5vh;
+      width: auto;
     }
   }
 }
@@ -279,7 +285,7 @@
   color: #fff;
   font-size: 1.25rem;
   text-align: center;
-  line-height: 2.8;
+  line-height: 2.7;
   transition: all 0.3s ease-in-out-circ;
   z-index: 99;
   cursor: pointer;
@@ -289,7 +295,9 @@
   }
 
   @mixin breakpoint phone {
-    bottom: 1rem;
+    position: relative;
+    bottom: 0;
+    margin-bottom: 0.5rem;
   }
 
   &:hover {
@@ -374,6 +382,24 @@
   width: 100%;
   text-align: left;
   color: #fff;
+}
+
+.zoomed-image {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 9999;
+  cursor: zoom-out;
+
+  svg {
+    height: 100%;
+  }
 }
 
 .loader {

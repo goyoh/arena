@@ -94,7 +94,6 @@ const readCookie = {
 function navigationMenu() {
   const nav = document.getElementById('navigation');
   const trigger = document.getElementById('navigation-trigger');
-  const eventtype = mobilecheck() ? 'touchstart' : 'click';
 
   const resetMenu = (callback) => {
     TweenMax.to(nav, 0.4, {
@@ -108,7 +107,9 @@ function navigationMenu() {
     });
   };
 
-  trigger.addEventListener(eventtype, () => {
+  trigger.addEventListener(window.eventtype, (e) => {
+    e.preventDefault();
+
     if (classie.has(trigger, 'active')) {
       resetMenu();
     } else {
@@ -116,8 +117,6 @@ function navigationMenu() {
       classie.add(nav, 'navigation--show');
       TweenMax.to(nav, 0.3, { x: '0%', autoAlpha: 1 });
     }
-
-    return false;
   });
 }
 
@@ -137,7 +136,7 @@ const browserDetect = (() => {
   }
 
   M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
-  if (ua.match(/version\/(\d+)/i) !== null) M.splice(1, 1, tem[1]);
+  if (tem = ua.match(/version\/(\d+)/i) !== null) M.splice(1, 1, tem[1]);
 
   return M.join(' ');
 })();
