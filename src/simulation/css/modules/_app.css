@@ -1,7 +1,7 @@
 .custom-menu {
   position: relative;
   top: 5.5rem;
-  left: calc(5% - 0.7rem);
+  left: calc(2% - 0.7rem);
   width: 26.667rem;
   height: 85%;
   background-color: #444;
@@ -217,10 +217,9 @@
 
 .custom-display {
   top: center;
-  top: 46.2%;
   left: 0;
   right: 0;
-  width: 26rem;
+  width: 40%;
   margin: auto;
   text-align: center;
   cursor: zoom-in;
@@ -245,7 +244,7 @@
     top: 0;
     left: 0;
     right: 0;
-    margin-right: 0;
+    margin-right: 2%;
     padding: 0;
     transform: none;
   }
@@ -255,6 +254,16 @@
   }
 
   svg {
+    @mixin breakpoint notdesktop {
+      max-width: 90%;
+    }
+
+    @mixin breakpoint phone {
+      max-height: 34vh;
+    }
+  }
+
+  /* svg {
     width: 72%;
 
     @mixin breakpoint tablet-port {
@@ -265,17 +274,21 @@
       height: 54.5vh;
       width: auto;
     }
-  }
+  } */
 }
 
 .custom-display-core {
   @mixin hide;
+
+  @mixin breakpoint phone {
+    margin: 6vh 0;
+  }
 }
 
 .custom-rotation {
   position: absolute;
   display: inline-block;
-  bottom: 5rem;
+  bottom: 9%;
   left: 0;
   right: 0;
   width: 13.333rem;
@@ -393,12 +406,14 @@
   left: 0;
   width: 100%;
   height: 100%;
+  padding: 5% 0;
   background-color: rgba(255, 255, 255, 0.9);
   z-index: 9999;
   cursor: zoom-out;
 
   svg {
-    height: 100%;
+    max-width: 90%;
+    height: 90% !important;
   }
 }
 

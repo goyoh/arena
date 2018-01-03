@@ -78,6 +78,7 @@
 
 <link rel="stylesheet" href="<?php echo get_stylesheet_uri(); ?>" type="text/css" media="screen" />
   
+<!--
 <script>
   var endpoints = { <?php if($endpoints = get_query_var('endpoints')):
     foreach((array)$endpoints as $key => $value):
@@ -86,7 +87,8 @@
     endforeach;
   endif; ?> };
 </script>
-  
+-->
+
 </head>
 
 <body id="pagetop" <?php body_class(); ?>>
@@ -95,7 +97,7 @@
   <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </noscript>
-  <script src="<?php bloginfo('url'); ?>/assets/js/gtm.js"></script>
+  <!-- <script src="<?php bloginfo('url'); ?>/assets/js/gtm.js"></script> -->
   <!-- End Google Tag Manager -->
 
   <div class="loader" id="loader">

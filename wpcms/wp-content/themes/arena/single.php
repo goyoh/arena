@@ -34,7 +34,7 @@
 ?>
 
   <div class="container" id="container">
-    <main class="main main--simulation" id="main" role="main">
+    <main class="main main--simulation" id="main" role="main" data-page="Simulation">
       <article class="content content--simulation" id="content">
         <nav class="content-navigation">
           <ul class="u-clear">
@@ -44,7 +44,7 @@
           </ul>
         </nav>
 
-        <section class="section section--custom is-swimwear js-get-height">
+        <section class="section section--custom is-swimwear js-get-height" data-component="SimulationCommon">
           <div class="custom-menu" id="wear-<?php echo $post->ID; ?>">
             <ul class="custom-menu__tabs u-clear u-pc">
               <li class="active" data-tab=".base-simulation">SWIM WEAR<br>SIMULATION</li>
@@ -68,28 +68,28 @@
             <div class="custom-menu__head u-sp">MARK<br>SIMULATION</div>
             <div class="custom-menu__tap">（タップして開く）</div>
 
-            <div class="custom-menu__content custom-mark-simulation">
+            <div class="custom-menu__content custom-mark-simulation mark-simulation">
               <div class="custom-menu__inner">
                 <!-- マークのありなし -->
                 <?php get_template_part('template/custom', 'mark-condition'); ?>
               </div>
-              <?php if(get_query_var('mark')['positions']): ?>
-              <div class="custom-menu__inner">
-                <!-- マークの位置 -->
-                <?php get_template_part('template/custom', 'mark-position'); ?>
-              </div>
-              <div class="custom-menu__inner">
-                <!-- マークの書体 -->
-                <?php get_template_part('template/custom', 'mark-font'); ?>
-              </div>
-              <div class="custom-menu__inner">
-                <!-- マークの色 -->
-                <?php get_template_part('template/custom', 'mark-colour'); ?>
-              </div>
-              <div class="custom-menu__inner">
-                <!-- マークの名前 -->
-                <?php get_template_part('template/custom', 'mark-text'); ?>
-              </div>
+              <?php if (get_query_var('mark')['positions']): ?>
+                <div class="custom-menu__inner">
+                  <!-- マークの位置 -->
+                  <?php get_template_part('template/custom', 'mark-position'); ?>
+                </div>
+                <div class="custom-menu__inner">
+                  <!-- マークの書体 -->
+                  <?php get_template_part('template/custom', 'mark-font'); ?>
+                </div>
+                <div class="custom-menu__inner">
+                  <!-- マークの色 -->
+                  <?php get_template_part('template/custom', 'mark-colour'); ?>
+                </div>
+                <div class="custom-menu__inner">
+                  <!-- マークの名前 -->
+                  <?php get_template_part('template/custom', 'mark-text'); ?>
+                </div>
               <?php endif; ?>
             </div>
 
@@ -109,7 +109,7 @@
             </div>
           </div>
 
-          <div class="custom-display" style="width: 18.6%;">
+          <div class="custom-display">
             <div class="custom-display-core js-base-display">
             <?php
               $basic_auth = array('user' => 'ccv', 'pass' => 'shunlock');
@@ -124,9 +124,15 @@
               echo $result;
             ?>
             </div>
-            <span class="custom-rotation u-sp js-rotation" data-rotation="front" data-svg="<?php echo strtoupper($post->post_name); ?>"><i class="icon icon--rotation"></i>ROTATION</span>
-            <?php if($have_page): ?><a href="" class="item-info__link js-popup-trigger u-sp" data-popup=".popup--design-note">商品情報を見る</a><?php endif; ?>
+
+            <div class="button-container u-sp">
+              <span class="custom-rotation js-rotation" data-rotation="front" data-svg="<?php echo strtoupper($post->post_name); ?>"><i class="icon icon--rotation"></i>ROTATION</span>
+              <?php if($have_page): ?>
+                <a href="javascript:void(0);" class="item-info__link js-popup-trigger" data-popup=".popup--design-note">商品情報を見る</a>
+              <?php endif; ?>
+            </div>
           </div>
+
           <span class="custom-rotation u-pc js-rotation" data-rotation="front" data-svg="<?php echo strtoupper($post->post_name); ?>"><i class="icon icon--rotation"></i>ROTATION</span>
         </section>
 

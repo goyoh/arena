@@ -27,6 +27,8 @@ export default class ColourFunction extends Component {
         return false;
       });
 
+      console.log(colourCode);
+
       this.keycodeUpper = 65;
       this.keycodeLower = 97;
 
@@ -129,11 +131,11 @@ export default class ColourFunction extends Component {
           $.each(colourCode[cData], (cIndex) => {
             const hexCodes = colourCode[cData][cIndex].hex;
             const cElChild = $(`.js-colour-scheme .js-colour${cIndex + 1}`).find(`*[data-colour="${hexCodes}"]`);
-            $(cElChild).trigger(window.eventtype);
+            $(cElChild).trigger('click');
             initialIndex += 1;
           });
         } else {
-          $('.js-colour-scheme .js-colour1 li:first-child').trigger(window.eventtype);
+          $('.js-colour-scheme .js-colour1 li:first-child').trigger('click');
           this.callback();
         }
 
@@ -141,7 +143,7 @@ export default class ColourFunction extends Component {
       }, 10);
 
       // 色のボタンをクリック処理
-      $('.js-colour-scheme').on(window.eventtype, 'li', (e) => {
+      $('.js-colour-scheme').on('click', 'li', (e) => {
         // e.preventDefault();
 
         const level = parseInt($(e.currentTarget).parents('ul').data('level'));

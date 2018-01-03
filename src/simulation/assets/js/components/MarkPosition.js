@@ -43,8 +43,8 @@ export default class MarkPosition extends Component {
 
         $('.js-colour--mark').data('target', tar);
 
-        // rotation the item if the mark is positioned on the opposite side
-        if (side !== rotation) this.rotation();
+        // rotate the item if the mark is positioned on the opposite side
+        if (side !== rotation) Component.component.SimulationCommon.rotation();
       }
 
       // update localStrage and the order link

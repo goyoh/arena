@@ -26,7 +26,7 @@ export default class MarkFamily extends Component {
 
     this.getMarkData().then((data) => {
       const { family, position, colour } = data;
-      const font = family.replace('.mrk', '');
+      const font = family ? family.replace('.mrk', '') : '';
 
       // initialise input
       $('.js-mark-family input').prop('checked', false);
@@ -35,13 +35,14 @@ export default class MarkFamily extends Component {
       $e.parent().addClass('active');
 
       $.each(this.markOptions, (index, el) => {
-        const $path = $(`#position-${el}`);
-        TweenMax.set($path.children().find('path'), { fill: 'none' });
+        const $container = $(`#position-${el}`);
+        const $path = $container.children().find('path');
+        TweenMax.set($path, { fill: 'none' });
       });
 
       if (position) {
-        const tar = `#position-${position.toLowerCase()}`;
-        const $path = $(tar).children(family).find('path');
+        const $container = $(`#position-${position.toLowerCase()}`);
+        const $path = $container.children(family).find('path');
         TweenMax.set($path, { fill: colour });
       }
 

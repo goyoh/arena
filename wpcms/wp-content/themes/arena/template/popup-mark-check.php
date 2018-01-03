@@ -1,5 +1,5 @@
 <p class="mark-check__head">入力したマークの確認</p>
-<a class="popup-close js-popup-close"></a>
+<a href="javascript:void(0);" class="popup-close js-popup-close"></a>
 <canvas id="text-canvas"></canvas>
 <div class="mark-check__image">
   <img class="js-mark-check-image" src="" align="">

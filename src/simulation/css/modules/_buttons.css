@@ -35,6 +35,11 @@
     background-position: center;
     vertical-align: sub;
     margin-right: 8px;
+    transition: background 0.3s ease-in-out-circ;
+
+    .custom-rotation:hover & {
+      background-image: url($root/icons/icon-rotation_on.png);
+    }
   }
 
   &--fina {

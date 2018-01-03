@@ -2,7 +2,7 @@
 
 ?>
 <p class="order-sheet__head system-requirements__head">動作環境</p>
-<a class="popup-close js-popup-close"></a>
+<a href="javascript:void(0);" class="popup-close js-popup-close"></a>
 
 <div class="docs-section">
   <h2>当サイトは、ご利用環境として下記を推奨しています。</h2>

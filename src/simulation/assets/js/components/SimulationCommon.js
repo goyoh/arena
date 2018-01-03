@@ -10,15 +10,16 @@ import OrderMenu from './OrderMenu';
 
 // const uploadPath = '1/simulation/wpcms/wp-content/uploads/sites/2/';
 // const uploadPath = 'https://custom.arena-jp.com/simulation/wpcms/wp-content/uploads/';
-const uploadPath = '/simulation/assets/images/svgs/';
+// const uploadPath = '/simulation/assets/images/svgs/';
+const uploadPath = 'https://custom.arena-jp.com/simulation/printcustom2/wp-content/uploads/sites/3/';
 
 export default class SimulationCommon extends Component {
   constructor(props) {
     super(props);
 
     const slug = window.location.href.split('?')[0].split('/').pop();
-    // this.jsonPath = `https://custom.arena-jp.com/simulation/wp-json/wp/v2/posts/?slug=${slug}`;
-    this.jsonPath = 'https://custom.arena-jp.com/simulation/wp-json/wp/v2/posts/?slug=oar-7010w';
+    this.jsonPath = `https://custom.arena-jp.com/simulation/printcustom2/wp-json/wp/v2/posts/?slug=${slug}`;
+    // this.jsonPath = 'https://custom.arena-jp.com/simulation/printcustom2/wp-json/wp/v2/posts/?slug=oar-8330';
 
     this.render();
   }
@@ -26,6 +27,7 @@ export default class SimulationCommon extends Component {
   render() {
     this.setStyleByCookie();
     this.events();
+    this.itemSize();
 
     this.baseColour = new BaseColour({
       jsonUrl: this.jsonPath,
@@ -58,7 +60,9 @@ export default class SimulationCommon extends Component {
 
     $(document).on(window.eventtype, '.js-modal', this.modals);
 
-    $(document).on(window.eventtype, '.js-base-display', this.imageModal);
+    $(document).on('click', '.js-base-display', this.imageModal);
+
+    $(window).on('resize', this.itemSize);
 
     if (mobilecheck()) {
       $(document).on('touchstart', '.custom-menu__head', this.tapMenu);
@@ -131,11 +135,9 @@ export default class SimulationCommon extends Component {
   }
 
   rotation(e) {
-    e.preventDefault();
-
     spinner.in();
 
-    const $tar = $(e.currentTarget);
+    const $tar = e ? $(e.currentTarget) : $('.js-rotation');
     const data = $tar.data('svg');
     const rotationDir = $tar.data('rotation');
 
@@ -143,6 +145,7 @@ export default class SimulationCommon extends Component {
     const key = storageKey.mark;
 
     const callback = () => {
+      this.itemSize();
       this.restyle();
       Component.component.MarkText.markTextToCanvas(key);
       spinner.out();
@@ -193,17 +196,36 @@ export default class SimulationCommon extends Component {
     $(target).add(e.currentTarget).addClass('active');
   }
 
+  itemSize = () => {
+    const $container = $('.js-base-display');
+    const $el = $container.find('svg');
+    const viewBox = ($el) ? $el[0].viewBox.baseVal : '';
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    if (!viewBox) {
+      $el.css('width', windowWidth * 0.4);
+    }
+
+    if (viewBox.height > viewBox.width) {
+      $el.css('height', windowHeight * 0.525);
+    } else {
+      $el.css('width', windowWidth * 0.4);
+    }
+  }
+
   reloadPage() {
     const vars = getUrlVars();
-    const $posEl = vars.pos ? $('.js-mark-position').find(`*[data-pos="${vars.pos}"]`) : $('.js-mark-position .active');
-    const $familyEl = vars.font ? $('.js-mark-family li').find(`*[data-code="${String(vars.font)}"]`) : $('.js-mark-family input:checked');
-    const $colEl = vars.col ? $('.js-colour--mark').find(`*[data-code="${vars.col}"]`) : $('.js-colour--mark').find('li.active');
+    const { pos, font, col, mark } = vars;
+    const $posEl = pos ? $('.js-mark-position').find(`*[data-pos="${pos}"]`) : $('.js-mark-position .active');
+    const $fontEl = font ? $('.js-mark-family li').find(`*[data-code="${String(font)}"]`) : $('.js-mark-family input:checked');
+    const $colEl = col ? $('.js-colour--mark').find(`*[data-code="${col}"]`) : $('.js-colour--mark').find('li.active');
 
     Component.component.MarkPosition.setData($posEl);
-    Component.component.MarkFamily.setData($familyEl);
+    Component.component.MarkFamily.setData($fontEl);
     this.changeColours($colEl);
 
-    if (vars.mark) Component.component.MarkText.markTextToCanvas();
+    if (mark) Component.component.MarkText.markTextToCanvas();
   }
 }
 

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en-GB"> <!--<![endif]-->
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1 user-scalable=no">
+		<title>home | </title>
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<meta property="og:title" content="C is" />
+		<meta property="og:site_name" content="C is"/>
+		<meta property="og:url" content="//c-is.co" />
+		<meta property="og:description" content="" />
+		<meta property="article:author" content="C-is" />
+		<meta property="article:publisher" content="C-is" />
+		<meta property="og:image" content="" />
+		<meta property="og:locale" content="en_GB" /> 
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="stylesheet" href="/simulation/style.css">
+	</head>
+
+	<body class="home">
+		<!--[if lt IE 7]>
+		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+		<![endif]-->
+
+		<div class="loader" id="loader">
+			<div class="loader__inner">
+				<span class="loader__count js-loader-count"></span>
+			</div>
+		</div>
+
+		<header class="header u-clear" role="banner">
+			<a class="header__logo" href="/simulation">
+				<img src="/simulation/assets/images/common/header-logo.png" alt="CUSTOM ORDER">
+			</a>
+			<a href="javascript:void(0);" class="navigation-trigger u-sp" id="navigation-trigger"><i></i></a>
+
+			<nav class="navigation u-sp" id="navigation" role="navigation">
+				<h5 class="navigation__head">ウェアの種類を選ぶ</h5>
+				<ul class="navigation__wear-list">
+					<li>
+						<a class="navigation__link" href="">Swim Wear</a>
+					</li>
+					<li>
+						<a class="navigation__link" href="">Team Wear</a>
+					</li>
+				</ul>
+
+				<h5 class="navigation__head">保存したStyle</h5>
+				<ul class="navigation-style__list js-style-list">
+					<li class="navigation-style__item active">
+						<span class="navigation-style__head">Style1</span>
+						<p class="navigation-style__desc">OAR-4300　BU02　<br>クロスジャケット</p>
+						<!-- <a href="" class="button button--remove">削除</a> -->
+					</li>
+					<li class="navigation-style__item registered">
+						<span class="navigation-style__head">Style2</span>
+						<p class="navigation-style__desc">OAR-4300　BU02　<br>クロスジャケット</p>
+						<a href="" class="button button--remove">削除</a>
+					</li>
+					<li class="navigation-style__item registered">
+						<span class="navigation-style__head">Style3</span>
+						<p class="navigation-style__desc">OAR-4300　BU02　<br>クロスジャケット</p>
+						<a href="" class="button button--remove">削除</a>
+					</li>
+					<li class="navigation-style__item">
+						<span class="navigation-style__head">Style4</span>
+						<p class="navigation-style__desc">- 未保存 -</p>
+					</li>
+					<li class="navigation-style__item">
+						<span class="navigation-style__head">Style5</span>
+						<p class="navigation-style__desc">- 未保存 -</p>
+					</li>
+				</ul>
+
+				<h5 class="navigation__head">はじめてのお客様へ</h5>
+				<a class="navigation__link navigation__link--help" href="https://custom.arena-jp.com/help/index.html" target="_blank">HELP</a>
+			</nav>
+
+			<div class="header__menu">
+				<div class="header-style js-style-list">
+					<p class="header-style__title">Style:</p>
+					<ul class="u-clear header-style__list">
+						<li class="header-style__item" data-number="1"><a class="registered active" href="">Style1</a></li>
+						<li class="header-style__item" data-number="2"><a class="registered" href="">Style2</a></li>
+						<li class="header-style__item" data-number="3"><a class="registered" href="">Style3</a></li>
+						<li class="header-style__item" data-number="4"><a href="">Style4</a></li>
+						<li class="header-style__item" data-number="5"><a href="">Style5</a></li>
+					</ul>
+				</div>
+
+				<div class="header__help">
+					<a href="https://custom.arena-jp.com/help/index.html" target="_blank">・HELP</a>
+					<a href="javascript:void(0);" class="js-popup-trigger" data-popup=".popup--system-requirements">・動作環境</a>
+				</div>
+			</div>
+		</header>
+
+		<div class="container" id="container">
+			
+<main class="main main--home" id="main" role="main" data-page="Home">
+	<article class="content content--home" id="content">
+		<nav class="content-navigation">
+			<ul class="u-clear">
+				<li class="active"><span>種類を選ぶ</span></li>
+				<li><span>カスタムする</span></li>
+				<li><span>オーダーする</span></li>
+			</ul>
+		</nav>
+
+		<section class="section section--top js-get-height">
+			<div class="menu-door menu-door--swimwear">
+				<div class="menu-door__inner u-center-vertical">
+					<a class="menu-door__link js-scroll-link" href="#item-swimwear"></a>
+					<h2 class="menu-door__title"><img src="/simulation/assets/images/common/text-swimwear.png" alt="SWIMWEAR"></h2>
+					<p class="menu-door__desc u-pc">スイムウェアは、FINA承認モデルです。（TOUGH SUITはFINA承認モデルではありません。）それぞれ異なる特徴をもった３つの素材があります。<br>アリーナの先端技術が、100分の1秒に挑戦するアスリートたちを応援します。</p>
+					<div class="menu-door__desc u-sp">種類を選ぶ</div>
+				</div>
+
+				<div class="menu-door__bg"></div>
+			</div>
+
+			<div class="menu-door menu-door--teamwear">
+				<div class="menu-door__inner u-center-vertical">
+					<a class="menu-door__link js-scroll-link" href="#item-teamwear"></a>
+					<h2 class="menu-door__title"><img src="/simulation/assets/images/common/text-teamwear.png" alt="TEAMWEAR"></h2>
+					<p class="menu-door__desc u-pc">さまざまな機能をかね備えた、ジャケットとパンツのセットアップをラインナップ。<br>Tシャツも合わせてご用意しております。</p>
+					<div class="menu-door__desc u-sp">種類を選ぶ</div>
+				</div>
+
+				<div class="menu-door__bg"></div>
+			</div>
+		</section>
+
+		<section class="section section--swimwear" id="item-swimwear">
+			<header class="item-head item-head--swimwear">
+				<div class="u-inner">
+					<h2 class="item-head__title"><img src="/simulation/assets/images/common/text-swimwear.png" alt="SWIMWEAR"></h2>
+					<p class="item-head__desc">スイムウェアは、FINA承認モデルです。（TOUGH SUITはFINA承認モデルではありません。）それぞれ異なる特徴をもった３つの素材があります。<br>アリーナの先端技術が、100分の1秒に挑戦するアスリートたちを応援します。</p>
+				</div>
+			</header>
+
+			<div class="item-inner">
+				<div class="u-inner">
+					<article class="item-collection">
+						<h3 class="item-collection__title">
+							<img src="/simulation/assets/images/common/text-aquaforce.png" alt="AQUAFORCE FUSION">
+							<i class="icon icon--fina"><img src="/simulation/assets/images/icons/icon-fina.png" alt="FINA承認モデル"></i>
+						</h3>
+
+						<p class="item-collection__desc">表地には、多くのトップスイマーが着用している布帛素材を100%使用しています。今まで布帛素材を着用したことの無いスイマーにもお勧めできるハイパフォーマンスモデルです。</p>
+
+						<ul class="item-list u-clear">
+							<li>
+								<a class="item-list__link" href="/simulation/simulation"></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-aquaforce1.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Women’s</span></div>
+							</li>
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-aquaforce2.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Men’s</span></div>
+							</li>
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-aquaforce3.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Girl’s</span></div>
+							</li>
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-aquaforce4.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Boy’s</span></div>
+							</li>
+						</ul>
+					</article>
+				</div>
+			</div>
+
+			<div class="item-inner">
+				<div class="u-inner">
+					<article class="item-collection">
+						<h3 class="item-collection__title"><img src="/simulation/assets/images/common/text-x-python.png" alt="X-Python"><i class="icon icon--fina"><img src="/simulation/assets/images/icons/icon-fina.png" alt="FINA承認モデル"></i></h3>
+						<p class="item-collection__desc">ニット素材を使用したモデルです。ポリウレタンを身体にまきつく（横方向）方向に配置することで身体にしっかりフィットし、スムーズな泳ぎをサポートします。</p>
+						<ul class="item-list u-clear">
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-x-python1.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Women’s</span></div>
+							</li>
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-x-python2.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Men’s</span></div>
+							</li>
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-x-python3.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Girl’s</span></div>
+							</li>
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-x-python4.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Boy’s</span></div>
+							</li>
+						</ul>
+					</article>
+				</div>
+			</div>
+
+			<div class="item-inner">
+				<div class="u-inner">
+					<article class="item-collection">
+						<h3 class="item-collection__title"><img src="/simulation/assets/images/common/text-uroko-skin.png" alt="UROKO SKIN"><i class="icon icon--fina"><img src="/simulation/assets/images/icons/icon-fina.png" alt="FINA承認モデル"></i></h3>
+						<p class="item-collection__desc">地厚な安心感と、伸びのあるフィット感／塩素に強く長持ち、はっ水加工でシャープな水切れ／ウロコ柄の表面感にスポーティなデザイン</p>
+						<ul class="item-list u-clear">
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-uroko-skin1.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Women’s</span></div>
+							</li>
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-uroko-skin2.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Men’s</span></div>
+							</li>
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-uroko-skin3.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Girl’s</span></div>
+							</li>
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-uroko-skin4.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Boy’s</span></div>
+							</li>
+						</ul>
+					</article>
+				</div>
+			</div>
+
+			<div class="item-inner">
+				<div class="u-inner">
+					<article class="item-collection">
+						<h3 class="item-collection__title"><img src="/simulation/assets/images/common/text-tough-suit.png" alt="Tought suit"></h3>
+						<p class="item-collection__desc">耐久性に優れた素材と運動性を重視したアイテム。頻度が高く、過酷なトレーニングを行う競泳スイマーやマスターズスイマーに最適な水着。</p>
+						<ul class="item-list u-clear">
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-tough-suit1.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Women’s</span></div>
+							</li>
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-tough-suit2.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Men’s</span></div>
+							</li>
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-tough-suit3.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Girl’s</span></div>
+							</li>
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-tough-suit4.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Boy’s</span></div>
+							</li>
+						</ul>
+					</article>
+				</div>
+			</div>
+
+			<div class="item-inner">
+				<div class="u-inner">
+					<article class="item-collection">
+						<h3 class="item-collection__title"><img src="/simulation/assets/images/common/text-print-custom.png" alt="TOUGH SUIT PRINT CUSTOM ORDER"></h3>
+						<p class="item-collection__desc">デザイン・カラーを選択してチーム名が柄に出来る。自分たちだけのオリジナル練習用水着を作ろう。</p>
+						<ul class="item-list item-list--long u-clear">
+							<li>
+								<div class="item-list__image">
+									<div class="u-center-vertical print-item-list">
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item1.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item2.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item3.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item4.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item5.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item6.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item7.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item8.png" alt="ITEM">
+										</a>
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Women’s</span></div>
+							</li>
+							<li>
+								<div class="item-list__image">
+									<div class="u-center-vertical print-item-list">
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item1.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item2.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item3.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item4.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item5.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item6.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item7.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item8.png" alt="ITEM">
+										</a>
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Girl’s</span></div>
+							</li>
+							<li>
+								<div class="item-list__image">
+									<div class="u-center-vertical print-item-list print-item-list--multi-row">
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item9.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item10.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item11.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item12.png" alt="ITEM">
+										</a>
+										<br>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item13.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item14.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item15.png" alt="ITEM">
+										</a>
+										<a class="print-item" href="">
+											<img class="js-preload" src="/simulation/assets/images/items/print-custom/item16.png" alt="ITEM">
+										</a>
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Men’s</span></div>
+							</li>
+							<li>
+								<div class="item-list__image">
+									<div class="item-list__image">
+										<div class="u-center-vertical print-item-list print-item-list--multi-row">
+											<a class="print-item" href="">
+												<img class="js-preload" src="/simulation/assets/images/items/print-custom/item9.png" alt="ITEM">
+											</a>
+											<a class="print-item" href="">
+												<img class="js-preload" src="/simulation/assets/images/items/print-custom/item10.png" alt="ITEM">
+											</a>
+											<a class="print-item" href="">
+												<img class="js-preload" src="/simulation/assets/images/items/print-custom/item11.png" alt="ITEM">
+											</a>
+											<a class="print-item" href="">
+												<img class="js-preload" src="/simulation/assets/images/items/print-custom/item12.png" alt="ITEM">
+											</a>
+											<br>
+											<a class="print-item" href="">
+												<img class="js-preload" src="/simulation/assets/images/items/print-custom/item13.png" alt="ITEM">
+											</a>
+											<a class="print-item" href="">
+												<img class="js-preload" src="/simulation/assets/images/items/print-custom/item14.png" alt="ITEM">
+											</a>
+											<a class="print-item" href="">
+												<img class="js-preload" src="/simulation/assets/images/items/print-custom/item15.png" alt="ITEM">
+											</a>
+											<a class="print-item" href="">
+												<img class="js-preload" src="/simulation/assets/images/items/print-custom/item16.png" alt="ITEM">
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Boy’s</span></div>
+							</li>
+						</ul>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="section section--teamwear" id="item-teamwear">
+			<header class="item-head item-head--teamwear">
+				<div class="u-inner">
+					<h2 class="item-head__title"><img src="/simulation/assets/images/common/text-teamwear.png" alt="TEAMWEAR"></h2>
+					<p class="item-head__desc">さまざまな機能をかね備えた、ジャケットとパンツのセットアップをラインナップ。<br>Tシャツも合わせてご用意しております。</p>
+				</div>
+			</header>
+			<div class="item-inner">
+				<div class="u-inner u-flex u-clear">
+					<article class="item-collection is-col2">
+						<h3 class="item-collection__title">クロスタイプ</h3>
+						<p class="item-collection__lubi">Cloth type</p>
+						<p class="item-collection__desc">肌離れが良い、裏メッシュなしのクロスタイプ。軽量感とストレッチ性に優れています。</p>
+						<ul class="item-list u-clear">
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-cross-type1.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Men’s & Women’s</span></div>
+							</li>
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-cross-type2.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Boy’s & Girl’s</span></div>
+							</li>
+						</ul>
+					</article>
+					<article class="item-collection is-col2">
+						<h3 class="item-collection__title">ウインドブレーカータイプ</h3>
+						<p class="item-collection__lubi">Windbreaker type</p>
+						<p class="item-collection__desc">防水・防風に優れたウインドブレーカータイプ。</p>
+						<ul class="item-list u-clear">
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-wind-breaker1.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Men’s & Women’s</span></div>
+							</li>
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-wind-breaker2.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Boy’s & Girl’s</span></div>
+							</li>
+						</ul>
+					</article>
+					<article class="item-collection is-col2">
+						<h3 class="item-collection__title">ジャージタイプ</h3>
+						<p class="item-collection__lubi">Jersey type</p>
+						<p class="item-collection__desc">ふくらみのある素材を使用。ソフトで安心感のある着用感。</p>
+						<ul class="item-list u-clear">
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-jersey-type1.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Men’s & Women’s</span></div>
+							</li>
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-jersey-type2.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Boy’s & Girl’s</span></div>
+							</li>
+						</ul>
+					</article>
+					<article class="item-collection is-col2">
+						<h3 class="item-collection__title">Tシャツ</h3>
+						<p class="item-collection__lubi">T-Shirt</p>
+						<p class="item-collection__desc">・・</p>
+						<ul class="item-list u-clear">
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-t-shirt1.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Men’s & Women’s</span></div>
+							</li>
+							<li>
+								<a class="item-list__link" href=""></a>
+								<div class="item-list__image">
+									<div class="u-center-vertical">
+										<img class="js-preload" src="/simulation/assets/images/items/item-t-shirt2.png" alt="ITEM">
+									</div>
+								</div>
+								<div class="item-list__desc"><span>Boy’s & Girl’s</span></div>
+							</li>
+						</ul>
+					</article>
+				</div>
+			</div>
+		</section>
+	</article>
+</main>
+
+
+		</div>
+
+		<footer class="footer u-clear" role="contentinfo">
+			<div class="footer__logo">
+				<img src="/simulation/assets/images/common/footer-logo.png" alt="copyright">
+			</div>
+		</footer>
+
+		<script src="/simulation/assets/js/main.js"></script>
+		
+		 
+
+
+		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+		<script>
+		 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		 ga('create', 'UA-xxxxxx', 'auto');
+		 ga('send', 'pageview');
+
+		</script>
+	</body>
+</html>

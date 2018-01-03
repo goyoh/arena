@@ -4,8 +4,6 @@ import { mobilecheck, readCookie, getOrientation } from '../app/globals';
 
 import Component from './Component';
 
-const eventtype = mobilecheck() ? 'touchstart' : 'click';
-
 const OrderMenu = {
   orderInfoActive: false,
   orderLinkActive: false,
@@ -30,11 +28,12 @@ const OrderMenu = {
   },
 
   styleRegistration: () => {
-    const $container = (mobilecheck()) ? $('.navigation-style__list') : $('.header-style__list');
-    const tar = (mobilecheck()) ? '.button--remove' : '.icon';
+    const $container = mobilecheck() ? $('.navigation-style__list') : $('.header-style__list');
+    const tar = mobilecheck() ? '.button--remove' : '.icon--style-close';
 
-    $container.on(eventtype, tar, (e) => {
-      this.removeFn(e);
+    $container.on(window.eventtype, tar, (e) => {
+      console.log(this);
+      OrderMenu.removeFn(e);
     });
   },
 
@@ -46,7 +45,7 @@ const OrderMenu = {
       TweenMax.to('.js-order-info', 0.4, { autoAlpha: 1 });
     }
 
-    this.orderInfoActive = true;
+    OrderMenu.orderInfoActive = true;
   },
 
   orderInfoHide: () => {
@@ -57,24 +56,24 @@ const OrderMenu = {
       TweenMax.to('.js-order-info', 0.4, { autoAlpha: 0 });
     }
 
-    this.orderInfoActive = false;
+    OrderMenu.orderInfoActive = false;
   },
 
   orderInfoShow: (e) => {
     e.preventDefault();
 
-    const yValue = this.orderInfoActive ? '100%' : '0%';
+    const yValue = OrderMenu.orderInfoActive ? '100%' : '0%';
     TweenMax.to('.js-order-info', 0.4, { y: yValue });
     $(e.currentTarget).toggleClass('show');
 
-    this.orderInfoActive = !this.orderInfoActive;
+    OrderMenu.orderInfoActive = !OrderMenu.orderInfoActive;
   },
 
   orderSheet: (e) => {
     e.preventDefault();
 
     window.history.pushState({}, 'order', Component.newOrderLink);
-    this.orderLinkActive = true;
+    OrderMenu.orderLinkActive = true;
   },
 
   orderSheetList: (e) => {

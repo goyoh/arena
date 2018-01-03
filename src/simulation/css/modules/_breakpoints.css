@@ -13,7 +13,8 @@
     font-size: 2.5vw;
   }
 
-  .u-pc {
+  .u-pc,
+  .u-tb {
     display: none !important;
   }
 
@@ -52,6 +53,11 @@
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
   .u-tb {
     display: block !important;
+  }
+
+  .u-pc,
+  .u-sp {
+    display: none !important;
   }
 
   html {

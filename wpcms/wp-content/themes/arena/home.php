@@ -21,7 +21,7 @@
 ?>
   
   <div class="container" id="container">
-    <main class="main main--home" id="main" role="main">
+    <main class="main main--home" id="main" role="main" data-page="Home">
       <article class="content content--home" id="content">
         <nav class="content-navigation">
           <ul class="u-clear">

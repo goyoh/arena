@@ -3,6 +3,10 @@ import { TweenMax } from 'gsap';
 import PerfectScrollbar from 'perfect-scrollbar';
 
 const ScrollEvents = {
+  scrollPosition: 0,
+
+  headerHeight: $('.header').outerHeight(),
+
   topScroll: (e) => {
     e.preventDefault();
 
@@ -38,16 +42,32 @@ const ScrollEvents = {
   scrollBarStyle: () => {
     const el = document.querySelector('.custom-menu');
 
-    this.ps = new PerfectScrollbar(el, {
-      wheelSpeed: 3,
-      minScrollbarLength: 5,
-    });
+    if (el) {
+      this.ps = new PerfectScrollbar(el, {
+        wheelSpeed: 3,
+        minScrollbarLength: 5,
+      });
+    }
   },
 
   updateScrollBar: () => {
     // update the scrollbar height
     // const el = document.querySelector('.custom-menu');
     if (this.ps) this.ps.update();
+  },
+
+  headerReveal: () => {
+    const st = $(window).scrollTop();
+
+    if (st > 10 && ScrollEvents.scrollPosition < st) {
+      TweenMax.to('.header, .content-navigation', 0.4, { y: -ScrollEvents.headerHeight });
+    } else if (ScrollEvents.scrollPosition > st) {
+      TweenMax.to('.header, .content-navigation', 0.4, { y: 0 });
+    } else {
+      TweenMax.to('.header, .content-navigation', 0.4, { y: 0 });
+    }
+
+    ScrollEvents.scrollPosition = st;
   },
 };
 

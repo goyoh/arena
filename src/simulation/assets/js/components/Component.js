@@ -6,7 +6,6 @@ import ScrollEvents from './ScrollEvents';
 export default class Component {
   constructor() {
     this.currentURL = window.location.href;
-    this.uploadPath = '/simulation/wpcms/wp-content/uploads/';
     this.markOptions = ['a', 'b', 'c', 'j', 'k', 'd', 'i', 'l', 'e', 'm', 'n', 'f', 'l', 'g', 'o'];
     this.pageID = $('.custom-menu').attr('id');
     this.styleName = $('.js-order-save').data('style');
@@ -20,7 +19,7 @@ export default class Component {
 
   getStyleByCookie = () => {
     const cookies = ['style1', 'style2', 'style3', 'style4', 'style5'];
-    let styleLinkURL = '';
+    let styleLink = '';
 
     $.each(cookies, (i) => {
       // apply the style which ain't 0 in Cookie
@@ -28,11 +27,11 @@ export default class Component {
         const val = readCookie.getItem(`style${i + 1}`);
         const res = decodeURIComponent(val);
 
-        styleLinkURL = `${styleLinkURL}&style${i + 1}=${res}`;
+        styleLink = `${styleLink}&style${i + 1}=${res}`;
       }
     });
 
-    return styleLinkURL;
+    return styleLink;
   }
 
   setStyleByCookie = () => {
@@ -41,8 +40,10 @@ export default class Component {
       // apply the style which ain't 0 in Cookie
       if (readCookie.getItem(`style${i + 1}`) === '0') {
         Component.styleNum = i + 1;
-        // return false;
+        return false;
       }
+
+      return true;
     });
   }
 
@@ -59,9 +60,9 @@ export default class Component {
     const { pos, font, bcol, col, mark } = Component.orderLink;
 
     const directLinkServer = 'https://custom.arena-jp.com/order/index.php?module=Flash&action=CreateStyle&style1=';
-    const directLink = `${directLinkServer}${style},${bcol},${pos},${font},${col},${mark}`;
-    const snsLink = encodeURIComponent(`${this.currentURL}?bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&mark=${mark}`);
-    Component.newOrderLink = `${this.currentURL}?style${styleNum}=${style}&bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&mark=${mark}`;
+    const directLink = `${directLinkServer}${style},${bcol || ''},${pos || ''},${font || ''},${col || ''},${mark || ''}`;
+    const snsLink = encodeURIComponent(`${this.currentURL}?bcol=${bcol || ''}&pos=${pos || ''}&font=${font || ''}&col=${col || ''}&mark=${mark || ''}`);
+    Component.newOrderLink = `${this.currentURL}?style${styleNum}=${style}&bcol=${bcol || ''}&pos=${pos || ''}&font=${font || ''}&col=${col || ''}&mark=${mark || ''}`;
 
     $('.js-order-sheet-direct').attr('href', directLink);
     $('.js-order-save').attr('href', Component.newOrderLink);
@@ -84,8 +85,7 @@ export default class Component {
       const language = $family.data('max-lang');
       const family = $family.val();
       const code = $family.data('code');
-
-      const length = $position.attr(`data-max-${language}`);
+      const length = $position.data(`max-${language}`);
 
       const data = { colour, text, position, family, code, language, length, rotation };
 
@@ -93,33 +93,33 @@ export default class Component {
     })
   )
 
-  colourDraw = (chilel, colour) => {
+  colourDraw = (el, colour) => {
     // for the svg drawing purpose
     // const stroke = $(chilel).css('stroke');
     // const fill = $(chilel).css('fill');
 
-    TweenMax.set(chilel, { fill: colour });
+    TweenMax.set(el, { fill: colour });
   }
 
   changeColours(e) {
-    const $tarEl = (e.currentTarget) ? $(e.currentTarget) : e;
+    const $el = (e.currentTarget) ? $(e.currentTarget) : e;
 
     // const $svg = $('.js-base-display').find('svg');
-    const tar = $tarEl.parent().data('target');
+    const tar = $el.parent().data('target');
     let $svgPath;
 
-    const cate = $tarEl.parent().data('cate');
-    const colour = $tarEl.data('colour');
-    const code = $tarEl.data('code');
+    const cate = $el.parent().data('cate');
+    const colour = $el.data('colour');
+    const code = $el.data('code');
 
-    const $colourEl = $tarEl.parents('.js-colour');
+    const $colourEl = $el.parents('.js-colour');
 
     // apply if it's the cololour for the mark
     if ($colourEl.is('.js-colour--mark')) {
       const markFont = $('.js-mark-family input:checked').val();
 
       $colourEl.find('li').removeClass('active');
-      $tarEl.addClass('active');
+      $el.addClass('active');
 
       // set localStrage and change the order link
       Component.storageValue[cate] = code;

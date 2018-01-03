@@ -4,7 +4,7 @@
 ?>
 
 <p class="order-sheet__head">オーダーシート作成希望のStyleを選択してください。</p>
-<a class="popup-close js-popup-close"></a>
+<a href="javascript:void(0);" class="popup-close js-popup-close"></a>
 <ul class="order-sheet__list js-order-sheet-list">
 <?php
   $i = 0;

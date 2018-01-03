@@ -4,7 +4,7 @@
 {% extends 'layout/_layout.html' %}
 
 {% block content %}
-<main class="main main--simulation" id="main" role="main">
+<main class="main main--simulation" id="main" role="main" data-page="Simulation">
 	<article class="content content--simulation" id="content">
 		<nav class="content-navigation">
 			<ul class="u-clear">
@@ -95,9 +95,11 @@
 					{% include 'svg/OAR-7010W.svg' %}
 				</div>
 
-				<span class="custom-rotation u-sp js-rotation" data-rotation="front" data-svg="OAR-7010W"><i class="icon icon--rotation"></i>ROTATION</span>
+				<div class="button-container u-sp">
+					<span class="custom-rotation js-rotation" data-rotation="front" data-svg="OAR-7010W"><i class="icon icon--rotation"></i>ROTATION</span>
 
-				<a href="" class="item-info__link js-popup-trigger u-sp" data-popup=".popup--design-note">商品情報を見る</a>
+					<a href="javascript:void(0);" class="item-info__link js-popup-trigger" data-popup=".popup--design-note">商品情報を見る</a>
+				</div>
 			</div>
 
 			<span class="custom-rotation u-pc js-rotation" data-rotation="front" data-svg="OAR-7010W"><i class="icon icon--rotation"></i>ROTATION</span>

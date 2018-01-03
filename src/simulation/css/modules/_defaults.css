@@ -228,6 +228,14 @@ ul {
     @mixin breakpoint phone {
       top: 0.8rem;
     }
+
+    .popup--design-note & {
+      top: 9.2%;
+
+      @mixin breakpoint phone {
+        top: 5.2%;
+      }
+    }
   }
 }
 

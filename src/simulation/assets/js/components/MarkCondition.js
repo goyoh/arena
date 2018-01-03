@@ -86,11 +86,11 @@ export default class MarkCondition extends Component {
     $('.overlay--inactive').remove();
 
     if (position) {
-      const posTar = `#position-${position.toLowerCase()}`;
-      const $posEl = $(posTar).children(family).find('path');
+      const tar = `#position-${position.toLowerCase()}`;
+      const $posEl = $(tar).children(family).find('path');
 
       TweenMax.set($posEl, { fill: colour });
-      $('.js-colour--mark').data('target', posTar);
+      $('.js-colour--mark').data('target', tar);
     }
 
     // apply if mark data already exists in localStrage

@@ -36,7 +36,7 @@
   <a class=header__logo href="<?php echo get_bloginfo('url'); ?>">
     <img src="<?php echo get_bloginfo('url'); ?>/assets/images/common/header-logo.png" alt="<?php echo get_bloginfo('name'); ?>">
   </a>
-  <a class="navigation-trigger u-sp" id="navigation-trigger"><i></i></a>
+  <a href="javascript:void(0);" class="navigation-trigger u-sp" id="navigation-trigger"><i></i></a>
 
   <nav class="navigation u-sp" id="navigation" role="navigation">
     <h5 class="navigation__head">ウェアの種類を選ぶ</h5>
@@ -44,10 +44,11 @@
       <li> <a href="/simulation/#item-swimwear" class="navigation__link">Swim Wear</a> </li>
       <li> <a href="/simulation/#item-teamwear" class="navigation__link">Team Wear</a> </li>
     </ul>
+
     <h5 class="navigation__head">保存したStyle</h5>
     <ul class="navigation-style__list js-style-list">
     <?php foreach((array)$style_list as $key => $value): ?>
-      <li class="navigation-style__item active">
+      <li class="navigation-style__item <?php if($value['url']): ?>active<?php endif; ?>" data-number="<?php echo $key+1; ?>">
         <span class="navigation-style__head"><?php echo $value['name']; ?></span>
         <p class="navigation-style__desc">
         <?php if($value['url']): ?>

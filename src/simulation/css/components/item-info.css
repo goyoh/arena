@@ -1,12 +1,12 @@
 .item-info {
   position: absolute;
   top: 10rem;
-  right: 5.5%;
-  min-width: 28rem;
+  right: 2.5%;
+  width: 28rem;
   color: #fff;
 
   @mixin breakpoint tablet {
-    min-width: 25rem;
+    width: 25rem;
   }
 
   @mixin breakpoint tablet-port {
@@ -23,9 +23,10 @@
     top: 0;
     right: 0;
     left: 0;
-    max-width: 66%;
+    max-width: 68%;
     min-width: 0;
     margin-top: 6rem;
+    margin-right: 2%;
     margin-left: auto;
   }
 
