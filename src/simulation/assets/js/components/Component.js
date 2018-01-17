@@ -57,12 +57,12 @@ export default class Component {
 
     const styleNum = Component.styleNum || '';
     const style = this.styleName || '';
-    const { pos, font, bcol, col, mark } = Component.orderLink;
+    const { pos, font, bcol, col, markA, markA2, markB } = Component.orderLink;
 
     const directLinkServer = 'https://custom.arena-jp.com/order/index.php?module=Flash&action=CreateStyle&style1=';
-    const directLink = `${directLinkServer}${style},${bcol || ''},${pos || ''},${font || ''},${col || ''},${mark || ''}`;
-    const snsLink = encodeURIComponent(`${this.currentURL}?bcol=${bcol || ''}&pos=${pos || ''}&font=${font || ''}&col=${col || ''}&mark=${mark || ''}`);
-    Component.newOrderLink = `${this.currentURL}?style${styleNum}=${style}&bcol=${bcol || ''}&pos=${pos || ''}&font=${font || ''}&col=${col || ''}&mark=${mark || ''}`;
+    const directLink = `${directLinkServer}${style},${bcol || ''},${pos || ''},${font || ''},${col || ''},${markA || ''}`;
+    const snsLink = encodeURIComponent(`${this.currentURL}?bcol=${bcol || ''}&pos=${pos || ''}&font=${font || ''}&col=${col || ''}&markA=${markA || ''}`);
+    Component.newOrderLink = `${this.currentURL}?style${styleNum}=${style}&bcol=${bcol || ''}&pos=${pos || ''}&font=${font || ''}&col=${col || ''}&markA=${markA || ''}&markA2=${markA2 || ''}&markB=${markB || ''}`;
 
     $('.js-order-sheet-direct').attr('href', directLink);
     $('.js-order-save').attr('href', Component.newOrderLink);

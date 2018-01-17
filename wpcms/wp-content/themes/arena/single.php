@@ -74,21 +74,23 @@
                 <?php get_template_part('template/custom', 'mark-condition'); ?>
               </div>
               <?php if (get_query_var('mark')['positions']): ?>
-                <div class="custom-menu__inner">
-                  <!-- マークの位置 -->
-                  <?php get_template_part('template/custom', 'mark-position'); ?>
-                </div>
-                <div class="custom-menu__inner">
-                  <!-- マークの書体 -->
-                  <?php get_template_part('template/custom', 'mark-font'); ?>
-                </div>
-                <div class="custom-menu__inner">
-                  <!-- マークの色 -->
-                  <?php get_template_part('template/custom', 'mark-colour'); ?>
-                </div>
-                <div class="custom-menu__inner">
-                  <!-- マークの名前 -->
-                  <?php get_template_part('template/custom', 'mark-text'); ?>
+                <div class="custom-menu__tab">
+                  <div class="custom-menu__inner">
+                    <!-- マークの位置 -->
+                    <?php get_template_part('template/custom', 'mark-position'); ?>
+                  </div>
+                  <div class="custom-menu__inner">
+                    <!-- マークの書体 -->
+                    <?php get_template_part('template/custom', 'mark-font'); ?>
+                  </div>
+                  <div class="custom-menu__inner">
+                    <!-- マークの色 -->
+                    <?php get_template_part('template/custom', 'mark-colour'); ?>
+                  </div>
+                  <div class="custom-menu__inner">
+                    <!-- マークの名前 -->
+                    <?php get_template_part('template/custom', 'mark-text'); ?>
+                  </div>
                 </div>
               <?php endif; ?>
             </div>

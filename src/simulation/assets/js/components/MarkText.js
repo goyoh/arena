@@ -3,7 +3,6 @@ import { TweenMax } from 'gsap';
 
 import Component from './Component';
 import OrderMenu from './OrderMenu';
-import Popup from './Popup';
 import { spinner } from '../app/Loader';
 
 const Encoding = require('encoding-japanese');
@@ -28,7 +27,7 @@ export default class MarkText extends Component {
   }
 
   load(props) {
-    const { e, jdata, text } = props;
+    const { e, jdata, text, line } = props;
 
     $.ajax({
       url: jdata,
@@ -38,8 +37,8 @@ export default class MarkText extends Component {
         const validation = data.validate;
 
         if (validation) {
-          this.markTextToCanvas(text);
-          Popup.popup(e);
+          this.markTextToCanvas(text, line);
+          // Popup.popup(e);
           $('.form-message').html('');
         } else {
           const message = data.message;
@@ -57,37 +56,58 @@ export default class MarkText extends Component {
   }
 
   setData(e) {
-    const text = $('.js-mark-text').val();
+    const $container = $(e.currentTarget).parent();
+    const text = $container.find('.js-mark-text').val();
     const encodedText = encodeURIComponent(text);
+    const line = Number($container.find('.js-mark-text').data('line'));
 
     this.getMarkData().then((data) => {
       const { language, length } = data;
       const jdata = `/simulation/validation/?lang=${language}&max=${length}&text=${encodedText}&json`;
-      this.load({ e, jdata, text });
+      this.load({ e, jdata, text, line });
     });
   }
 
-  markTextToCanvas(text) {
+  markTextToCanvas(text, line) {
     const { pos, font, bcol, col } = Component.storageValue;
+    const rotationDir = $('.mark-simulation').find('.js-rotation').data('rotation');
+    const dir = rotationDir === 'front' ? 'back' : 'front';
+    const markNum = dir === 'front' ? 'markA' : 'markB';
+    const mark = `${markNum}${line}`;
+
+    const str = text || Component.storageValue[mark];
 
     // convert text from UTF-8 to SJIS
-    if (text) {
-      const image = document.querySelector('.js-mark-check-image'); // Image element
-      const strArray = Encoding.stringToCode(text);
+    if (str) {
+      const strArray = Encoding.stringToCode(str);
       const sjisArray = Encoding.convert(strArray, 'SJIS', 'UNICODE');
       const sjisText = Encoding.urlEncode(sjisArray);
-      const fontServer = 'https://mark.arena-jp.com/simulation/servlet/MarkSample2';
+      const fontServer = 'https://mark.arena-jp.com/simulation/servlet/MarkSample3';
 
-      image.src = `${fontServer}?bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&mark=${sjisText}`;
+      const posID = pos.toLowerCase();
+      const svg = `#mark-${posID}`;
+      const url = `${fontServer}?bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&mark=${sjisText}`;
+
+      TweenMax.set('.mark-group g', { autoAlpha: 0 });
+      TweenMax.to(svg, 0.4, { autoAlpha: 1 });
+
+      if (line && line === 2) {
+        const image = $(svg).children('image').clone();
+        image.attr('xlink:href', url);
+
+        $(svg).append(image);
+      } else {
+        $(svg).children('image').attr('xlink:href', url);
+      }
     }
 
     // show order info menu on the bottom right side
     if (!OrderMenu.orderInfoActive && text) OrderMenu.orderInfo();
 
     // set value on localStrage and change the order link
-    Component.storageValue.mark = text;
+    Component.storageValue[mark] = str;
     this.setLocalStrage();
-    this.orderLinkChange('mark', text);
+    this.orderLinkChange(mark, str);
   }
 }
 

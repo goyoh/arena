@@ -4,6 +4,10 @@
     display: inline-block;
     margin-left: 5px;
 
+    @mixin breakpoint desktop {
+      max-width: 55%;
+    }
+
     @mixin breakpoint tablet-port {
       width: 100%;
     }

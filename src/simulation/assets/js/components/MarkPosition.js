@@ -22,7 +22,7 @@ export default class MarkPosition extends Component {
   }
 
   setData($e) {
-    const cate = $e.parents('ul').data('cate');
+    const cate = $e.parents('.js-mark-position').data('cate');
     const side = $e.data('side');
 
     $('.js-mark-position a').removeClass('active');

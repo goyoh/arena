@@ -47,28 +47,45 @@
 					</div>
 
 					<div class="custom-menu__inner">
-						<h4 class="custom-menu__title">マークの位置</h4>
-
-						{% include 'components/_mark-pos.html' %}
+						<div class="custom-direction">
+							<span class="button button--direction js-rotation" data-rotation="front" data-svg="OAR-7010W">BACK</span>
+						</div>
 					</div>
 
-					<div class="custom-menu__inner">
-						<h4 class="custom-menu__title">マークの書体</h4>
+					<div class="custom-menu__tab active" data-rotation="front">
+						<div class="custom-menu__inner">
+							<h4 class="custom-menu__title">マークの位置</h4>
 
-						{% include 'components/_mark-family.html' %}
+							{% include 'components/_mark-pos.html' %}
+						</div>
+
+						<div class="custom-menu__inner">
+							<h4 class="custom-menu__title">マークの書体</h4>
+
+							{% include 'components/_mark-family.html' %}
+						</div>
+
+						<div class="custom-menu__inner">
+							<h4 class="custom-menu__title">マークの色</h4>
+
+							{% include 'components/_mark-colour.html' %}
+						</div>
+
+						<div class="custom-menu__inner">
+							<h4 class="custom-menu__title">マークの名前</h4>
+
+							{% include 'components/_mark-text.html' %}
+						</div>
 					</div>
 
-					<div class="custom-menu__inner">
-						<h4 class="custom-menu__title">マークの色</h4>
+					<div class="custom-menu__tab" data-rotation="back">
+						<div class="custom-menu__inner">
+							<h4 class="custom-menu__title">マークの位置</h4>
 
-						{% include 'components/_mark-colour.html' %}
+							{% include 'components/_mark-pos.html' %}
+						</div>
 					</div>
 
-					<div class="custom-menu__inner">
-						<h4 class="custom-menu__title">マークの名前</h4>
-
-						{% include 'components/_mark-text.html' %}
-					</div>
 				</div>
 				<p class="read-more js-read-more"></p>
 			</div>

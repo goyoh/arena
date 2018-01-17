@@ -2,9 +2,9 @@
   &__list {
     display: flex;
     flex-wrap: wrap;
-    width: calc(100% + 1.114rem);
+    width: calc(100% + 0.666rem);
     margin: auto;
-    margin-left: -0.567rem;
+    margin-left: -0.333rem;
     margin-bottom: 0.5rem;
 
     @mixin breakpoint phone {
@@ -15,8 +15,7 @@
     li {
       width: 3.333rem;
       height: 1.333rem;
-      margin-bottom: 0.567rem;
-      margin-left: 0.567rem;
+      margin: 0 0.3333rem 0.567rem;
       border: 1px solid #999;
       cursor: pointer;
 

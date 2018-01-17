@@ -31,6 +31,7 @@ export default class SimulationCommon extends Component {
 
     this.baseColour = new BaseColour({
       jsonUrl: this.jsonPath,
+      print: true,
       callback: () => {
         this.markSetAsStart();
         TweenMax.to('.js-base-display', 0.4, {
@@ -141,39 +142,48 @@ export default class SimulationCommon extends Component {
     const data = $tar.data('svg');
     const rotationDir = $tar.data('rotation');
 
+    const svg = rotationDir === 'front' ? '_back.svg' : '.svg';
+    const dir = rotationDir === 'front' ? 'back' : 'front';
+    const markInfo = rotationDir === 'front' ? 'markB' : 'markA';
+    const $directionTab = $(`.custom-menu__tab[data-rotation="${dir}"]`);
+
     const storageKey = JSON.parse(localStorage.getItem(this.pageID));
-    const key = storageKey.mark;
+    const key = storageKey[markInfo];
+    const key2 = storageKey[`${markInfo}2`];
 
     const callback = () => {
       this.itemSize();
       this.restyle();
-      Component.component.MarkText.markTextToCanvas(key);
+      Component.component.MarkText.markTextToCanvas(key, 1);
+      if (key2) Component.component.MarkText.markTextToCanvas(key2, 2);
       spinner.out();
+      $('.custom-menu__tab[data-rotation]').removeClass('active');
+      $directionTab.addClass('active');
     };
-
-    const svg = rotationDir === 'front' ? '_back.svg' : '.svg';
-    const dir = rotationDir === 'front' ? 'back' : 'front';
 
     $('.js-base-display').load(`${uploadPath}${data}${svg}`, () => {
       callback();
+      $tar.text(rotationDir.toUpperCase());
     });
 
     $tar.data('rotation', dir);
   }
 
   markSetAsStart() {
-    const vars = getUrlVars();
+    const { mark, pos } = getUrlVars();
 
     // add mark text info at start
-    if (vars.mark && vars.mark !== '') {
-      Component.storageValue.mark = vars.mark;
-      Component.orderLink.mark = vars.mark;
+    if (mark && mark !== '') {
+      const text = $('.js-mark-text').val();
+
+      Component.storageValue.mark = text;
+      Component.orderLink.mark = text;
     }
 
     // apply if there are queries
-    if (vars.pos && vars.pos !== '') {
+    if (pos && pos !== '') {
       // set initial localStrage
-      if (vars.mark && vars.mark !== '') {
+      if (mark && mark !== '') {
         OrderMenu.orderInfo();
       }
 
@@ -216,16 +226,17 @@ export default class SimulationCommon extends Component {
 
   reloadPage() {
     const vars = getUrlVars();
-    const { pos, font, col, mark } = vars;
+    const { pos, font, col, markA, markA2 } = vars;
     const $posEl = pos ? $('.js-mark-position').find(`*[data-pos="${pos}"]`) : $('.js-mark-position .active');
     const $fontEl = font ? $('.js-mark-family li').find(`*[data-code="${String(font)}"]`) : $('.js-mark-family input:checked');
     const $colEl = col ? $('.js-colour--mark').find(`*[data-code="${col}"]`) : $('.js-colour--mark').find('li.active');
+    const line = !markA2 ? 1 : 2;
 
     Component.component.MarkPosition.setData($posEl);
     Component.component.MarkFamily.setData($fontEl);
     this.changeColours($colEl);
 
-    if (mark) Component.component.MarkText.markTextToCanvas();
+    if (markA) Component.component.MarkText.markTextToCanvas(null, line);
   }
 }
 

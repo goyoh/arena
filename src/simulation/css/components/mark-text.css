@@ -6,6 +6,7 @@
   }
 
   input[type="text"] {
+    width: 50%;
     height: calc(2.5rem - 2px);
     padding: 0 0.5rem;
     background-color: transparent;
@@ -72,6 +73,20 @@
 
     @mixin breakpoint phone {
       padding: 0;
+    }
+  }
+
+  &__inner {
+    margin-top: 0.333rem;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  &__input {
+    &--second {
+      margin-top: 0.333rem;
     }
   }
 }
