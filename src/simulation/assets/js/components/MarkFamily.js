@@ -23,6 +23,7 @@ export default class MarkFamily extends Component {
 
   setData($e) {
     $('.js-mark-text').toggleClass('disabled', $e.data('max-lang') === 'en');
+    const cate = $('.js-mark-family').data('cate');
 
     this.getMarkData().then((data) => {
       const { family, position, colour } = data;
@@ -47,8 +48,8 @@ export default class MarkFamily extends Component {
       }
 
       // update localStrage and the order link
-      this.orderLinkChange('font', font);
-      Component.storageValue.font = font;
+      this.orderLinkChange(cate, font);
+      Component.storageValue[cate] = font;
       this.setLocalStrage();
     });
   }

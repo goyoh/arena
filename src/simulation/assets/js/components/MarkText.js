@@ -87,18 +87,11 @@ export default class MarkText extends Component {
       const posID = pos.toLowerCase();
       const svg = `#mark-${posID}`;
       const url = `${fontServer}?bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&mark=${sjisText}`;
+      const svgContainer = line === 2 ? '.mark-group w' : '.mark-group g';
 
-      TweenMax.set('.mark-group g', { autoAlpha: 0 });
+      TweenMax.set(svgContainer, { autoAlpha: 0 });
+      $(svg).children('image').attr('xlink:href', url);
       TweenMax.to(svg, 0.4, { autoAlpha: 1 });
-
-      if (line && line === 2) {
-        const image = $(svg).children('image').clone();
-        image.attr('xlink:href', url);
-
-        $(svg).append(image);
-      } else {
-        $(svg).children('image').attr('xlink:href', url);
-      }
     }
 
     // show order info menu on the bottom right side

@@ -226,17 +226,17 @@ export default class SimulationCommon extends Component {
 
   reloadPage() {
     const vars = getUrlVars();
-    const { pos, font, col, markA, markA2 } = vars;
+    const { pos, font, col, markA, markB, markB2 } = vars;
     const $posEl = pos ? $('.js-mark-position').find(`*[data-pos="${pos}"]`) : $('.js-mark-position .active');
     const $fontEl = font ? $('.js-mark-family li').find(`*[data-code="${String(font)}"]`) : $('.js-mark-family input:checked');
     const $colEl = col ? $('.js-colour--mark').find(`*[data-code="${col}"]`) : $('.js-colour--mark').find('li.active');
-    const line = !markA2 ? 1 : 2;
+    const line = !markB2 ? 1 : 2;
 
     Component.component.MarkPosition.setData($posEl);
     Component.component.MarkFamily.setData($fontEl);
     this.changeColours($colEl);
 
-    if (markA) Component.component.MarkText.markTextToCanvas(null, line);
+    if (markA || markB) Component.component.MarkText.markTextToCanvas(null, line);
   }
 }
 
