@@ -51,6 +51,11 @@ export default class SimulationCommon extends Component {
       return false;
     });
 
+    $('.js-colour--edge').on(window.eventtype, 'li', (e) => {
+      this.changeColours(e);
+      return false;
+    });
+
     $('.custom-menu__tabs').on(window.eventtype, 'li', (e) => {
       this.tabs(e);
     });
@@ -138,52 +143,58 @@ export default class SimulationCommon extends Component {
   rotation(e) {
     spinner.in();
 
-    const $tar = e ? $(e.currentTarget) : $('.js-rotation');
-    const data = $tar.data('svg');
+    const $tar = e ? $(e.currentTarget) : $('.custom-direction .js-rotation');
+    const svgData = $tar.data('svg');
     const rotationDir = $tar.data('rotation');
+    const tarDir = rotationDir === 'front' ? 'back' : 'front';
 
-    const svg = rotationDir === 'front' ? '_back.svg' : '.svg';
-    const dir = rotationDir === 'front' ? 'back' : 'front';
-    const markInfo = rotationDir === 'front' ? 'markB' : 'markA';
-    const $directionTab = $(`.custom-menu__tab[data-rotation="${dir}"]`);
+    const $directionTab = $(`.custom-menu__tab[data-rotation="${tarDir}"]`);
 
     const storageKey = JSON.parse(localStorage.getItem(this.pageID));
-    const key = storageKey[markInfo];
-    const key2 = storageKey[`${markInfo}2`];
+    const markTar = rotationDir === 'front' ? 'markB' : 'markA';
+
+    const key = storageKey[markTar];
+    const key2 = storageKey[`${markTar}2`];
 
     const callback = () => {
       this.itemSize();
       this.restyle();
-      Component.component.MarkText.markTextToCanvas(key, 1);
-      if (key2) Component.component.MarkText.markTextToCanvas(key2, 2);
-      spinner.out();
-      $('.custom-menu__tab[data-rotation]').removeClass('active');
-      $directionTab.addClass('active');
+      this.getMarkData().then((data) => {
+        Component.component.MarkText.markTextToCanvas(key, null, data);
+        if (key2) Component.component.MarkText.markTextToCanvas(key2, 2, data);
+
+        spinner.out();
+        $('.custom-menu__tab[data-rotation]').removeClass('active');
+        $directionTab.addClass('active');
+      });
     };
 
-    $('.js-base-display').load(`${uploadPath}${data}${svg}`, () => {
-      callback();
-      $tar.text(rotationDir.toUpperCase());
-    });
+    const svg = rotationDir === 'front' ? '_back.svg' : '.svg';
 
-    $tar.data('rotation', dir);
+    $('.js-rotation').data('rotation', tarDir).attr('data-rotation', tarDir);
+    $('.js-rotation').text(rotationDir.toUpperCase());
+
+    $('.js-base-display').load(`${uploadPath}${svgData}${svg}`, () => {
+      callback();
+    });
   }
 
   markSetAsStart() {
-    const { mark, pos } = getUrlVars();
+    const { markA, posA } = getUrlVars();
+    const $current = $('.custom-menu__tab.active');
 
     // add mark text info at start
-    if (mark && mark !== '') {
-      const text = $('.js-mark-text').val();
+    if (markA && markA !== '') {
+      const text = $current.find('.js-mark-text').val();
 
-      Component.storageValue.mark = text;
-      Component.orderLink.mark = text;
+      Component.storageValue.markA = text;
+      Component.orderLink.markA = text;
     }
 
     // apply if there are queries
-    if (pos && pos !== '') {
+    if (posA && posA !== '') {
       // set initial localStrage
-      if (mark && mark !== '') {
+      if (markA && markA !== '') {
         OrderMenu.orderInfo();
       }
 
@@ -194,8 +205,8 @@ export default class SimulationCommon extends Component {
       Component.component.MarkCondition.setData($el);
     }
 
-    if ($('.js-mark-family input:checked').data('max-lang') === 'en') {
-      $('.js-mark-text').addClass('disabled');
+    if ($current.find('.js-mark-family input:checked').data('max-lang') === 'en') {
+      $current.find('.js-mark-text').addClass('disabled');
     }
   }
 
@@ -226,15 +237,28 @@ export default class SimulationCommon extends Component {
 
   reloadPage() {
     const vars = getUrlVars();
-    const { pos, font, col, markA, markB, markB2 } = vars;
-    const $posEl = pos ? $('.js-mark-position').find(`*[data-pos="${pos}"]`) : $('.js-mark-position .active');
-    const $fontEl = font ? $('.js-mark-family li').find(`*[data-code="${String(font)}"]`) : $('.js-mark-family input:checked');
-    const $colEl = col ? $('.js-colour--mark').find(`*[data-code="${col}"]`) : $('.js-colour--mark').find('li.active');
-    const line = !markB2 ? 1 : 2;
+    const { posA, fontA, colA, ecolA, markA, markB, markB2 } = vars;
 
-    Component.component.MarkPosition.setData($posEl);
-    Component.component.MarkFamily.setData($fontEl);
-    this.changeColours($colEl);
+    const $current = $('.custom-menu__tab.active');
+
+    const $posEl = $current.find('.js-mark-position');
+    const $pos = posA ? $posEl.find(`*[data-pos="${posA}"]`) : $posEl.find('.active');
+
+    const $fontEl = $current.find('.js-mark-family');
+    const $font = fontA ? $fontEl.find(`*[data-code="${String(fontA)}"]`) : $fontEl.find('input:checked');
+
+    const $colEl = $current.find('.js-colour--mark');
+    const $col = colA ? $colEl.find(`*[data-code="${colA}"]`) : $colEl.find('li.active');
+
+    const $ecolEl = $current.find('.js-colour--edge');
+    const $ecol = ecolA ? $ecolEl.find(`*[data-code="${ecolA}"]`) : $ecolEl.find('li.active');
+
+    const line = !markB2 ? null : 2;
+
+    Component.component.MarkPosition.setData($pos);
+    Component.component.MarkFamily.setData($font);
+    this.changeColours($col);
+    this.changeColours($ecol);
 
     if (markA || markB) Component.component.MarkText.markTextToCanvas(null, line);
   }

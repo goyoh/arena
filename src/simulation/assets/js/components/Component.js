@@ -74,20 +74,27 @@ export default class Component {
 
   getMarkData = () => (
     new Promise((resolve) => {
-      const colour = $('.js-colour--mark').find('li.active').data('colour');
-      const position = $('.js-mark-position .active').data('pos');
-      const rotation = $('.js-rotation').data('rotation');
-      const text = $('.js-mark-text').val();
+      const rotation = $('.custom-direction .js-rotation').data('rotation');
+      const $current = $('.custom-menu__tab.active');
 
-      const $position = $('.js-mark-position').find(`[data-pos="${position}"]`);
+      const colour = $current.find('.js-colour--mark').find('li.active').data('colour');
+      const ecolour = $current.find('.js-colour--edge').find('li.active').data('colour');
+      const ccode = $current.find('.js-colour--mark').find('li.active').data('code');
+      const ecode = $current.find('.js-colour--edge').find('li.active').data('code');
+      const position = $current.find('.js-mark-position .active').data('pos');
+      const text = $current.find('.js-mark-text').val();
 
-      const $family = $('.js-mark-family input:checked');
+      const $position = $current.find('.js-mark-position').find(`[data-pos="${position}"]`);
+      const $family = $current.find('.js-mark-family input:checked');
       const language = $family.data('max-lang');
       const family = $family.val();
       const code = $family.data('code');
       const length = $position.data(`max-${language}`);
 
-      const data = { colour, text, position, family, code, language, length, rotation };
+      console.log('getMarkData');
+      console.log(position);
+
+      const data = { colour, ccode, ecolour, ecode, text, position, family, code, language, length, rotation };
 
       resolve(data);
     })
@@ -103,6 +110,7 @@ export default class Component {
 
   changeColours(e) {
     const $el = (e.currentTarget) ? $(e.currentTarget) : e;
+    const $current = $('.custom-menu__tab.active');
 
     // const $svg = $('.js-base-display').find('svg');
     const tar = $el.parent().data('target');
@@ -115,8 +123,8 @@ export default class Component {
     const $colourEl = $el.parents('.js-colour');
 
     // apply if it's the cololour for the mark
-    if ($colourEl.is('.js-colour--mark')) {
-      const markFont = $('.js-mark-family input:checked').val();
+    if ($colourEl.is('.js-colour--mark') || $colourEl.is('.js-colour--edge')) {
+      const markFont = $current.find('.js-mark-family input:checked').val();
 
       $colourEl.find('li').removeClass('active');
       $el.addClass('active');
@@ -140,6 +148,7 @@ export default class Component {
   restyle() {
     // const $svg = $('.js-base-display').find('svg');
     const storageKey = JSON.parse(localStorage.getItem(this.pageID));
+    const $current = $('.custom-menu__tab.active');
 
     if (storageKey) {
       // loop all the selector which can be used for restyling the svg item
@@ -151,8 +160,8 @@ export default class Component {
         // apply if it's a category for colouring
         if ($(el).is('.js-colour')) {
           // apply if it's a mark
-          if ($(el).is('.js-colour--mark')) {
-            const markFont = $('.js-mark-family input:checked').val();
+          if ($(el).is('.js-colour--mark') || $(el).is('.js-colour--edge')) {
+            const markFont = $current.find('.js-mark-family input:checked').val();
             const $path = $(tar).children(markFont).find('path');
 
             const colour = $(el).find(`[data-code="${key}"]`).data('colour');

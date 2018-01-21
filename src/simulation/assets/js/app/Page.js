@@ -85,7 +85,7 @@ export default class Page {
       const $component = $components.eq(i);
       const componentName = $component.data('component');
 
-      if (Component[componentName] !== undefined) {
+      if (Component[componentName] !== undefined && this.components[componentName] === undefined) {
         const options = $component.data('options');
         const component = new Component[componentName]($component, options);
 

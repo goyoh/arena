@@ -22,16 +22,20 @@ export default class MarkFamily extends Component {
   }
 
   setData($e) {
-    $('.js-mark-text').toggleClass('disabled', $e.data('max-lang') === 'en');
-    const cate = $('.js-mark-family').data('cate');
+    const $current = $('.custom-menu__tab.active');
+
+    $current.find('.js-mark-text').toggleClass('disabled', $e.data('max-lang') === 'en');
+
+    const $family = $e.parents('.js-mark-family');
+    const cate = $family.data('cate');
 
     this.getMarkData().then((data) => {
       const { family, position, colour } = data;
       const font = family ? family.replace('.mrk', '') : '';
 
       // initialise input
-      $('.js-mark-family input').prop('checked', false);
-      $('.js-mark-family li').removeClass('active');
+      $current.find('.js-mark-family input').prop('checked', false);
+      $current.find('.js-mark-family li').removeClass('active');
       $e.prop('checked', true);
       $e.parent().addClass('active');
 

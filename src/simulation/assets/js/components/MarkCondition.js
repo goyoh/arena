@@ -91,6 +91,7 @@ export default class MarkCondition extends Component {
 
       TweenMax.set($posEl, { fill: colour });
       $('.js-colour--mark').data('target', tar);
+      $('.js-colour--edge').data('target', tar);
     }
 
     // apply if mark data already exists in localStrage

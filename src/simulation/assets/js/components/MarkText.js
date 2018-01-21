@@ -27,21 +27,20 @@ export default class MarkText extends Component {
   }
 
   load(props) {
-    const { e, jdata, text, line } = props;
+    const { e, jdata, text, line, data } = props;
 
     $.ajax({
       url: jdata,
       dataType: 'json',
     })
-      .done((data) => {
-        const validation = data.validate;
+      .done((formData) => {
+        const validation = formData.validate;
 
         if (validation) {
-          this.markTextToCanvas(text, line);
-          // Popup.popup(e);
+          this.markTextToCanvas(text, line, data);
           $('.form-message').html('');
         } else {
-          const message = data.message;
+          const message = formData.message;
 
           $('.form-message').html(message);
         }
@@ -59,21 +58,49 @@ export default class MarkText extends Component {
     const $container = $(e.currentTarget).parent();
     const text = $container.find('.js-mark-text').val();
     const encodedText = encodeURIComponent(text);
-    const line = Number($container.find('.js-mark-text').data('line'));
+    const line = $container.find('.js-mark-text').data('line') || '';
 
     this.getMarkData().then((data) => {
       const { language, length } = data;
       const jdata = `/simulation/validation/?lang=${language}&max=${length}&text=${encodedText}&json`;
-      this.load({ e, jdata, text, line });
+      this.load({ e, jdata, text, line, data });
     });
   }
 
-  markTextToCanvas(text, line) {
-    const { pos, font, bcol, col } = Component.storageValue;
-    const rotationDir = $('.mark-simulation').find('.js-rotation').data('rotation');
-    const dir = rotationDir === 'front' ? 'back' : 'front';
+  markTextToCanvas(text, line, data) {
+    const { posA, posB, fontA, fontB, colA, colB, ecolA, ecolB, bcol } = Component.storageValue;
+
+    console.log(Component.storageValue);
+    console.log(data);
+
+    const dir = $('.mark-simulation').find('.js-rotation').data('rotation');
+
     const markNum = dir === 'front' ? 'markA' : 'markB';
     const mark = `${markNum}${line}`;
+
+    let posBupdated;
+    let fontBupdated;
+    let colBupdated;
+    let ecolBupdated;
+
+    if (data) {
+      const { position, family, ccode, ecode } = data;
+
+      posBupdated = posB || position;
+      fontBupdated = fontB || family.replace('.mrk', '');
+      colBupdated = colB || ccode;
+      ecolBupdated = ecolB || ecode;
+    } else {
+      posBupdated = posB;
+      fontBupdated = fontB;
+      colBupdated = colB;
+      ecolBupdated = ecolB;
+    }
+
+    const pos = dir === 'front' ? posA : posBupdated;
+    const font = dir === 'front' ? fontA : fontBupdated;
+    const col = dir === 'front' ? colA : colBupdated;
+    const ecol = dir === 'front' ? ecolA : ecolBupdated;
 
     const str = text || Component.storageValue[mark];
 
@@ -86,12 +113,19 @@ export default class MarkText extends Component {
 
       const posID = pos.toLowerCase();
       const svg = `#mark-${posID}`;
-      const url = `${fontServer}?bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&mark=${sjisText}`;
-      const svgContainer = line === 2 ? '.mark-group w' : '.mark-group g';
+      const url = `${fontServer}?bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&ecol=${ecol}&mark=${sjisText}`;
 
-      TweenMax.set(svgContainer, { autoAlpha: 0 });
-      $(svg).children('image').attr('xlink:href', url);
-      TweenMax.to(svg, 0.4, { autoAlpha: 1 });
+      if (posID === 'w' && line !== 2) {
+        const svgAlt = '#mark-g';
+        const urlAlt = `${fontServer}?bcol=${bcol}&pos=G&font=${font}&col=${col}&ecol=${ecol}&mark=${sjisText}`;
+
+        $(svgAlt).children('image').attr('xlink:href', urlAlt);
+        TweenMax.to(svgAlt, 0.4, { autoAlpha: 1 });
+      } else {
+        if (line !== 2) TweenMax.set('.mark-group g', { autoAlpha: 0 });
+        $(svg).children('image').attr('xlink:href', url);
+        TweenMax.to(svg, 0.4, { autoAlpha: 1 });
+      }
     }
 
     // show order info menu on the bottom right side

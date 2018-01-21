@@ -27,8 +27,6 @@ export default class ColourFunction extends Component {
         return false;
       });
 
-      console.log(colourCode);
-
       this.keycodeUpper = 65;
       this.keycodeLower = 97;
 

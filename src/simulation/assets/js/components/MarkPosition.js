@@ -21,15 +21,23 @@ export default class MarkPosition extends Component {
     });
   }
 
-  setData($e) {
-    const cate = $e.parents('.js-mark-position').data('cate');
-    const side = $e.data('side');
+  toggleTextOption = (pos) => {
+    if (pos === 'W') {
+      TweenMax.to('js-mark-text[data-line="2"]', 0.4, { autoAlpha: 1 });
+    } else {
+      TweenMax.to('js-mark-text[data-line="2"]', 0.4, { autoAlpha: 0 });
+    }
+  }
 
-    $('.js-mark-position a').removeClass('active');
+  setData($e) {
+    const $current = $('.custom-menu__tab.active');
+    const cate = $e.parents('.js-mark-position').data('cate');
+
+    $current.find('.js-mark-position a').removeClass('active');
     $e.addClass('active');
 
     this.getMarkData().then((data) => {
-      const { position, family, colour, rotation } = data;
+      const { position, family, colour } = data;
 
       $.each(this.markOptions, (index, el) => {
         const $path = $(`#position-${el}`);
@@ -41,10 +49,10 @@ export default class MarkPosition extends Component {
         const $path = $(tar).children(family).find('path');
         TweenMax.set($path, { fill: colour });
 
-        $('.js-colour--mark').data('target', tar);
+        $current.find('.js-colour--mark').data('target', tar);
+        $current.find('.js-colour--edge').data('target', tar);
 
-        // rotate the item if the mark is positioned on the opposite side
-        if (side !== rotation) Component.component.SimulationCommon.rotation();
+        this.toggleTextOption(position);
       }
 
       // update localStrage and the order link
