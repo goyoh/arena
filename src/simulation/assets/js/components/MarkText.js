@@ -62,7 +62,7 @@ export default class MarkText extends Component {
 
     this.getMarkData().then((data) => {
       const { language, length } = data;
-      const jdata = `/simulation/validation/?lang=${language}&max=${length}&text=${encodedText}&json`;
+      const jdata = `/simulation/printcustom2/validation/?lang=${language}&max=${length}&text=${encodedText}&json`;
       this.load({ e, jdata, text, line, data });
     });
   }
