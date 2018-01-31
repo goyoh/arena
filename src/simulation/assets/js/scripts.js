@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import Promise from 'promise-polyfill';
+import 'whatwg-fetch';
 import FastClick from 'fastclick';
 import Page from './app/Page';
 import { mobilecheck } from './app/globals';

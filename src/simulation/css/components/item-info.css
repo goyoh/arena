@@ -98,9 +98,13 @@
       left: 0;
       right: 0;
       width: 13.333rem;
-      height: 3.333rem;
+      height: 4rem;
       margin: auto;
+      padding: 0.4rem 0;
       font-size: 1.25rem;
+      line-height: 1.4;
+
+      /* height: 3.333rem; */
     }
 
     &.is-red {

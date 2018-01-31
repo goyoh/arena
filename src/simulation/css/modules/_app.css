@@ -310,7 +310,10 @@
   @mixin breakpoint phone {
     position: relative;
     bottom: 0;
-    margin-bottom: 0.5rem;
+    height: 4rem;
+    margin-bottom: 0;
+    padding: 0.3rem 0;
+    vertical-align: top;
   }
 
   &:hover {

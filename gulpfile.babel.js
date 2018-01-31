@@ -95,12 +95,12 @@ gulp.task('postcss', () => {
     })]))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(paths.tmp))
-    .pipe($.header(banner, { pkg: pkg }))
+    .pipe($.header(banner, { pkg }))
     .pipe(gulp.dest(paths.buildRoot))
     .pipe(reload({ stream: true }));
 });
 
-gulp.task('html', ['postcss', 'nunjucks'], () => {
+gulp.task('html', ['postcss', 'nunjucks', 'webpack'], () => {
   const options = {
     searchPath: [paths.tmp, paths.srcRoot, '.'],
   };

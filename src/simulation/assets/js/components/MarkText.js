@@ -56,13 +56,22 @@ export default class MarkText extends Component {
 
   setData(e) {
     const $container = $(e.currentTarget).parent();
-    const text = $container.find('.js-mark-text').val();
-    const encodedText = encodeURIComponent(text);
+    const text1 = $container.find('.js-mark-text').val();
+    const encodedText = encodeURIComponent(text1);
     const line = $container.find('.js-mark-text').data('line') || '';
+    const text = [];
+
+    text.push(text1);
+
+    if (line === 2) {
+      const $form = $container.parents('.mark-text__form');
+      const text2 = $form.find('.js-mark-text').not('[data-line="2"]').val();
+      text.push(text2);
+    }
 
     this.getMarkData().then((data) => {
       const { language, length } = data;
-      const jdata = `/simulation/validation/?lang=${language}&max=${length}&text=${encodedText}&json`;
+      const jdata = `/simulation/printcustom2/validation/?lang=${language}&max=${length}&text=${encodedText}&json`;
       this.load({ e, jdata, text, line, data });
     });
   }
@@ -102,10 +111,10 @@ export default class MarkText extends Component {
     const col = dir === 'front' ? colA : colBupdated;
     const ecol = dir === 'front' ? ecolA : ecolBupdated;
 
-    const str = text || Component.storageValue[mark];
+    const str = text[0] || Component.storageValue[mark];
 
     // convert text from UTF-8 to SJIS
-    if (str) {
+    if (str && pos) {
       const strArray = Encoding.stringToCode(str);
       const sjisArray = Encoding.convert(strArray, 'SJIS', 'UNICODE');
       const sjisText = Encoding.urlEncode(sjisArray);
@@ -115,14 +124,22 @@ export default class MarkText extends Component {
       const svg = `#mark-${posID}`;
       const url = `${fontServer}?bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&ecol=${ecol}&mark=${sjisText}`;
 
-      if (posID === 'w' && line !== 2) {
+      if (posID === 'w' && line === 2) {
+        const strArray2 = Encoding.stringToCode(text[1]);
+        const sjisArray2 = Encoding.convert(strArray2, 'SJIS', 'UNICODE');
+        const sjisText2 = Encoding.urlEncode(sjisArray2);
+
         const svgAlt = '#mark-g';
-        const urlAlt = `${fontServer}?bcol=${bcol}&pos=G&font=${font}&col=${col}&ecol=${ecol}&mark=${sjisText}`;
+        const urlAlt = `${fontServer}?bcol=${bcol}&pos=G&font=${font}&col=${col}&ecol=${ecol}&mark=${sjisText2}`;
 
         $(svgAlt).children('image').attr('xlink:href', urlAlt);
-        TweenMax.to(svgAlt, 0.4, { autoAlpha: 1 });
+        $(svg).children('image').attr('xlink:href', url);
+        TweenMax.to([svgAlt, svg], 0.4, { autoAlpha: 1 });
+
+        Component.storageValue[markNum] = text[1];
+        this.orderLinkChange(markNum, text[1]);
       } else {
-        if (line !== 2) TweenMax.set('.mark-group g', { autoAlpha: 0 });
+        TweenMax.set('.mark-group g', { autoAlpha: 0 });
         $(svg).children('image').attr('xlink:href', url);
         TweenMax.to(svg, 0.4, { autoAlpha: 1 });
       }

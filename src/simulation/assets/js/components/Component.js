@@ -9,6 +9,8 @@ export default class Component {
     this.markOptions = ['a', 'b', 'c', 'j', 'k', 'd', 'i', 'l', 'e', 'm', 'n', 'f', 'l', 'g', 'o'];
     this.pageID = $('.custom-menu').attr('id');
     this.styleName = $('.js-order-save').data('style');
+    this.bcolBase = '';
+    this.colourStock = {};
   }
 
   static component = {};
@@ -57,12 +59,24 @@ export default class Component {
 
     const styleNum = Component.styleNum || '';
     const style = this.styleName || '';
-    const { pos, font, bcol, col, markA, markA2, markB } = Component.orderLink;
+    // const { pos, font, bcol, col, markA, markA2, markB } = Component.orderLink;
+    const bcol = Component.orderLink.bcol || '';
+    const posA = Component.orderLink.posA || '';
+    const posB = Component.orderLink.posB || '';
+    const fontA = Component.orderLink.fontA || '';
+    const fontB = Component.orderLink.fontB || '';
+    const colA = Component.orderLink.colA || '';
+    const colB = Component.orderLink.colB || '';
+    const ecolA = Component.orderLink.ecolA || '';
+    const ecolB = Component.orderLink.ecolB || '';
+    const markA = Component.orderLink.markA || '';
+    const markB = Component.orderLink.markB || '';
+    const markB2 = Component.orderLink.markB2 || '';
 
     const directLinkServer = 'https://custom.arena-jp.com/order/index.php?module=Flash&action=CreateStyle&style1=';
-    const directLink = `${directLinkServer}${style},${bcol || ''},${pos || ''},${font || ''},${col || ''},${markA || ''}`;
-    const snsLink = encodeURIComponent(`${this.currentURL}?bcol=${bcol || ''}&pos=${pos || ''}&font=${font || ''}&col=${col || ''}&markA=${markA || ''}`);
-    Component.newOrderLink = `${this.currentURL}?style${styleNum}=${style}&bcol=${bcol || ''}&pos=${pos || ''}&font=${font || ''}&col=${col || ''}&markA=${markA || ''}&markA2=${markA2 || ''}&markB=${markB || ''}`;
+    const directLink = `${directLinkServer}${style},${bcol},${posA},${fontA},${colA},${markA},${ecolA},,${posB},${fontB},${colB},${markB},${ecolB},${markB2}`;
+    const snsLink = encodeURIComponent(`${this.currentURL}?bcol=${bcol}&posA=${posA}&fontA=${fontA}&colA=${colA}&markA=${markA}&ecolA=${ecolA}&markA2=&posB=${posB}$fontB=${fontB}&colB=${colB}&markB=${markB}&ecolB=${ecolB}&markB2=${markB2}`);
+    Component.newOrderLink = `${this.currentURL}?style${styleNum}=${style}&bcol=${bcol}&posA=${posA}&fontA=${fontA}&colA=${colA}&markA=${markA}&ecolA=${ecolA}&markA2=&posB=${posB}$fontB=${fontB}&colB=${colB}&markB=${markB}&ecolB=${ecolB}&markB2=${markB2}`;
 
     $('.js-order-sheet-direct').attr('href', directLink);
     $('.js-order-save').attr('href', Component.newOrderLink);
@@ -91,9 +105,6 @@ export default class Component {
       const code = $family.data('code');
       const length = $position.data(`max-${language}`);
 
-      console.log('getMarkData');
-      console.log(position);
-
       const data = { colour, ccode, ecolour, ecode, text, position, family, code, language, length, rotation };
 
       resolve(data);
@@ -112,6 +123,16 @@ export default class Component {
     const $el = (e.currentTarget) ? $(e.currentTarget) : e;
     const $current = $('.custom-menu__tab.active');
 
+    const $colB = $('.js-colour--mark[data-cate="colB"]');
+    const $ecolB = $('.js-colour--edge[data-cate="ecolB"]');
+
+    const {
+      colA,
+      colB = $colB.find('.mark-colour__item.active').data('colour'),
+      ecolA,
+      ecolB = $ecolB.find('.mark-colour__item.active').data('colour'),
+    } = this.colourStock;
+
     // const $svg = $('.js-base-display').find('svg');
     const tar = $el.parent().data('target');
     let $svgPath;
@@ -119,6 +140,31 @@ export default class Component {
     const cate = $el.parent().data('cate');
     const colour = $el.data('colour');
     const code = $el.data('code');
+
+    const bcolBase = {
+      b: $('.js-colour2').find('.active').data('colour'),
+      c: $('.js-colour3').find('.active').data('colour'),
+    };
+
+    console.log(Component.storageValue);
+    console.log(ecolA);
+    console.log(ecolB);
+
+    if (colour === bcolBase.b) {
+      return false;
+    } else if (colA === colour && cate === 'ecolA') {
+      return false;
+    } else if (colB === colour && cate === 'ecolB') {
+      return false;
+    } else if (ecolA === colour && cate === 'colA') {
+      return false;
+    } else if (ecolB === colour && cate === 'colB') {
+      return false;
+    } else if (colour === bcolBase.c && cate === 'ecolA') {
+      return false;
+    } else if (colour === bcolBase.c && cate === 'ecolB') {
+      return false;
+    }
 
     const $colourEl = $el.parents('.js-colour');
 
@@ -136,13 +182,20 @@ export default class Component {
       $svgPath = $(tar).children(markFont).find('path');
     } else {
       $svgPath = $(tar).children();
+      this.bcolBase = {
+        b: $('.js-colour2').find('.active').data('colour'),
+        c: $('.js-colour3').find('.active').data('colour'),
+      };
     }
 
     this.orderLinkChange(cate, code);
+    this.colourStock[cate] = colour;
     // draw svg
     $svgPath.each((index, el) => {
       this.colourDraw(el, colour);
     });
+
+    return true;
   }
 
   restyle() {
@@ -183,6 +236,17 @@ export default class Component {
           }
         }
       });
+    }
+  }
+
+  inActivateFont(pos) {
+    const $tar = $('.mark-family__item *[data-code="105"], .mark-family__item *[data-code="108"]');
+
+    if (pos === 'F') {
+      $tar.attr('disabled', true);
+      $tar.prop('checked', false);
+    } else {
+      $tar.attr('disabled', false);
     }
   }
 

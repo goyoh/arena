@@ -27,8 +27,10 @@ export default class MarkCondition extends Component {
   setData($e) {
     const condition = $e.data('mark');
 
-    $('.js-mark-condition a').removeClass('active');
-    $e.addClass('active');
+    if (!$e.is('.active')) {
+      $('.js-mark-condition a').removeClass('active');
+      $e.addClass('active');
+    }
 
     this.getMarkData().then((data) => {
       if (condition === 'on') {
@@ -42,17 +44,19 @@ export default class MarkCondition extends Component {
   }
 
   markSVGRemove() {
-    $.each(this.markOptions, (index, el) => {
-      const $path = $(`#position-${el}`);
-      TweenMax.set($path.children().find('path'), { display: 'none' });
-    });
+    // $.each(this.markOptions, (index, el) => {
+    //   const $path = $(`#position-${el}`);
+    //   TweenMax.set($path, { display: 'none' });
+    // });
+    TweenMax.set('.mark-group', { display: 'none' });
   }
 
   markSVGShow() {
-    $.each(this.markOptions, (index, el) => {
-      const $path = $(`#position-${el}`);
-      TweenMax.set($path.children().find('path'), { display: 'inherit' });
-    });
+    // $.each(this.markOptions, (index, el) => {
+    //   const $path = $(`#position-${el}`);
+    //   TweenMax.set($path, { display: 'inherit' });
+    // });
+    TweenMax.set('.mark-group', { display: 'inherit' });
   }
 
   markOff() {

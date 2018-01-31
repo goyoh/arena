@@ -140,6 +140,18 @@ export default class SimulationCommon extends Component {
     $('.content').on(window.eventtype, ':not(.modal)', modalClose);
   }
 
+  toggleTextOption = (pos) => {
+    const $container = $('.js-mark-text[data-line="2"]').parent();
+    const $submitAlt = $('.js-mark-submit--above');
+    if (pos === 'W') {
+      TweenMax.to($container, 0.4, { autoAlpha: 1 });
+      TweenMax.to($submitAlt, 0.4, { autoAlpha: 0 });
+    } else {
+      TweenMax.to($container, 0.4, { autoAlpha: 0 });
+      TweenMax.to($submitAlt, 0.4, { autoAlpha: 1 });
+    }
+  }
+
   rotation(e) {
     spinner.in();
 
@@ -155,24 +167,30 @@ export default class SimulationCommon extends Component {
 
     const key = storageKey[markTar];
     const key2 = storageKey[`${markTar}2`];
+    const line = key2 ? 2 : '';
+    const text = [key2, key];
 
     const callback = () => {
       this.itemSize();
       this.restyle();
-      this.getMarkData().then((data) => {
-        Component.component.MarkText.markTextToCanvas(key, null, data);
-        if (key2) Component.component.MarkText.markTextToCanvas(key2, 2, data);
-
+      if (Component.component.MarkText) {
+        this.getMarkData().then((data) => {
+          Component.component.MarkText.markTextToCanvas(text, line, data);
+          this.toggleTextOption(data.position);
+          this.inActivateFont(data.position);
+          spinner.out();
+        });
+      } else {
         spinner.out();
-        $('.custom-menu__tab[data-rotation]').removeClass('active');
-        $directionTab.addClass('active');
-      });
+      }
     };
 
     const svg = rotationDir === 'front' ? '_back.svg' : '.svg';
 
     $('.js-rotation').data('rotation', tarDir).attr('data-rotation', tarDir);
     $('.js-rotation').text(rotationDir.toUpperCase());
+    $('.custom-menu__tab[data-rotation]').removeClass('active');
+    $directionTab.addClass('active');
 
     $('.js-base-display').load(`${uploadPath}${svgData}${svg}`, () => {
       callback();
@@ -238,6 +256,13 @@ export default class SimulationCommon extends Component {
   reloadPage() {
     const vars = getUrlVars();
     const { posA, fontA, colA, ecolA, markA, markB, markB2 } = vars;
+    Component.storageValue.posA = posA;
+    Component.storageValue.fontA = fontA;
+    Component.storageValue.colA = colA;
+    Component.storageValue.ecolA = ecolA;
+    Component.storageValue.markA = markA;
+    Component.storageValue.markB = markB;
+    Component.storageValue.markB2 = markB2;
 
     const $current = $('.custom-menu__tab.active');
 
@@ -253,14 +278,17 @@ export default class SimulationCommon extends Component {
     const $ecolEl = $current.find('.js-colour--edge');
     const $ecol = ecolA ? $ecolEl.find(`*[data-code="${ecolA}"]`) : $ecolEl.find('li.active');
 
-    const line = !markB2 ? null : 2;
+    const line = !markB2 ? '' : 2;
 
     Component.component.MarkPosition.setData($pos);
     Component.component.MarkFamily.setData($font);
     this.changeColours($col);
     this.changeColours($ecol);
 
-    if (markA || markB) Component.component.MarkText.markTextToCanvas(null, line);
+    if (markA) {
+      const text = [markA];
+      Component.component.MarkText.markTextToCanvas(text, line);
+    }
   }
 }
 

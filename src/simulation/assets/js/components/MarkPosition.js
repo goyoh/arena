@@ -22,10 +22,14 @@ export default class MarkPosition extends Component {
   }
 
   toggleTextOption = (pos) => {
+    const $container = $('.js-mark-text[data-line="2"]').parent();
+    const $submitAlt = $('.js-mark-submit--above');
     if (pos === 'W') {
-      TweenMax.to('js-mark-text[data-line="2"]', 0.4, { autoAlpha: 1 });
+      TweenMax.to($container, 0.4, { autoAlpha: 1 });
+      TweenMax.to($submitAlt, 0.4, { autoAlpha: 0 });
     } else {
-      TweenMax.to('js-mark-text[data-line="2"]', 0.4, { autoAlpha: 0 });
+      TweenMax.to($container, 0.4, { autoAlpha: 0 });
+      TweenMax.to($submitAlt, 0.4, { autoAlpha: 1 });
     }
   }
 
@@ -53,6 +57,7 @@ export default class MarkPosition extends Component {
         $current.find('.js-colour--edge').data('target', tar);
 
         this.toggleTextOption(position);
+        this.inActivateFont(position);
       }
 
       // update localStrage and the order link

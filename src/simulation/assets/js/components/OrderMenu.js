@@ -32,7 +32,6 @@ const OrderMenu = {
     const tar = mobilecheck() ? '.button--remove' : '.icon--style-close';
 
     $container.on(window.eventtype, tar, (e) => {
-      console.log(this);
       OrderMenu.removeFn(e);
     });
   },
