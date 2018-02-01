@@ -19,7 +19,7 @@ export default class MarkText extends Component {
   }
 
   events() {
-    $('.mark-text__form').on(window.eventtype, '.js-mark-submit', (e) => {
+    $('.mark-text__form').on('click', '.js-mark-submit', (e) => {
       e.preventDefault();
       spinner.in();
       this.setData(e);
