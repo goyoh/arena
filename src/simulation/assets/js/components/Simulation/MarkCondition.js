@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import { TweenMax } from 'gsap';
 
-import Component from './Component';
-import OrderMenu from './OrderMenu';
+import Component from '../Component';
+import OrderMenu from '../OrderMenu';
 
 export default class MarkCondition extends Component {
   constructor(props) {
@@ -43,21 +43,21 @@ export default class MarkCondition extends Component {
     this.updateScrollBar();
   }
 
-  markSVGRemove() {
+  markSVGRemove = () => {
     // $.each(this.markOptions, (index, el) => {
     //   const $path = $(`#position-${el}`);
     //   TweenMax.set($path, { display: 'none' });
     // });
     TweenMax.set('.mark-group', { display: 'none' });
-  }
+  };
 
-  markSVGShow() {
+  markSVGShow = () => {
     // $.each(this.markOptions, (index, el) => {
     //   const $path = $(`#position-${el}`);
     //   TweenMax.set($path, { display: 'inherit' });
     // });
     TweenMax.set('.mark-group', { display: 'inherit' });
-  }
+  };
 
   markOff() {
     // add overlay on the layer
@@ -114,5 +114,3 @@ export default class MarkCondition extends Component {
     this.markConditionActive = false;
   }
 }
-
-Component.MarkCondition = MarkCondition;

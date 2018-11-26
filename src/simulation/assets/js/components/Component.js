@@ -34,7 +34,7 @@ export default class Component {
     });
 
     return styleLink;
-  }
+  };
 
   setStyleByCookie = () => {
     const cookies = ['style1', 'style2', 'style3', 'style4', 'style5'];
@@ -47,7 +47,7 @@ export default class Component {
 
       return true;
     });
-  }
+  };
 
   setLocalStrage() {
     localStorage.setItem(this.pageID, JSON.stringify(Component.storageValue));
@@ -59,19 +59,21 @@ export default class Component {
 
     const styleNum = Component.styleNum || '';
     const style = this.styleName || '';
-    // const { pos, font, bcol, col, markA, markA2, markB } = Component.orderLink;
-    const bcol = Component.orderLink.bcol || '';
-    const posA = Component.orderLink.posA || '';
-    const posB = Component.orderLink.posB || '';
-    const fontA = Component.orderLink.fontA || '';
-    const fontB = Component.orderLink.fontB || '';
-    const colA = Component.orderLink.colA || '';
-    const colB = Component.orderLink.colB || '';
-    const ecolA = Component.orderLink.ecolA || '';
-    const ecolB = Component.orderLink.ecolB || '';
-    const markA = Component.orderLink.markA || '';
-    const markB = Component.orderLink.markB || '';
-    const markB2 = Component.orderLink.markB2 || '';
+
+    const {
+      bcol = '',
+      posA = '',
+      posB = '',
+      fontA = '',
+      fontB = '',
+      colA = '',
+      colB = '',
+      ecolA = '',
+      ecolB = '',
+      markA = '',
+      markB = '',
+      markB2 = '',
+    } = Component.orderLink;
 
     const directLinkServer = 'https://custom.arena-jp.com/order/index.php?module=Flash&action=CreateStyle&style1=';
     const directLink = `${directLinkServer}${style},${bcol},${posA},${fontA},${colA},${markA},${ecolA},,${posB},${fontB},${colB},${markB},${ecolB},${markB2}`;
@@ -105,7 +107,19 @@ export default class Component {
       const code = $family.data('code');
       const length = $position.data(`max-${language}`);
 
-      const data = { colour, ccode, ecolour, ecode, text, position, family, code, language, length, rotation };
+      const data = {
+        colour,
+        ccode,
+        ecolour,
+        ecode,
+        text,
+        position,
+        family,
+        code,
+        language,
+        length,
+        rotation,
+      };
 
       resolve(data);
     })
@@ -146,10 +160,6 @@ export default class Component {
       c: $('.js-colour3').find('.active').data('colour'),
     };
 
-    console.log(Component.storageValue);
-    console.log(ecolA);
-    console.log(ecolB);
-
     if (colour === bcolBase.b) {
       return false;
     } else if (colA === colour && cate === 'ecolA') {
@@ -182,6 +192,7 @@ export default class Component {
       $svgPath = $(tar).children(markFont).find('path');
     } else {
       $svgPath = $(tar).children();
+
       this.bcolBase = {
         b: $('.js-colour2').find('.active').data('colour'),
         c: $('.js-colour3').find('.active').data('colour'),
@@ -210,10 +221,13 @@ export default class Component {
         const cate = $(el).data('cate');
         const key = storageKey[cate];
 
+        const ifIsMark = $(el).is('.js-colour--mark') || $(el).is('.js-colour--edge');
+        const ifIsGradation = $(el).is('.js-colour--gradation');
+
         // apply if it's a category for colouring
         if ($(el).is('.js-colour')) {
           // apply if it's a mark
-          if ($(el).is('.js-colour--mark') || $(el).is('.js-colour--edge')) {
+          if (ifIsMark) {
             const markFont = $current.find('.js-mark-family input:checked').val();
             const $path = $(tar).children(markFont).find('path');
 
@@ -222,7 +236,7 @@ export default class Component {
             $path.each((i, chilel) => {
               this.colourDraw(chilel, colour);
             });
-          } else if ($(el).is('.js-colour--gradation')) {
+          } else if (ifIsGradation) {
             const colour = $(el).find('.active').data('colour');
 
             $('#a-color > path').css('opacity', 0);
@@ -239,7 +253,7 @@ export default class Component {
     }
   }
 
-  inActivateFont(pos) {
+  inActivateFont = (pos) => {
     const $tar = $('.mark-family__item *[data-code="105"], .mark-family__item *[data-code="108"]');
 
     if (pos === 'F') {
@@ -248,7 +262,7 @@ export default class Component {
     } else {
       $tar.attr('disabled', false);
     }
-  }
+  };
 
   updateScrollBar = () => {
     ScrollEvents.updateScrollBar();

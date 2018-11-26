@@ -25,17 +25,20 @@ const ScrollEvents = {
 
     const elTop = $('.custom-menu').scrollTop();
     const alphaVal = elTop === 0 ? 1 : 0;
+
     TweenMax.set('.js-read-more', { autoAlpha: alphaVal });
   },
 
   scrollNav: (e) => {
     const elTop = $(e.currentTarget).scrollTop();
     const alphaVal = elTop === 0 ? 1 : 0;
+
     TweenMax.set('.js-read-more', { autoAlpha: alphaVal });
   },
 
   scrollBottom: (e) => {
     const elHeight = $(e.currentTarget).height();
+
     $('.custom-menu').animate({ scrollTop: elHeight });
   },
 

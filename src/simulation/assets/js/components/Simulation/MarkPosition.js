@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import { TweenMax } from 'gsap';
 
-import Component from './Component';
+import Component from '../Component';
 
 export default class MarkPosition extends Component {
   constructor(props) {
@@ -17,6 +17,7 @@ export default class MarkPosition extends Component {
     $('.js-mark-position').on(window.eventtype, 'a', (e) => {
       e.preventDefault();
       const $el = $(e.currentTarget);
+
       this.setData($el);
     });
   }
@@ -24,6 +25,7 @@ export default class MarkPosition extends Component {
   toggleTextOption = (pos) => {
     const $container = $('.js-mark-text[data-line="2"]').parent();
     const $submitAlt = $('.js-mark-submit--above');
+
     if (pos === 'W') {
       TweenMax.to($container, 0.4, { autoAlpha: 1 });
       TweenMax.to($submitAlt, 0.4, { autoAlpha: 0 });
@@ -45,12 +47,14 @@ export default class MarkPosition extends Component {
 
       $.each(this.markOptions, (index, el) => {
         const $path = $(`#position-${el}`);
+
         TweenMax.set($path.children().find('path'), { fill: 'none' });
       });
 
       if (position) {
         const tar = `#position-${position.toLowerCase()}`;
         const $path = $(tar).children(family).find('path');
+
         TweenMax.set($path, { fill: colour });
 
         $current.find('.js-colour--mark').data('target', tar);
@@ -67,5 +71,3 @@ export default class MarkPosition extends Component {
     });
   }
 }
-
-Component.MarkPosition = MarkPosition;

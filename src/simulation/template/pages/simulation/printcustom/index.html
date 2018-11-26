@@ -4,7 +4,7 @@
 {% extends 'layout/_layout.html' %}
 
 {% block content %}
-<main class="main main--simulation" id="main" role="main">
+<main class="main main--simulation" id="main" role="main" data-page="Simulation">
 	<article class="content content--simulation" id="content">
 		<nav class="content-navigation">
 			<ul class="u-clear">
@@ -14,7 +14,7 @@
 			</ul>
 		</nav>
 
-		<section class="section section--custom is-swimwear js-get-height">
+		<section class="section section--custom is-swimwear js-get-height" data-component="SimulationCommon">
 			<div class="custom-menu" id="wear_1_01">
 				<ul class="custom-menu__tabs u-clear u-pc">
 					<li class="active" data-tab=".base-simulation">SWIM WEAR<br>SIMULATION</li>
@@ -48,28 +48,30 @@
 						{% include 'components/_mark-condition.html' %}
 					</div>
 
-					<div class="custom-menu__inner">
-						<h4 class="custom-menu__title">マークの位置</h4>
+					<div class="custom-menu__tab active" data-rotation="front">					
+						<div class="custom-menu__inner">
+							<h4 class="custom-menu__title">マークの位置</h4>
 
-						{% include 'components/_mark-pos.html' %}
-					</div>
+							{% include 'components/_mark-pos.html' %}
+						</div>
 
-					<div class="custom-menu__inner">
-						<h4 class="custom-menu__title">マークの書体</h4>
+						<div class="custom-menu__inner">
+							<h4 class="custom-menu__title">マークの書体</h4>
 
-						{% include 'components/_mark-family.html' %}
-					</div>
+							{% include 'components/_mark-family.html' %}
+						</div>
 
-					<div class="custom-menu__inner">
-						<h4 class="custom-menu__title">マークの色</h4>
+						<div class="custom-menu__inner">
+							<h4 class="custom-menu__title">マークの色</h4>
 
-						{% include 'components/_mark-colour.html' %}
-					</div>
+							{% include 'components/_mark-colour.html' %}
+						</div>
 
-					<div class="custom-menu__inner">
-						<h4 class="custom-menu__title">マークの名前</h4>
+						<div class="custom-menu__inner">
+							<h4 class="custom-menu__title">マークの名前</h4>
 
-						{% include 'components/_mark-text.html' %}
+							{% include 'components/_mark-text.html' %}
+						</div>
 					</div>
 
 					<p class="read-more js-read-more"></p>

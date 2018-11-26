@@ -1,12 +1,13 @@
 import $ from 'jquery';
 import { TweenMax } from 'gsap';
-import { mobilecheck, getUrlVars } from '../app/globals';
-import { loaderOut, spinner } from '../app/Loader';
-import Component from './Component';
+import { mobilecheck, getUrlVars } from '../../app/globals';
+import { loaderOut, spinner } from '../../app/Loader';
+import Component from '../Component';
+
+import ScrollEvents from '../ScrollEvents';
+import OrderMenu from '../OrderMenu';
 
 import BaseColour from './BaseColour';
-import ScrollEvents from './ScrollEvents';
-import OrderMenu from './OrderMenu';
 
 // const uploadPath = '1/simulation/wpcms/wp-content/uploads/sites/2/';
 // const uploadPath = 'https://custom.arena-jp.com/simulation/wpcms/wp-content/uploads/';
@@ -34,11 +35,10 @@ export default class SimulationCommon extends Component {
       print: true,
       callback: () => {
         this.markSetAsStart();
+
         TweenMax.to('.js-base-display', 0.4, {
           autoAlpha: 1,
-          onComplete: () => {
-            loaderOut();
-          },
+          onComplete: () => { loaderOut(); },
         });
       },
     });
@@ -56,9 +56,7 @@ export default class SimulationCommon extends Component {
       return false;
     });
 
-    $('.custom-menu__tabs').on(window.eventtype, 'li', (e) => {
-      this.tabs(e);
-    });
+    $('.custom-menu__tabs').on(window.eventtype, 'li', this.tabs);
 
     $(document).on(window.eventtype, '.js-rotation', (e) => {
       this.rotation(e);
@@ -75,8 +73,9 @@ export default class SimulationCommon extends Component {
     }
   }
 
-  tabs(e) {
+  tabs = (e) => {
     const tabName = $(e.currentTarget).data('tab');
+
     $('.custom-menu__tabs li').add('.custom-menu__content').removeClass('active');
     $(e.currentTarget).add(tabName).addClass('active');
 
@@ -143,6 +142,7 @@ export default class SimulationCommon extends Component {
   toggleTextOption = (pos) => {
     const $container = $('.js-mark-text[data-line="2"]').parent();
     const $submitAlt = $('.js-mark-submit--above');
+
     if (pos === 'W') {
       TweenMax.to($container, 0.4, { autoAlpha: 1 });
       TweenMax.to($submitAlt, 0.4, { autoAlpha: 0 });
@@ -173,6 +173,7 @@ export default class SimulationCommon extends Component {
     const callback = () => {
       this.itemSize();
       this.restyle();
+
       if (Component.component.MarkText) {
         this.getMarkData().then((data) => {
           Component.component.MarkText.markTextToCanvas(text, line, data);
@@ -291,5 +292,3 @@ export default class SimulationCommon extends Component {
     }
   }
 }
-
-Component.SimulationCommon = SimulationCommon;

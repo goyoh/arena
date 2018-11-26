@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import { TweenMax } from 'gsap';
 
-import Component from './Component';
+import Component from '../Component';
 
 export default class MarkFamily extends Component {
   constructor(props) {
@@ -58,5 +58,3 @@ export default class MarkFamily extends Component {
     });
   }
 }
-
-Component.MarkFamily = MarkFamily;

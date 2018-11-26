@@ -10,12 +10,7 @@ import Component from '../components/Component';
 import ScrollEvents from '../components/ScrollEvents';
 import Popup from '../components/Popup';
 import OrderMenu from '../components/OrderMenu';
-
-import SimulationCommon from '../components/SimulationCommon';
-import MarkCondition from '../components/MarkCondition';
-import MarkFamily from '../components/MarkFamily';
-import MarkText from '../components/MarkText';
-import MarkPosition from '../components/MarkPosition';
+import * as SimulationComponents from '../components/Simulation/';
 
 export default class Page {
   constructor() {
@@ -23,33 +18,25 @@ export default class Page {
 
     this.components = Component.component;
     this.templates = [];
-
-    // route((collection) => {
-    //   this.render(collection);
-    // });
-
-    // route.base('/simulation');
-    // route.start(true);
-    this.render();
   }
 
   render() {
     getSize();
     navigationMenu();
-    const browserName = browserDetect.toLowerCase();
-    document.body.className = `${document.body.className} ${browserName}`;
 
-    const pageName = this.$view.data('page');
-
+    this.addBrowserClass();
     this.loadPage();
     this.loadComponent();
+
     this.preLoad().then(() => {
       ScrollEvents.scrollNavDisplay();
       this.events();
 
-      if (pageName !== 'Home') {
-        OrderMenu.styleRegistration();
+      const pageName = this.$view.data('page');
 
+      if (pageName !== 'Home') {
+        // loaderOut();
+        OrderMenu.styleRegistration();
         if (!mobilecheck()) ScrollEvents.scrollBarStyle();
       } else {
         loaderOut();
@@ -66,16 +53,25 @@ export default class Page {
     $(document).on(window.eventtype, '.js-order-link-make', OrderMenu.orderLinkMake);
     $('.js-order-sheet-list').on(window.eventtype, 'li', OrderMenu.orderSheetList);
     $('.js-order-info').on('click', '.js-order-info-close--sp', OrderMenu.orderInfoShow);
+
     $('.custom-menu').on('scroll', ScrollEvents.scrollNav);
     $(window).on('scroll', ScrollEvents.headerReveal);
+
     window.onresize = getSize;
+  }
+
+  addBrowserClass = () => {
+    const browserName = browserDetect.toLowerCase();
+    document.body.className = `${document.body.className} ${browserName}`;
   }
 
   loadPage() {
     const pageName = this.$view.data('page');
 
-    $('body').removeClass((index, className) => (className.match(/(^|\s)is-\S+/g) || []).join(' '));
-    $('body').addClass(`is-${pageName.toLowerCase()}`);
+    if (pageName) {
+      $('body').removeClass((index, className) => (className.match(/(^|\s)is-\S+/g) || []).join(' '));
+      $('body').addClass(`is-${pageName.toLowerCase()}`);
+    }
   }
 
   loadComponent() {
@@ -85,9 +81,9 @@ export default class Page {
       const $component = $components.eq(i);
       const componentName = $component.data('component');
 
-      if (Component[componentName] !== undefined && this.components[componentName] === undefined) {
+      if (SimulationComponents[componentName] !== undefined && this.components[componentName] === undefined) {
         const options = $component.data('options');
-        const component = new Component[componentName]($component, options);
+        const component = new SimulationComponents[componentName]($component, options);
 
         this.components[componentName] = component;
       } else {

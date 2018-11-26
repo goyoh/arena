@@ -1,9 +1,9 @@
 import $ from 'jquery';
 import { TweenMax } from 'gsap';
 
-import Component from './Component';
-import OrderMenu from './OrderMenu';
-import { spinner } from '../app/Loader';
+import Component from '../Component';
+import OrderMenu from '../OrderMenu';
+import { spinner } from '../../app/Loader';
 
 const Encoding = require('encoding-japanese');
 
@@ -27,7 +27,7 @@ export default class MarkText extends Component {
   }
 
   load(props) {
-    const { e, jdata, text, line, data } = props;
+    const { jdata, text, line, data } = props;
 
     $.ajax({
       url: jdata,
@@ -78,9 +78,6 @@ export default class MarkText extends Component {
 
   markTextToCanvas(text, line, data) {
     const { posA, posB, fontA, fontB, colA, colB, ecolA, ecolB, bcol } = Component.storageValue;
-
-    console.log(Component.storageValue);
-    console.log(data);
 
     const dir = $('.mark-simulation').find('.js-rotation').data('rotation');
 
@@ -154,5 +151,3 @@ export default class MarkText extends Component {
     this.orderLinkChange(mark, str);
   }
 }
-
-Component.MarkText = MarkText;
