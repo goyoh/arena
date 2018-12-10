@@ -100,7 +100,7 @@ gulp.task('postcss', () => {
     .pipe(reload({ stream: true }));
 });
 
-gulp.task('html', ['postcss', 'nunjucks', 'webpack'], () => {
+gulp.task('html', ['postcss', 'nunjucks'], () => {
   const options = {
     searchPath: [paths.tmp, paths.srcRoot, '.'],
   };
@@ -159,18 +159,20 @@ gulp.task('fonts', () => (
     .pipe(gulp.dest(`${paths.buildAssets}/fonts`))
 ));
 
-gulp.task('webpack', (callback) => {
-  webpack(webpackConfig, (err, stats) => {
-    if (err) throw new gutil.PluginError('webpack', err);
-    gutil.log('[webpack]', stats.toString({
-      // output options
-    }));
-    callback();
-  });
-});
+gulp.task('webpack', () => (
+  new Promise(resolve => (
+    webpack(webpackConfig, (err, stats) => {
+      if (err) throw new gutil.PluginError('webpack', err);
+      gutil.log('[webpack]', stats.toString());
+      resolve();
+    })
+  ))
+));
 
 gulp.task('extras', () => (
   gulp.src([
+    // `${paths.srcRoot}/**/*`,
+    // !`${paths.srcRoot}/template/*`,
     paths.srcRoot + '/*.*',
     !paths.srcRoot + '/template/*',
   ], {
@@ -238,14 +240,16 @@ gulp.task('serve:test', () => {
   gulp.watch('test/spec/**/*.js', ['lint:test']);
 });
 
-gulp.task('build', ['postcss', 'images', 'fonts', 'webpack', 'html', 'extras', 'replace'], () => {
+gulp.task('build', ['postcss', 'images', 'fonts', 'webpack'], () => {
+  gulp.start('html');
+  gulp.start('replace');
+  // gulp.start('extras');
   global.HMR = !process.argv.includes('--no-hmr');
   return gulp.src(`${paths.srcRoot}/**/*`).pipe($.size({ title: 'build', gzip: true }));
 });
 
 gulp.task('start', ['postcss', 'webpack']);
 
-gulp.task('default', () => {
-  gulp.start('start');
+gulp.task('default', ['start'], () => {
   gulp.start('serve');
 });
