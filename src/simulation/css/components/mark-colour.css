@@ -22,7 +22,7 @@
       height: 1.333rem;
       margin-bottom: 0.567rem;
       margin-left: 0.567rem;
-      border: 1px solid #999;
+      border: 2px solid #999;
       cursor: pointer;
 
       @mixin breakpoint tablet {
@@ -43,7 +43,7 @@
 
       &:hover,
       &.active {
-        border: 1px solid #fff;
+        border: 2px solid #fff;
       }
 
       &.hide {

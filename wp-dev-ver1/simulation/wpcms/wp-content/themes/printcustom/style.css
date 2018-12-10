@@ -1,0 +1,191 @@
+/*
+Theme Name: arena PRINT CUSTOM ORDER
+Theme URI: //custom.arena-jp.com
+Description: 水着のカスタムオーダー
+Version: 1.0
+Author: DESCENTE
+Author URI: //www.descente.co.jp
+*/
+
+/* 以下、あとでマージする(3)  */
+
+.custom-display a {
+  color: white;
+  text-decoration: underline;
+}
+
+ul li[data-colour="1"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_1.png) left top /contain repeat scroll; }
+ul li[data-colour="2"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_2.png) left top /contain repeat scroll; }
+ul li[data-colour="3"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_3.png) left top /contain repeat scroll; }
+ul li[data-colour="4"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_4.png) left top /contain repeat scroll; }
+ul li[data-colour="5"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_5.png) left top /contain repeat scroll; }
+ul li[data-colour="6"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_6.png) left top /contain repeat scroll; }
+ul li[data-colour="7"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_7.png) left top /contain repeat scroll; }
+ul li[data-colour="8"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_8.png) left top /contain repeat scroll; }
+ul li[data-colour="9"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_9.png) left top /contain repeat scroll; }
+ul li[data-colour="10"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_10.png) left top /contain repeat scroll; }
+ul li[data-colour="11"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_11.png) left top /contain repeat scroll; }
+ul li[data-colour="12"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_12.png) left top /contain repeat scroll; }
+ul li[data-colour="13"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_13.png) left top /contain repeat scroll; }
+ul li[data-colour="14"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_14.png) left top /contain repeat scroll; }
+ul li[data-colour="15"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_15.png) left top /contain repeat scroll; }
+ul li[data-colour="16"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_16.png) left top /contain repeat scroll; }
+ul li[data-colour="17"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_17.png) left top /contain repeat scroll; }
+ul li[data-colour="18"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_18.png) left top /contain repeat scroll; }
+ul li[data-colour="19"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_19.png) left top /contain repeat scroll; }
+ul li[data-colour="20"] { height: 2.333rem; background: transparent url(/simulation/assets/images/chip/gradation_20.png) left top /contain repeat scroll; }
+
+/* 以下、あとでマージする(2)  */
+
+.popup--system-requirements {
+  color: white;
+}
+
+.popup-inner .docs-section {
+  color: white;
+  padding: 1em 2em;
+}
+
+/* 以下、あとでマージする(1)  */
+
+.menu-door__bg {
+  background-color: #005eb8;
+}
+
+.item-list li {
+  background-color: #666666;
+}
+
+.order-sheet__image canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+
+@media (min-width:1025px){
+	.custom-pick__fonts li {
+	  width: 50%;
+	}
+
+	.custom-pick__fonts li img {
+	  vertical-align: text-top;
+	}
+
+	.custom-pick__fonts li.font--fancy {
+	  width: 100%;
+	}
+}
+@media (max-width:768px){
+	.custom-pick__fonts li {
+	  width: 100%;
+	}
+
+	.custom-pick__fonts li.font--fancy {
+	  width: 100%;
+	}
+}
+
+@media all and (-ms-high-contrast: none){
+	.custom-display-core svg {
+		height: 600px;
+	}
+	.footer {
+		position: absolute;
+		bottom: 0;
+	}
+
+	.post-template-default {
+		overflow: hidden;
+	}
+}
+
+@media only screen and (max-device-width: 1024px) and (min-device-width: 768px) and (orientation: portrait){
+	.custom-menu__content {
+		padding-bottom: 24px;
+	}
+}
+
+.u-pc img,
+.u-sp img {
+	width: 100%;
+}
+
+.product-info__head {
+	padding-top: 40px;
+}
+
+@media only screen and (max-width: 400px){
+	.custom-display svg {
+		width: 100%;
+	}
+}
+
+
+#colour-code {
+	width: 30%;
+	float: right;
+}
+
+@media only screen and (max-width: 400px){
+	#colour-code {
+		width: auto;
+		float: none;
+	}
+}
+
+#colour-collection {
+	width: 70%; 
+	float: left;
+}
+
+@media only screen and (max-width: 400px){
+	#colour-collection {
+		width: auto;
+		float: none;
+	}
+}
+
+
+
+
+.notes {
+  text-align: left;
+  color: #fff
+}
+
+.notes,
+#zoomed-image {
+  width: 100%
+}
+
+#zoomed-image {
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding: 5% 0;
+  background-color: hsla(0, 0%, 100%, 1.0);
+  z-index: 9999;
+  cursor: zoom-out
+}
+
+#zoomed-image svg {
+	cursor: zoom-out;
+  max-width: 90%;
+  height: 90% !important
+}
+
+.custom-display-core svg {
+	cursor: zoom-in;
+}

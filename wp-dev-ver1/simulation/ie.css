@@ -1,0 +1,30 @@
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	.custom-display-core.js-base-display svg {
+		zoom: 3.5;
+	}
+	.svg-text {
+		font-size: 0.2rem;
+	}
+	.custom-display {
+		margin-right: 0;
+		margin-left: 30%;
+	}
+}
+
+@media screen and (max-width: 1080px) and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	.custom-display {
+		margin-right: 0;
+		margin-left: 20%;
+	}
+}
+@media screen and (max-width: 600px) and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	.custom-display {
+		margin-right: 0;
+		margin-left: 0;
+	}
+}
+@media screen and (max-width: 500px) and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	.custom-display-core.js-base-display svg {
+		zoom: 3;
+	}
+}

@@ -20,7 +20,11 @@ const babelConfig = Object.assign({}, pkg.babel, {
 const config = {
   context: path.resolve(__dirname, './src/simulation'),
 
-  entry: './assets/js/scripts.js',
+  entry: {
+    main: './assets/js/standard/scripts.js',
+    printCustom: './assets/js/print-custom/scripts.js',
+    printCustom2: './assets/js/print-custom2/scripts.js',
+  },
 
   output: {
     path: path.resolve(__dirname, './.tmp/simulation/assets/js'),

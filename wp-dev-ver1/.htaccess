@@ -1,0 +1,11 @@
+#AuthUserFile /var/www/html/.htpasswd
+#AuthGroupFile /dev/null
+#AuthName "ROOT"
+#AuthType Basic
+#require valid-user
+
+RewriteEngine on
+#RewriteCond %{REQUEST_URI} /simulation/
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+

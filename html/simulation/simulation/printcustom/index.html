@@ -102,7 +102,7 @@
 
 		<div class="container" id="container">
 			
-<main class="main main--simulation" id="main" role="main">
+<main class="main main--simulation" id="main" role="main" data-page="Simulation">
 	<article class="content content--simulation" id="content">
 		<nav class="content-navigation">
 			<ul class="u-clear">
@@ -112,7 +112,7 @@
 			</ul>
 		</nav>
 
-		<section class="section section--custom is-swimwear js-get-height">
+		<section class="section section--custom is-swimwear js-get-height" data-component="SimulationCommon">
 			<div class="custom-menu" id="wear_1_01">
 				<ul class="custom-menu__tabs u-clear u-pc">
 					<li class="active" data-tab=".base-simulation">SWIM WEAR<br>SIMULATION</li>
@@ -163,16 +163,21 @@
 					<div class="custom-menu__inner">
 						<div class="mark-condition" data-component="MarkCondition">
   <ul class="mark-condition__list u-clear js-mark-condition">
-    <li class="mark-condition__item"><a data-mark="on"><i class="icon icon--tick"></i>マークあり</a></li>
-    <li class="mark-condition__item"><a class="active" data-mark="off"><i class="icon icon--tick"></i>マークなし</a></li>
+    <li class="mark-condition__item">
+      <a data-mark="on"><i class="icon icon--tick"></i>マークあり</a>
+    </li>
+    <li class="mark-condition__item">
+      <a class="active" data-mark="off"><i class="icon icon--tick"></i>マークなし</a>
+    </li>
   </ul>
 </div>
 					</div>
 
-					<div class="custom-menu__inner">
-						<h4 class="custom-menu__title">マークの位置</h4>
+					<div class="custom-menu__tab active" data-rotation="front">					
+						<div class="custom-menu__inner">
+							<h4 class="custom-menu__title">マークの位置</h4>
 
-						<div class="mark-position" data-component="MarkPosition">
+							<div class="mark-position" data-component="MarkPosition">
 	<ul class="mark-position__list u-clear js-mark-position" data-cate="pos" data-target=".js-svg-text">
 		<li class="mark-position__item">
 			<a class="active" data-side="front" data-pos="A" data-value="A" data-angle="0" data-max-en="8" data-max-em="5">
@@ -202,12 +207,12 @@
 	</ul>
 </div>
 
-					</div>
+						</div>
 
-					<div class="custom-menu__inner">
-						<h4 class="custom-menu__title">マークの書体</h4>
+						<div class="custom-menu__inner">
+							<h4 class="custom-menu__title">マークの書体</h4>
 
-						<div class="mark-family" data-component="MarkFamily">						
+							<div class="mark-family" data-component="MarkFamily">						
 	<div class="mark-family__section custom-menu__section">
 		<ul class="mark-family__list u-clear js-mark-family" data-cate="font">
 			<li class="mark-family__item u-font--swis721-md-bt">
@@ -259,12 +264,12 @@
 </div>
 
 
-					</div>
+						</div>
 
-					<div class="custom-menu__inner">
-						<h4 class="custom-menu__title">マークの色</h4>
+						<div class="custom-menu__inner">
+							<h4 class="custom-menu__title">マークの色</h4>
 
-						<div class="mark-colour">
+							<div class="mark-colour">
 	<div class="mark-colour__section custom-menu__section">
 		<ul class="mark-colour__list js-colour js-colour--mark" data-cate="col" data-target="#position-a">
 			<li class="mark-colour__item u-colour--wht active" data-colour="#ffffff" data-code="WHT" style="background-color:#ffffff"></li>
@@ -279,12 +284,12 @@
 	</div>
 </div>
 
-					</div>
+						</div>
 
-					<div class="custom-menu__inner">
-						<h4 class="custom-menu__title">マークの名前</h4>
+						<div class="custom-menu__inner">
+							<h4 class="custom-menu__title">マークの名前</h4>
 
-						<div class="mark-text" data-component="MarkText">           
+							<div class="mark-text" data-component="MarkText">           
   <form class="mark-text__form" data-cate="text">
     <div class="mark-text__inner">
       <input class="js-mark-text disabled" type="text" name="text-markA" placeholder="1行目" value="">
@@ -301,6 +306,7 @@
   <!-- <p class="mark-text__notes">※書体06は小文字の指定ができません。</p> -->
 </div>
 
+						</div>
 					</div>
 
 					<p class="read-more js-read-more"></p>
