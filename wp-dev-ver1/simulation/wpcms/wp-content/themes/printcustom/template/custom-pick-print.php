@@ -34,13 +34,13 @@ $arg = array (
 
 ?>
 <h4 class="custom-menu__title">PRINT</h4>
-<div class="mark-print-type">
-  <ul class="mark-print-type__list js-wear-type u-clear">
+<div class="wear-type">
+  <ul class="wear-type__list js-wear-type u-clear">
   <?php 
     foreach((array)$terms = get_posts($arg) as $key => $post):
       setup_postdata($post);
   ?>
-    <li class="mark-print-type__item">
+    <li class="wear-type__item">
       <a href="<?php echo get_permalink(); ?>" id="post_thumbnail_<?php the_ID(); ?>" class="<?php echo ($wp_query->post->ID == $post->ID)? 'active' : ''; ?>" data-svg="<?php echo $post->post_title; ?>">
       <?php 
         if(has_post_thumbnail($post->ID)):

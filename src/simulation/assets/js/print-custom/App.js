@@ -240,6 +240,7 @@ export default class SimulationCommon extends Base {
         console.log('show order');
         orderMenu.orderInfo();
       }
+
       this.reloadPage();
     } else {
       // apply no-mark option to dom and localStrage
@@ -393,12 +394,12 @@ export default class SimulationCommon extends Base {
 
   markPosPick(event) {
     const $tarEl = (event.currentTarget) ? $(event.currentTarget) : event;
-    const cate = $tarEl.parents('ul').attr('data-cate');
-    const pos = $tarEl.attr('data-pos');
-    const side = $tarEl.attr('data-side');
-    const rotationInfo = $('.js-rotation').attr('data-rotation');
+    const cate = $tarEl.parents('ul').data('cate');
+    const pos = $tarEl.data('pos');
+    const side = $tarEl.data('side');
+    const rotationInfo = $('.js-rotation').data('rotation');
+    const colour = $('.js-colour--mark').find('li.active').data('colour');
     const markFont = $('.js-mark-family input:checked').val();
-    const colour = $('.js-colour--mark').find('li.active').attr('data-colour');
 
     $.each(markOptions, (index, el) => {
       const $path = $(`#position-${el}`);
@@ -426,9 +427,9 @@ export default class SimulationCommon extends Base {
 
   markFamily(event) {
     const $tarEl = (event.currentTarget) ? $(event.currentTarget) : event;
-    const pos = $('.js-mark-pos a.active').attr('data-pos');
-    const code = $('.js-mark-family input:checked').attr('data-code');
-    const colour = $('.js-colour--mark').find('li.active').attr('data-colour');
+    const pos = $('.js-mark-pos a.active').data('pos');
+    const code = $('.js-mark-family input:checked').data('code');
+    const colour = $('.js-colour--mark').find('li.active').data('colour');
     const markFont = $('.js-mark-family input:checked').val();
 
     $('.js-mark-family input').prop('checked', false);
@@ -436,7 +437,7 @@ export default class SimulationCommon extends Base {
     $tarEl.prop('checked', true);
     $tarEl.parent().addClass('active');
 
-    if ($tarEl.attr('data-max-lang') === 'en') {
+    if ($tarEl.data('max-lang') === 'en') {
       $('.js-mark-text').addClass('disabled');
       console.log('en');
     } else {
@@ -486,24 +487,25 @@ export default class SimulationCommon extends Base {
   };
 
   reloadPage() {
+    const { pos, font, col, mark } = getUrlVars();
     let $posEl;
     let $familyEl;
     let $colEl;
 
-    if (getUrlVars().pos) {
-      $posEl = $('.js-mark-pos').find(`*[data-pos=${getUrlVars().pos}]`);
+    if (pos) {
+      $posEl = $('.js-mark-pos').find(`*[data-pos=${pos}]`);
     } else {
       $posEl = $('.js-mark-pos .active');
     }
 
-    if (getUrlVars().font) {
-      $familyEl = $('.js-mark-family li').find(`*[data-code=${String(getUrlVars().font)}]`);
+    if (font) {
+      $familyEl = $('.js-mark-family li').find(`*[data-code=${String(font)}]`);
     } else {
       $familyEl = $('.js-mark-family input:checked');
     }
 
-    if (getUrlVars().col) {
-      $colEl = $('.js-colour--mark').find(`*[data-code=${getUrlVars().col}]`);
+    if (col) {
+      $colEl = $('.js-colour--mark').find(`*[data-code=${col}]`);
     } else {
       $colEl = $('.js-colour--mark').find('li.active');
     }
@@ -512,7 +514,7 @@ export default class SimulationCommon extends Base {
     this.markFamily($familyEl);
     this.changeColours($colEl);
 
-    if (getUrlVars().mark) {
+    if (mark) {
       this.markTextToCanvas();
     }
   }

@@ -204,7 +204,7 @@ endif;
         </div>
 
         <div class="popup popup--design-note js-popup">
-          <div class="popup-inner design-note">
+          <div class="popup-inner design-note is-print">
             <h3 class="design-note__head">デザインに関する注意事項</h3>
             <a class="popup-close js-popup-close" style="top: 4.2%;"></a>
             <div class="design-note__inner">
@@ -213,22 +213,22 @@ endif;
                 <p><span class="asterisk">※</span>書体06は小文字と記号の指定ができません。</p>
                 <p><span class="asterisk">※</span>ご指定の文字数によって、実施の商品とマーキングの大きさが異なります。<br>マーキングの大きさの目安は下記の通りです。</p>
 
-                <ul>
-                  <li>
+                <ul class="design-note__list">
+                  <li class="design-note__item">
                     <span>8文字の場合</span>
-                    <div class="design-note__items is-size">
+                    <div class="design-note__image is-size">
                       <img src="/simulation/assets/images/customisation/design-note/size1.png" alt="8文字の場合">
                     </div>
                   </li>
-                  <li>
+                  <li class="design-note__item">
                     <span>5文字の場合</span>
-                    <div class="design-note__items is-size">
+                    <div class="design-note__image is-size">
                       <img src="/simulation/assets/images/customisation/design-note/size2.png" alt="5文字の場合">
                     </div>
                   </li>
-                  <li>
+                  <li class="design-note__item">
                     <span>2文字の場合</span>
-                    <div class="design-note__items is-size">
+                    <div class="design-note__image is-size">
                       <img src="/simulation/assets/images/customisation/design-note/size3.png" alt="2文字の場合">
                     </div>
                   </li>
@@ -237,10 +237,10 @@ endif;
 
               <div class="design-note__desc" style="flex-shrink: 0;">
                 <p><span class="asterisk">※</span>マークには細いフチがつきます。詳細は下記の通りです。</p>
-                <ul>
-                  <li>
+                <ul class="design-note__list">
+                  <li class="design-note__item">
                     <span>・下記の品番では、マークのフチにAカラーがつきます。</span>
-                    <div class="design-note__items">
+                    <div class="design-note__image">
                       <p><span><img src="/simulation/assets/images/customisation/design-note/image1.jpg" alt="OAT-7062W、OAT-7062WJ、OAT-7063、OAT-7063J"></span>OAT-7062W、OAT-7062WJ、OAT-7063、OAT-7063J</p>
                       <p><span><img src="/simulation/assets/images/customisation/design-note/image2.jpg" alt="OAT-7064W、OAT-7064WJ、OAT-7065、OAT-7065J"></span>OAT-7064W、OAT-7064WJ、OAT-7065、OAT-7065J</p>
                       <p><span><img src="/simulation/assets/images/customisation/design-note/image3.jpg" alt="OAT-7070W、OAT-7070WJ、OAT-7071、OAT-7071J"></span>OAT-7070W、OAT-7070WJ、OAT-7071、OAT-7071J</p>
@@ -249,17 +249,17 @@ endif;
                     </div>
                   </li>
 
-                  <li>
+                  <li class="design-note__item">
                     <span>・下記の品番では、マークのフチにBカラーがつきます。</span>
-                    <div class="design-note__items">
+                    <div class="design-note__image">
                       <p><span><img src="/simulation/assets/images/customisation/design-note/image6.jpg" alt="OAT-7060W、OAT-7060WJ、OAT-7061、OAT-7061J"></span>OAT-7060W、OAT-7060WJ、OAT-7061、OAT-7061J</p>
                       <p><span><img src="/simulation/assets/images/customisation/design-note/image7.jpg" alt="OAT-7066W、OAT-7066WJ、OAT-7067、OAT-7067J"></span>OAT-7066W、OAT-7066WJ、OAT-7067、OAT-7067J</p>
                     </div>
                   </li>
 
-                  <li>
+                  <li class="design-note__item">
                     <span>・下記の品番では、マークのフチにグラデーションの一番上のカラーがつきます。</span>
-                    <div class="design-note__items">
+                    <div class="design-note__image">
                       <p><span><img src="/simulation/assets/images/customisation/design-note/image8.jpg" alt="OAT-7068W、OAT-7068WJ、OAT-7069、OAT-7069J"></span>OAT-7068W、OAT-7068WJ、OAT-7069、OAT-7069J</p>
                     </div>
                   </li>
