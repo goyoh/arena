@@ -28,14 +28,14 @@
       window.location.href = $(this).attr('href') + '?bcol=' + str_colorcode;
     });
 
-    $('.custom-display-core').on('click', 'svg', function(e){
-      var modal = $('#zoomed-image');
-      $('svg', modal).remove();
-      $(this).clone(true, false).appendTo(modal);
-      modal.show().find('svg').on('click', function(e){
-        $(this).parent().hide();
-      });
-    });
+    // $('.custom-display-core').on('click', 'svg', function(e){
+    //   var modal = $('#zoomed-image');
+    //   $('svg', modal).remove();
+    //   $(this).clone(true, false).appendTo(modal);
+    //   modal.show().find('svg').on('click', function(e){
+    //     $(this).parent().hide();
+    //   });
+    // });
 
 // :radio
     $('input[name=custom-font]').change(function() {
@@ -79,7 +79,7 @@
 
     var add_colour_collection = setInterval(function(){
       if($('#colour-code').length){
-        $('#colour-code').before("<p id=\"colour-collection\" class=\"colour-code u-text-left\"><small></small></p>").parent().addClass('clear');
+        $('#colour-code').before("<p id=\"colour-collection\" class=\"colour-code u-text-left\"><small></small></p>").parent().addClass('u-clear');
         update_colour_collection();
         clearInterval(add_colour_collection);
       }

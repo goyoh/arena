@@ -2,7 +2,7 @@ import $ from 'jquery';
 import imagesLoaded from 'imagesloaded';
 
 import { mobilecheck, getSize, browserDetect } from './globals';
-import { scrollEvents, orderMenu, popups } from './Components';
+import { scrollEvents, orderMenu, popups, navigationMenu } from './Components';
 import { loaderProgress, loaderOut } from './Loader';
 import SimulationCommon from './App';
 
@@ -43,6 +43,7 @@ export default class Page {
 
   render() {
     getSize();
+    navigationMenu();
     this.addBrowserClass();
     this.loadPage();
 

@@ -42,9 +42,7 @@ export default class MarkPosition extends Component {
     $current.find('.js-mark-position a').removeClass('active');
     $e.addClass('active');
 
-    this.getMarkData().then((data) => {
-      const { position, family, colour } = data;
-
+    this.getMarkData().then(({ position, family, colour }) => {
       $.each(this.markOptions, (index, el) => {
         const $path = $(`#position-${el}`);
 

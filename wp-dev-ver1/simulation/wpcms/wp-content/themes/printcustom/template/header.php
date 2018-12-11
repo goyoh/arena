@@ -31,7 +31,7 @@
   
 ?>
   <a class=header__logo href="<?php echo network_site_url(); ?>">
-    <img src="<?php echo network_site_url(); ?>assets/images/common/header-logo.png" alt="<?php echo get_bloginfo('name'); ?>"> </a> <a class="navigation-trigger u-sp" id=navigation-trigger><i></i>
+    <img src="<?php echo network_site_url(); ?>assets/images/common/header-logo.png" alt="<?php echo get_bloginfo('name'); ?>">
   </a>
   <a class="navigation-trigger u-sp" id="navigation-trigger"><i></i></a>
 

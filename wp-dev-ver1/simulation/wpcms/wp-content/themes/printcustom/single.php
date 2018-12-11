@@ -75,7 +75,7 @@ endif;
             <div class="custom-menu__head u-sp">SWIM WEAR<br>SIMULATION</div>
             <div class="custom-menu__tap is-hidden">（タップして開く）</div>
 
-            <div class="custom-menu__content custom-menu__content--base base-simulation active">
+            <div class="custom-menu__content custom-menu__content--base base-simulation js-base-simulation active">
               <div class="custom-menu__inner">
                 <!-- Product Type -->
                 <?php get_template_part('template/custom-pick', 'type'); ?>
@@ -94,7 +94,7 @@ endif;
             <div class="custom-menu__head u-sp">MARK<br>SIMULATION</div>
             <div class="custom-menu__tap">（タップして開く）</div>
 
-            <div class="custom-menu__content custom-mark-simulation mark-simulation">
+            <div class="custom-menu__content custom-mark-simulation mark-simulation js-mark-simulation">
               <!-- 
               <div class="custom-pick custom-pick-disabled">
                 只今、メンテナンス中のため、マークシミュレーション機能はご利用いただけません
@@ -104,29 +104,10 @@ endif;
                 <!-- マークのありなし -->
                 <?php get_template_part('template/custom-pick', 'mark'); ?>
               </div>
-              <!-- 
-              <div class="custom-pick">
-                <ul class="custom-pick__mark-print clear js-mark-print">
-                  <li><a class="js-mark-tab-trigger active" data-tab=".js-custom-pick-tab--pos" data-print="point"><i class="icon icon--tick"></i>ポイントマーク</a></li>
-                  <li><a class="js-mark-tab-trigger" data-tab=".js-custom-pick-tab--direction" data-print="design"><i class="icon icon--tick"></i>デザインマーク</a></li>
-                </ul>
-              </div>
-              -->
+
               <?php if(get_query_var('mark')['positions'] || get_query_var('mark')['direction']): ?>
               <div class="custom-menu__inner">
-                <?php 
-                  get_template_part('template/custom-pick', 'mark-print');
-                  /* 
-                <div class="custom-pick__tab js-custom-pick-tab js-custom-pick-tab--pos active">
-                  <!-- マークの位置 -->
-                  <?php get_template_part('template/custom-pick', 'mark-position'); ?>
-                </div>
-                <div class="custom-pick__tab js-custom-pick-tab js-custom-pick-tab--direction">
-                  <!-- マークの位置 -->
-                  <?php get_template_part('template/custom-pick', 'mark-direction'); ?>
-                </div>
-                  */ 
-                ?>
+                <?php get_template_part('template/custom-pick', 'mark-print'); ?>
               </div>
               <div class="custom-menu__inner">
                 <!-- マークの書体 -->
@@ -139,8 +120,9 @@ endif;
               <div class="custom-menu__inner">
                 <!-- マークの名前 -->
                 <?php get_template_part('template/custom-pick', 'mark-input'); ?>
-				<p class="form-notes">※書体06は小文字と記号の指定ができません。</p>
+				        <p class="form-notes">※書体06は小文字と記号の指定ができません。</p>
               </div>
+
               <p class="read-more js-read-more"></p>
               <?php endif; ?>
             </div>

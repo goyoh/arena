@@ -1,6 +1,3 @@
-import classie from 'classie';
-import { TweenMax } from 'gsap';
-
 function decodeHtmlEntity(str) {
   return str.replace(/&#(\d+);/g, (match, dec) => (
     String.fromCharCode(dec)
@@ -91,35 +88,6 @@ const readCookie = {
   },
 };
 
-function navigationMenu() {
-  const nav = document.getElementById('navigation');
-  const trigger = document.getElementById('navigation-trigger');
-
-  const resetMenu = (callback) => {
-    TweenMax.to(nav, 0.4, {
-      autoAlpha: 0,
-      x: '100%',
-      onComplete: () => {
-        classie.remove(trigger, 'active');
-        classie.remove(nav, 'navigation--show');
-        if (callback) callback();
-      },
-    });
-  };
-
-  trigger.addEventListener(window.eventtype, (e) => {
-    e.preventDefault();
-
-    if (classie.has(trigger, 'active')) {
-      resetMenu();
-    } else {
-      classie.add(trigger, 'active');
-      classie.add(nav, 'navigation--show');
-      TweenMax.to(nav, 0.3, { x: '0%', autoAlpha: 1 });
-    }
-  });
-}
-
 const browserDetect = (() => {
   const ua = navigator.userAgent;
   let tem;
@@ -149,6 +117,5 @@ export {
   getUrlVars,
   readCookie,
   getSize,
-  navigationMenu,
   browserDetect,
 };

@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import { TweenMax } from 'gsap';
 
-import { decodeHtmlEntity, mobilecheck, getOrientation, getUrlVars, readCookie } from './globals';
+import { readCookie } from './globals';
 
 export const storageValue = {};
 export const orderLink = {};
@@ -14,7 +14,7 @@ export class Base {
   constructor() {
     this.currentURL = window.location.href;
     this.pageID = $('.custom-menu').attr('id');
-    this.styleName = $('.js-order-save').attr('data-style');
+    this.styleName = $('.js-order-save').data('style');
   }
 
   get getStyleByCookie() {
@@ -82,11 +82,10 @@ export class Base {
     const $tarEl = (event.currentTarget) ? $(event.currentTarget) : event;
 
     // const svg = $('.js-base-display').find('svg');
-    const tar = $tarEl.parent().attr('data-target');
-    const cate = $tarEl.parent().attr('data-cate');
-
-    const colour = $tarEl.attr('data-colour');
-    const code = $tarEl.attr('data-code');
+    const tar = $tarEl.parent().data('target');
+    const cate = $tarEl.parent().data('cate');
+    const colour = $tarEl.data('colour');
+    const code = $tarEl.data('code');
     let svgPath;
 
     // apply if it's the cololour for the mark
@@ -119,27 +118,27 @@ export class Base {
     if (strageKey) {
       // loop all the selector which can be used for restyling the svg item
       $('*[data-cate]').each((index, el) => {
-        const tar = $(el).attr('data-target');
-        const cate = $(el).attr('data-cate');
+        const tar = $(el).data('target');
+        const cate = $(el).data('cate');
         const key = strageKey[cate];
         // apply if it's a category for colouring
         if ($(el).hasClass('js-colour')) {
           // apply if it's for the mark
           if ($(el).hasClass('js-colour--mark')) {
-            const markFont = $('.custom-pick__fonts input:checked').val();
+            const markFont = $('.js-mark-family input:checked').val();
             const $tarEl = $(tar).children(markFont).find('path');
-            const colour = $(el).find(`[data-code="${key}"]`).attr('data-colour');
+            const colour = $(el).find(`[data-code="${key}"]`).data('colour');
 
             $tarEl.each((i, chilel) => {
               this.colourDraw(chilel, colour);
             });
           } else if ($(el).hasClass('js-colour--gradation')) {
-            const colour = $(el).find('.active').attr('data-colour');
+            const colour = $(el).find('.active').data('colour');
 
             $('#a-color > path').css('opacity', 0);
             $(`#colourg${colour}`).css('opacity', 1);
           } else {
-            const colour = $(el).find('.active').attr('data-colour');
+            const colour = $(el).find('.active').data('colour');
 
             $(tar).children().each((i, chilel) => {
               this.colourDraw(chilel, colour);

@@ -51,7 +51,7 @@ export default class SimulationCommon extends Base {
   }
 
   events() {
-    $(document).on(eventtype2, '.js-rotation', (event) => {
+    $(document).on(window.eventtype, '.js-rotation', (event) => {
       this.rotation(event);
       return false;
     });
@@ -199,11 +199,13 @@ export default class SimulationCommon extends Base {
     return true;
   };
 
-  rotation() {
-    const data = $('.js-rotation').attr('data-svg');
-    const rotationDir = $('.js-rotation').attr('data-rotation');
-    const strageKey = JSON.parse(localStorage.getItem(this.pageID));
-    const key = strageKey.mark;
+  rotation(event) {
+    const selector = mobilecheck() ? '.button-container .js-rotation' : '.js-rotation.u-pc';
+    const $tar = event ? $(event.currentTarget) : $(selector);
+    const data = $tar.data('svg');
+    const rotationDir = $tar.data('rotation');
+    const storageKey = JSON.parse(localStorage.getItem(this.pageID));
+    const key = storageKey.mark;
 
     // front or back
     if (rotationDir === 'front') {
@@ -213,7 +215,7 @@ export default class SimulationCommon extends Base {
         this.itemSize();
       });
 
-      $('.js-rotation').attr('data-rotation', 'back');
+      $tar.data('rotation', 'back');
     } else {
       $('.js-base-display').load(`${this.rotationPath}${data}.svg`, () => {
         this.restyle();
@@ -221,7 +223,7 @@ export default class SimulationCommon extends Base {
         this.itemSize();
       });
 
-      $('.js-rotation').attr('data-rotation', 'front');
+      $tar.data('rotation', 'front');
     }
   }
 
@@ -255,23 +257,23 @@ export default class SimulationCommon extends Base {
 
   markPick(event) {
     const $tarEl = (event.currentTarget) ? $(event.currentTarget) : event;
+    const condition = $($tarEl).data('mark');
 
     $('.js-mark-pick a').removeClass('active');
     $tarEl.addClass('active');
 
-    const condition = $($tarEl).attr('data-mark');
     // apply if [マーク有り] picked
     if (condition === 'on') {
       // remove overlay
-      $('.custom-mark-simulation').css('overflow', 'auto');
+      $('.js-mark-simulation').css('overflow', 'auto');
       $('.overlay--inactive').remove();
 
       // retrive mark info
-      const pos = $('.js-mark-pos .active').attr('data-pos');
+      const pos = $('.js-mark-pos .active').data('pos');
 
       if (pos) {
         const markFont = $('.js-mark-family input:checked').val();
-        const colour = $('.js-colour--mark').find('li.active').attr('data-colour');
+        const colour = $('.js-colour--mark').find('li.active').data('colour');
         const posTar = `#position-${pos.toLowerCase()}`;
         const $posEl = $(posTar).children(markFont).find('path');
 
@@ -297,8 +299,8 @@ export default class SimulationCommon extends Base {
       // add overlay on the layer
       const overlay = document.createElement('div');
       overlay.className = 'overlay overlay--inactive';
-      document.querySelector('.custom-mark-simulation').appendChild(overlay);
-      $('.custom-mark-simulation').css('overflow', 'hidden');
+      document.querySelector('.js-mark-simulation').appendChild(overlay);
+      $('.js-mark-simulation').css('overflow', 'hidden');
 
       // update the order link (remove mark data)
       this.currentURL = this.currentURL.split(/[?#]/)[0];
@@ -325,10 +327,10 @@ export default class SimulationCommon extends Base {
 
   markText(options) {
     const text = (options.text) ? options.text : $('.js-mark-text').val();
-    const posData = storageValue.pos || $('.js-mark-pos .active').attr('data-pos');
+    const posData = storageValue.pos || $('.js-mark-pos .active').data('pos');
     const $tar = $('.js-mark-pos').find(`[data-pos="${posData}"]`);
     const $tar2 = $('.js-mark-family input:checked');
-    const lang = $tar2.attr('data-max-lang');
+    const lang = $tar2.data('max-lang');
     const textLength = $tar.attr(`data-max-${lang}`);
     const encodedText = encodeURIComponent(text);
 
@@ -392,8 +394,8 @@ export default class SimulationCommon extends Base {
     }
   }
 
-  markPosPick(event) {
-    const $tarEl = (event.currentTarget) ? $(event.currentTarget) : event;
+  markPosPick(event, auto) {
+    const $tarEl = event.currentTarget ? $(event.currentTarget) : event;
     const cate = $tarEl.parents('ul').data('cate');
     const pos = $tarEl.data('pos');
     const side = $tarEl.data('side');
@@ -412,8 +414,8 @@ export default class SimulationCommon extends Base {
       TweenMax.set($el, { fill: colour });
       $('.js-colour--mark').attr('data-target', tar);
 
-      // rotation the item if the mark is positioned on the opposite side
-      if (side !== rotationInfo) this.rotation();
+      // rotate the item if the mark is positioned on the opposite side
+      if (side !== rotationInfo && !auto) this.rotation();
     }
 
     $('.js-mark-pos a').removeClass('active');
@@ -422,6 +424,7 @@ export default class SimulationCommon extends Base {
     // update localStrage and the order link
     this.orderLinkChange(cate, pos);
     storageValue[cate] = pos;
+
     this.setLocalStrage();
   }
 
@@ -510,7 +513,7 @@ export default class SimulationCommon extends Base {
       $colEl = $('.js-colour--mark').find('li.active');
     }
 
-    this.markPosPick($posEl);
+    this.markPosPick($posEl, true);
     this.markFamily($familyEl);
     this.changeColours($colEl);
 

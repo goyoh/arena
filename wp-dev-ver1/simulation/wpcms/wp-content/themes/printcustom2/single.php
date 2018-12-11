@@ -55,7 +55,7 @@
             <div class="custom-menu__head u-sp">TEAM WEAR<br>SIMULATION</div>
             <div class="custom-menu__tap is-hidden">（タップして開く）</div>
 
-            <div class="custom-menu__content custom-menu__content--base base-simulation active">
+            <div class="custom-menu__content custom-menu__content--base base-simulation js-base-simulation active">
               <div class="custom-menu__inner">
                 <!-- Product Type -->
                 <?php get_template_part('template/custom', 'type'); ?>
@@ -69,7 +69,7 @@
             <div class="custom-menu__head u-sp">MARK<br>SIMULATION</div>
             <div class="custom-menu__tap">（タップして開く）</div>
 
-            <div class="custom-menu__content custom-mark-simulation mark-simulation">
+            <div class="custom-menu__content custom-mark-simulation mark-simulation js-mark-simulation">
               <div class="custom-menu__inner">
                 <!-- マークのありなし -->
                 <?php get_template_part('template/custom', 'mark-condition'); ?>
