@@ -19,7 +19,6 @@ function getOrientation() {
 
 function getSize() {
   const windowHeight = window.innerHeight;
-
   const el = document.querySelector('.js-get-height');
 
   if (el) el.style.height = `${windowHeight}px`;
@@ -61,6 +60,8 @@ const readCookie = {
         case Date:
           sExpires = `; expires=${vEnd.toUTCString()}`;
           break;
+        default:
+          return true;
       }
     }
 

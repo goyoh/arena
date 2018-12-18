@@ -54,7 +54,6 @@ export default class Page {
       const pageName = this.$view.data('page');
 
       if (pageName !== 'Home') {
-        // loaderOut();
         const simulation = new SimulationCommon();
         simulation.default();
 
@@ -80,13 +79,13 @@ export default class Page {
         }).on('always', () => {
           $('body').removeClass('load-start').addClass('load-completed');
 
-          resolve(true);
+          resolve();
         });
       } else {
         loaderProgress(100);
         $('body').removeClass('load-start').addClass('load-completed');
 
-        resolve(true);
+        resolve();
       }
     });
   }

@@ -17,7 +17,7 @@ export class Base {
     this.styleName = $('.js-order-save').data('style');
   }
 
-  get getStyleByCookie() {
+  getStyleByCookie = () => {
     let styleLinkURL = '';
 
     $.each(cookies, (i) => {
@@ -30,17 +30,16 @@ export class Base {
     });
 
     return styleLinkURL;
-  }
+  };
 
   setStyleByCookie = () => {
-    $.each(cookies, (i) => {
-      // apply the style which ain't 0 in Cookie
-      if (readCookie.getItem(`style${i + 1}`) == '0') {
+    for (let i = 0; i < cookies.length; i += 1) {
+      if (readCookie.getItem(`style${i + 1}`) === '0') {
         styleNum = i + 1;
-        return false;
+        break;
       }
-    });
-  }
+    }
+  };
 
   setLocalStrage() {
     localStorage.setItem(this.pageID, JSON.stringify(storageValue));
@@ -52,22 +51,18 @@ export class Base {
 
     const styleNumData = styleNum || '';
     const styleData = this.styleName || '';
-    // let posData = orderLink['pos'] || '';
-    // let familyData = orderLink['font'] || '';
-    // let baseColourData = orderLink['bcol'] || '';
-    // let colourData = orderLink['col'] || '';
-    // let markData = orderLink['mark'] || '';
     const { pos = '', font = '', bcol = '', col = '', mark = '' } = orderLink;
 
     newOrderLink = `${this.currentURL}?style${styleNumData}=${styleData}&bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&mark=${mark}`;
     const directLink = `https://custom.arena-jp.com/order/index.php?module=Flash&action=CreateStyle&style1=${styleData},${bcol},${pos},${font},${col},${mark}`;
+    const snsLink = encodeURIComponent(`${this.currentURL}?bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&mark=${mark}`);
 
     $('.js-order-sheet-direct').attr('href', directLink);
     $('.js-order-save').attr('href', newOrderLink);
 
-    $('.js-facebook-link').attr('href', `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`${this.currentURL}?bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&mark=${mark}`)}`);
-    $('.js-twitter-link').attr('href', `https://twitter.com/home?status=${encodeURIComponent(`${this.currentURL}?bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&mark=${mark}`)}`);
-    $('.js-line-link').attr('href', `http://line.me/R/msg/text/?${encodeURIComponent(`${this.currentURL}?bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&mark=${mark}`)}`);
+    $('.js-facebook-link').attr('href', `https://www.facebook.com/sharer/sharer.php?u=${snsLink}`);
+    $('.js-twitter-link').attr('href', `https://twitter.com/home?status=${snsLink}`);
+    $('.js-line-link').attr('href', `http://line.me/R/msg/text/?${snsLink}`);
   }
 
   colourDraw = (chilel, colour) => {
@@ -121,6 +116,7 @@ export class Base {
         const tar = $(el).data('target');
         const cate = $(el).data('cate');
         const key = strageKey[cate];
+
         // apply if it's a category for colouring
         if ($(el).hasClass('js-colour')) {
           // apply if it's for the mark

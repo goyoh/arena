@@ -46,7 +46,6 @@ const scrollEvents = {
     const tar = $(e.currentTarget).attr('href');
     const headerHeight = $('.header').outerHeight();
     const bannerHeight = $(tar).find('.item-head').outerHeight();
-
     const tarTop = ($(tar).offset().top + bannerHeight) - headerHeight;
 
     $('html, body').animate({ scrollTop: tarTop });
