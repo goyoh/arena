@@ -363,7 +363,7 @@ export default class SimulationCommon extends Base {
       if (!orderMenu.orderInfoActive && text) orderMenu.orderInfo();
 
       // set value on localStrage and change the order link
-      storageValue.mark = str;
+      storageValue.mark = sjisText;
       this.setLocalStrage();
       this.orderLinkChange('mark', sjisText);
     }
