@@ -74,10 +74,7 @@
 
     &.is-no-option {
       border-color: 1px solid #515151;
-
-      img {
-        height: 98%;
-      }
+      img { height: 98%; }
     }
   }
 }

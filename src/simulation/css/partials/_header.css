@@ -8,10 +8,7 @@
   background-color: #000;
   color: #fff;
   z-index: 999;
-
-  a {
-    color: #fff;
-  }
+  a { color: #fff; }
 
   &__logo {
     float: left;
@@ -65,9 +62,7 @@
       vertical-align: baseline;
     }
 
-    &.active {
-      opacity: 1;
-    }
+    &.active { opacity: 1; }
 
     &.active,
     &.registered {
@@ -84,15 +79,11 @@
         opacity: 0;
       }
 
-      &:hover {
-        opacity: 1;
-      }
+      &:hover { opacity: 1; }
     }
   }
 
-  .icon {
-    cursor: pointer;
-  }
+  .icon { cursor: pointer; }
 
   &__title {
     display: inline-block;

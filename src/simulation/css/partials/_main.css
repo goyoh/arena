@@ -6,10 +6,7 @@
 
 .main {
   position: relative;
-
-  &--home {
-    background-color: #1a1a1a;
-  }
+  &--home { background-color: #1a1a1a; }
 }
 
 .content {

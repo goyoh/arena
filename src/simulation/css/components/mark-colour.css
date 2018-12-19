@@ -46,9 +46,7 @@
         border: 2px solid #fff;
       }
 
-      &.hide {
-        display: none;
-      }
+      &.hide { display: none; }
     }
   }
 

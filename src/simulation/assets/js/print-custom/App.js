@@ -4,14 +4,13 @@ import { TweenMax } from 'gsap';
 import { mobilecheck, getUrlVars } from './globals';
 import { Base, storageValue, orderLink, styleNum } from './base';
 import { scrollEvents, orderMenu } from './Components';
-import { loaderOut } from './Loader';
+import { loaderOut, spinner } from './Loader';
 import ColourFunction from './BaseColour';
 
 const Encoding = require('encoding-japanese');
-
 const fontServer = 'https://mark.arena-jp.com/simulation/servlet/MarkSample2';
-const eventtype2 = mobilecheck() ? 'touchstart' : 'click';
 const markOptions = ['a', 'b', 'c', 'j', 'k', 'd', 'i', 'l', 'e', 'm', 'n', 'f', 'l', 'g', 'o'];
+// const eventtype2 = mobilecheck() ? 'touchstart' : 'click';
 
 
 export default class SimulationCommon extends Base {
@@ -51,16 +50,6 @@ export default class SimulationCommon extends Base {
   }
 
   events() {
-    $(document).on(window.eventtype, '.js-rotation', (event) => {
-      this.rotation(event);
-      return false;
-    });
-
-    $(document).on(window.eventtype, '.js-modal', (event) => {
-      this.modals(event);
-      return false;
-    });
-
     // mark events
     $('.js-colour--mark').on(window.eventtype, 'li', (event) => {
       this.changeColours(event);
@@ -86,10 +75,14 @@ export default class SimulationCommon extends Base {
       this.markFamily(event);
     });
 
-    $('.custom-menu__tabs').on(window.eventtype, 'li', (event) => {
-      this.tabs(event);
+    $('.custom-menu__tabs').on(window.eventtype, 'li', this.tabs);
+
+    $(document).on(window.eventtype, '.js-rotation', (event) => {
+      this.rotation(event);
+      return false;
     });
 
+    $(document).on(window.eventtype, '.js-modal', this.modals);
     $(document).on('click', '.js-base-display', this.imageModal);
     $(window).on('resize', this.itemSize);
 
@@ -99,31 +92,26 @@ export default class SimulationCommon extends Base {
     // });
 
     if (mobilecheck()) {
-      // $(document).on(window.eventtype, '.custom-menu__head', (event) =>{
-      $(document).on('touchstart', '.custom-menu__head', (event) => {
-        this.tapMenu(event);
-      });
+      $(document).on('touchstart', '.custom-menu__head', this.tapMenu);
     }
   }
 
-  tabs = (event) => {
-    const tabName = $(event.currentTarget).attr('data-tab');
+  tabs = ({ currentTarget }) => {
+    const tabName = $(currentTarget).data('tab');
 
-    $('.custom-menu__tabs li').removeClass('active');
-    $('.custom-menu__content').removeClass('active');
-    $(event.currentTarget).addClass('active');
-    $(tabName).addClass('active');
+    $('.custom-menu__tabs li').add('.custom-menu__content').removeClass('active');
+    $(currentTarget).add(tabName).addClass('active');
+
     scrollEvents.scrollNavDisplay();
-
     // update the scrollbar height
     scrollEvents.updateScrollBar();
   };
 
-  tapMenu = (event) => {
+  tapMenu = ({ currentTarget }) => {
     const $el = $('.custom-menu__content');
-    const $tar = $(event.currentTarget).next().next();
+    const $tar = $(currentTarget).next().next();
     const $tapNav = $('.custom-menu__tap');
-    const $tapTar = $(event.currentTarget).next();
+    const $tapTar = $(currentTarget).next();
 
     $el.removeClass('active');
     $tar.addClass('active');
@@ -131,8 +119,8 @@ export default class SimulationCommon extends Base {
     $tapTar.addClass('is-hidden');
   };
 
-  imageModal = (e) => {
-    const $el = $(e.currentTarget);
+  imageModal = ({ currentTarget }) => {
+    const $el = $(currentTarget);
     const $tar = $el.find('svg');
 
     this.modalImage = document.createElement('div');
@@ -141,7 +129,6 @@ export default class SimulationCommon extends Base {
     this.modalImage.addEventListener('click', this.imageModalClose);
 
     TweenMax.set('.js-base-display', { opacity: 0 });
-
     document.body.appendChild(this.modalImage);
   };
 
@@ -156,25 +143,23 @@ export default class SimulationCommon extends Base {
     });
   }
 
-  modals(event) {
-    const modalTar = $(event.currentTarget).attr('data-modal');
+  modals = (event) => {
+    event.preventDefault();
 
-    if (!$(event.currentTarget).hasClass('active')) {
-      $(event.currentTarget).addClass('active');
-      TweenMax.to(modalTar, 0.4, { autoAlpha: 1 });
-    } else {
-      $(event.currentTarget).removeClass('active');
-      TweenMax.to(modalTar, 0.4, { autoAlpha: 0 });
-    }
+    const $tar = $(event.currentTarget);
+    const modal = $tar.data('modal');
+    const alphaVal = !$tar.hasClass('active') ? 1 : 0;
 
-    $('.content').on(window.eventtype, ':not(.modal)', () => {
-      this.modalClose(event.currentTarget, modalTar);
-    });
-  }
+    $tar.toggleClass('active');
+    TweenMax.to(modal, 0.4, { autoAlpha: alphaVal });
 
-  modalClose = (el, target) => {
-    $(el).removeClass('active');
-    TweenMax.to(target, 0.4, { autoAlpha: 0 });
+    const modalClose = () => {
+      $tar.removeClass('active');
+      TweenMax.to(modal, 0.4, { autoAlpha: 0 });
+      $('.content').off(window.eventtype, modalClose);
+    };
+
+    $('.content').on(window.eventtype, ':not(.modal)', modalClose);
   };
 
   itemSize = () => {
@@ -186,7 +171,6 @@ export default class SimulationCommon extends Base {
 
     if (!viewBox) {
       $el.css('width', windowWidth * 0.4);
-
       return false;
     }
 
@@ -200,31 +184,25 @@ export default class SimulationCommon extends Base {
   };
 
   rotation(event) {
+    spinner.in();
+
     const selector = mobilecheck() ? '.button-container .js-rotation' : '.js-rotation.u-pc';
     const $tar = event ? $(event.currentTarget) : $(selector);
     const data = $tar.data('svg');
     const rotationDir = $tar.data('rotation');
+    const tarDir = rotationDir === 'front' ? 'back' : 'front';
     const storageKey = JSON.parse(localStorage.getItem(this.pageID));
     const key = storageKey.mark;
+    const svg = rotationDir === 'front' ? '_back.svg' : '.svg';
 
-    // front or back
-    if (rotationDir === 'front') {
-      $('.js-base-display').load(`${this.rotationPath}${data}_back.svg`, () => {
-        this.restyle();
-        this.markTextToCanvas(key);
-        this.itemSize();
-      });
+    $('.js-base-display').load(`${this.rotationPath}${data}${svg}`, () => {
+      this.restyle();
+      this.markTextToCanvas(key);
+      this.itemSize();
+      spinner.out();
+    });
 
-      $tar.data('rotation', 'back');
-    } else {
-      $('.js-base-display').load(`${this.rotationPath}${data}.svg`, () => {
-        this.restyle();
-        this.markTextToCanvas(key);
-        this.itemSize();
-      });
-
-      $tar.data('rotation', 'front');
-    }
+    $tar.data('rotation', tarDir);
   }
 
   markSetAsStart() {
@@ -326,6 +304,8 @@ export default class SimulationCommon extends Base {
   }
 
   markText(options) {
+    spinner.in();
+
     const text = (options.text) ? options.text : $('.js-mark-text').val();
     const posData = storageValue.pos || $('.js-mark-pos .active').data('pos');
     const $tar = $('.js-mark-pos').find(`[data-pos="${posData}"]`);
@@ -333,7 +313,6 @@ export default class SimulationCommon extends Base {
     const lang = $tar2.data('max-lang');
     const textLength = $tar.attr(`data-max-${lang}`);
     const encodedText = encodeURIComponent(text);
-
     const jdata = `/simulation/printcustom/validation/?lang=${lang}&max=${textLength}&text=${encodedText}&json`;
 
     $.ajax({
@@ -351,12 +330,8 @@ export default class SimulationCommon extends Base {
           $('.form-message').html(message);
         }
       })
-      .fail(() => {
-        console.log('error');
-      })
-      .always(() => {
-        console.log('complete');
-      });
+      .fail(() => { console.log('error'); })
+      .always(() => { spinner.out(); });
 
     return false;
   }
@@ -390,7 +365,7 @@ export default class SimulationCommon extends Base {
       // set value on localStrage and change the order link
       storageValue.mark = str;
       this.setLocalStrage();
-      this.orderLinkChange('mark', str);
+      this.orderLinkChange('mark', sjisText);
     }
   }
 
@@ -411,6 +386,7 @@ export default class SimulationCommon extends Base {
     if (pos) {
       const tar = `#position-${pos.toLowerCase()}`;
       const $el = $(tar).children(markFont).find('path');
+
       TweenMax.set($el, { fill: colour });
       $('.js-colour--mark').attr('data-target', tar);
 
@@ -517,9 +493,7 @@ export default class SimulationCommon extends Base {
     this.markFamily($familyEl);
     this.changeColours($colEl);
 
-    if (mark) {
-      this.markTextToCanvas();
-    }
+    if (mark) this.markTextToCanvas();
   }
 }
 

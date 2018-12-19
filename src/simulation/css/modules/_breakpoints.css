@@ -1,30 +1,18 @@
 @media (max-width: 768px) {
-  .custom-pick__fonts li {
-    width: 100%;
-  }
-
-  .custom-pick__fonts li.font--fancy {
-    width: 100%;
-  }
+  .custom-pick__fonts li { width: 100%; }
+  .custom-pick__fonts li.font--fancy { width: 100%; }
 }
 
 @media only screen and (max-width: 415px) {
-  html {
-    font-size: 2.5vw;
-  }
+  html { font-size: 2.5vw; }
 
   .u-pc,
   .u-tb {
     display: none !important;
   }
 
-  .u-sp {
-    display: block !important;
-  }
-
-  .u-inner {
-    width: 90%;
-  }
+  .u-sp { display: block !important; }
+  .u-inner { width: 90%; }
 }
 
 /* @media only screen and (max-width: 400px) {
@@ -34,15 +22,11 @@
 } */
 
 @media only screen and (max-width: 326px) {
-  html {
-    font-size: 9px;
-  }
+  html { font-size: 9px; }
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
-  html {
-    font-size: 12px;
-  }
+  html { font-size: 12px; }
 
   .u-inner {
     max-width: 980px;
@@ -51,18 +35,15 @@
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
-  .u-tb {
-    display: block !important;
-  }
+  html { font-size: 12px; }
+
+  .u-tb { display: block !important; }
 
   .u-pc,
   .u-sp {
     display: none !important;
   }
 
-  html {
-    font-size: 12px;
-  }
 
   .u-inner {
     max-width: 980px;
@@ -71,16 +52,11 @@
 }
 
 @media all and (-ms-high-contrast: none) {
-  .custom-display-core svg {
-    height: 600px;
-  }
+  .custom-display-core svg { height: 600px; }
+  .post-template-default { overflow: hidden; }
 
   .footer {
     position: absolute;
     bottom: 0;
-  }
-
-  .post-template-default {
-    overflow: hidden;
   }
 }

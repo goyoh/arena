@@ -8,10 +8,7 @@
     float: left;
     width: 49%;
     height: 2.5rem;
-
-    &:first-child {
-      margin-right: 2%;
-    }
+    &:first-child { margin-right: 2%; }
   }
 
   &__link {

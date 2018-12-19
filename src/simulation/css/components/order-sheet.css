@@ -131,10 +131,7 @@
 
     .order-sheet__item.active & {
       background-color: #222;
-
-      &::before {
-        content: '選択解除';
-      }
+      &::before { content: '選択解除'; }
     }
   }
 }

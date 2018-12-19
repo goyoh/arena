@@ -63,9 +63,7 @@ export default class SimulationCommon extends Component {
     });
 
     $(document).on(window.eventtype, '.js-modal', this.modals);
-
     $(document).on('click', '.js-base-display', this.imageModal);
-
     $(window).on('resize', this.itemSize);
 
     if (mobilecheck()) {

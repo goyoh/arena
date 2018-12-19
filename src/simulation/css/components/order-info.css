@@ -55,10 +55,7 @@
     margin-top: 1rem;
     text-align: center;
     line-height: 2.8;
-
-    &:first-child {
-      margin-top: 0;
-    }
+    &:first-child { margin-top: 0; }
   }
 
   &__link {
