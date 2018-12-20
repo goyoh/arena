@@ -78,8 +78,7 @@
 
   <link rel="stylesheet" href="<?php echo get_stylesheet_uri(); ?>" type="text/css" media="screen" />
 <style type="text/css">
-<!--
-.custom-pick-disabled {
+/*.custom-pick-disabled {
   position: absolute;
   color: red;
   background: lightgray;
@@ -91,8 +90,7 @@
     height: 40px;
     width: 91%;
   }
-}
--->
+}*/
 </style>
 <script>
   var endpoints = { <?php if($endpoints = get_query_var('endpoints')):
