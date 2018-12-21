@@ -24,26 +24,3 @@ var copy_svg_to_canvas = function( style ){
 }
 
 
-$(function(){
-
-	$(".js-order-sheet").on("click", function(){
-		//copy_svg_to_canvas(1);
-	});
-/*
-  var canvas = document.getElementById("canvas_style1");
-  var ctx = canvas.getContext('2d');
-
-  // LocalStroageからデータを取得する
-  var base64 = window.localStorage.getItem("style1");
-
-  // Imageオブジェクトを作成し、src属性にデータを設定する
-  var image = new Image();
-  image.src = base64;
-  image.onload = function(){
-    // 画像の読み込みが終わったら、Canvasに画像を反映する。
-    ctx.drawImage(image, 10, -10, 70, 125);
-  }
-*/
-});
-
-

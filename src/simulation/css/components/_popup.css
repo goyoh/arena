@@ -1,0 +1,77 @@
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: color(#000 a(80%));
+  z-index: 99;
+  transform: translateY(100%);
+
+  @mixin breakpoint phone {
+    z-index: 992;
+  }
+
+  &--order-sheet { color: #fff; }
+  &--product-info { z-index: 999; }
+  &--system-requirements { color: #fff; }
+
+  &-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 640px;
+    height: 80%;
+    margin: auto;
+    background-color: #222;
+    font-size: 12px;
+
+    @mixin breakpoint phone {
+      width: 100%;
+      top: 4.3rem;
+      bottom: auto;
+      height: calc(100% - 4.3rem);
+      font-size: 8px;
+    }
+
+    .popup--design-note & {
+      width: 1040px;
+
+      @mixin breakpoint phone {
+        width: 100%;
+      }
+    }
+
+    .docs-section {
+      color: #fff;
+      padding: 1em 2em;
+    }
+  }
+
+  &-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.667rem;
+    display: inline-block;
+    width: 2.583rem;
+    height: 3.583rem;
+    background-image: url($root/icons/icon-close.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+
+    @mixin breakpoint phone {
+      top: 0.8rem;
+    }
+
+    .popup--design-note & {
+      top: 9.2%;
+
+      @mixin breakpoint phone {
+        top: 5.2%;
+      }
+    }
+  }
+}

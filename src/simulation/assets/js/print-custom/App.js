@@ -8,6 +8,7 @@ import { loaderOut, spinner } from './Loader';
 import ColourFunction from './BaseColour';
 
 const Encoding = require('encoding-japanese');
+
 const fontServer = 'https://mark.arena-jp.com/simulation/servlet/MarkSample2';
 const markOptions = ['a', 'b', 'c', 'j', 'k', 'd', 'i', 'l', 'e', 'm', 'n', 'f', 'l', 'g', 'o'];
 // const eventtype2 = mobilecheck() ? 'touchstart' : 'click';
@@ -197,7 +198,7 @@ export default class SimulationCommon extends Base {
 
     $('.js-base-display').load(`${this.rotationPath}${data}${svg}`, () => {
       this.restyle();
-      this.markTextToCanvas(key);
+      this.markTextToCanvas(key, true);
       this.itemSize();
       spinner.out();
     });
@@ -336,7 +337,7 @@ export default class SimulationCommon extends Base {
     return false;
   }
 
-  markTextToCanvas(text) {
+  markTextToCanvas(text, isEncoded) {
     const { pos, font, bcol, col, mark } = storageValue;
 
     // convert text from UTF-8 to SJIS
@@ -345,10 +346,15 @@ export default class SimulationCommon extends Base {
     if (str) {
       // let imageElem = document.querySelector('.js-mark-check-image'); //Image element
       // const convertedText = Encoding.codeToString(sjisArray);
+      let sjisText = str;
 
-      const strArray = Encoding.stringToCode(str);
-      const sjisArray = Encoding.convert(strArray, 'SJIS', 'UNICODE');
-      const sjisText = Encoding.urlEncode(sjisArray);
+      if (!isEncoded || !mark) {
+        const strArray = Encoding.stringToCode(str);
+        const sjisArray = Encoding.convert(strArray, 'SJIS', 'UNICODE');
+
+        sjisText = Encoding.urlEncode(sjisArray);
+      }
+
       const imageUrl = `${fontServer}?bcol=${bcol}&pos=${pos}&font=${font}&col=${col}&mark=${sjisText}`;
 
       const posID = pos.toLowerCase();

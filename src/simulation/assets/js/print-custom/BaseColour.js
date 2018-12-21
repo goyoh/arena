@@ -138,7 +138,7 @@ export default class ColourFunction extends Base {
       });
     }
 
-    const txt = '<div class="bcolour__section"><p id="colour-code" class="colour-code u-text-right"></p></div>';
+    const txt = '<div class="bcolour__section"><p id="colour-code" class="bcolour__code u-text-right"></p></div>';
     $('.js-colour-scheme').append(txt);
   };
 

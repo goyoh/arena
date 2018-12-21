@@ -60,3 +60,23 @@
 .u-sp img {
   width: 100%;
 }
+
+%clear {
+  content: ' ';
+  display: table;
+}
+
+.u-clear {
+  *zoom: 1;
+
+  &::before {
+    @extend %clear;
+  }
+
+  &::after {
+    @extend %clear;
+
+    clear: both;
+  }
+}
+

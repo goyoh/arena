@@ -79,7 +79,7 @@
 
     var add_colour_collection = setInterval(function(){
       if($('#colour-code').length){
-        $('#colour-code').before("<p id=\"colour-collection\" class=\"colour-code u-text-left\"><small></small></p>").parent().addClass('u-clear');
+        $('#colour-code').before("<p id=\"colour-collection\" class=\"bcolour__code--collection u-text-left\"><small></small></p>").parent().addClass('u-clear');
         update_colour_collection();
         clearInterval(add_colour_collection);
       }

@@ -10,7 +10,6 @@
 /* CONFIG MODULES */
 
 @import 'modules/_vars.css';
-@import 'modules/_clearfix.css';
 @import 'modules/_normalize.css';
 @import 'modules/_defaults.css';
 @import 'modules/_utilities.css';
@@ -28,8 +27,8 @@
 /* OBJECTS & MODULES */
 
 @import 'modules/_buttons.css';
+@import 'modules/_overlay.css';
 @import 'modules/_inputs.css';
-@import 'modules/_lists.css';
 @import 'modules/_typography.css';
 @import 'modules/_misc.css';
 @import 'modules/_app.css';
@@ -39,19 +38,21 @@
 
 /* COMPONENTS */
 
-@import 'components/bcolour.css';
-@import 'components/design-note.css';
-@import 'components/item-info.css';
-@import 'components/mark-check.css';
-@import 'components/mark-colour.css';
-@import 'components/mark-condition.css';
-@import 'components/mark-family.css';
-@import 'components/mark-position.css';
-@import 'components/mark-print.css';
-@import 'components/mark-text.css';
-@import 'components/order-info.css';
-@import 'components/order-sheet.css';
-@import 'components/wear-type.css';
+@import 'components/_modal.css';
+@import 'components/_popup.css';
+@import 'components/_bcolour.css';
+@import 'components/_design-note.css';
+@import 'components/_item-info.css';
+@import 'components/_mark-check.css';
+@import 'components/_mark-colour.css';
+@import 'components/_mark-condition.css';
+@import 'components/_mark-family.css';
+@import 'components/_mark-position.css';
+@import 'components/_mark-print.css';
+@import 'components/_mark-text.css';
+@import 'components/_order-info.css';
+@import 'components/_order-sheet.css';
+@import 'components/_wear-type.css';
 
 
 /* VENDOR */

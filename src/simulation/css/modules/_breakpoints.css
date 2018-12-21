@@ -15,12 +15,6 @@
   .u-inner { width: 90%; }
 }
 
-/* @media only screen and (max-width: 400px) {
-  .custom-display svg {
-    width: 100%;
-  }
-} */
-
 @media only screen and (max-width: 326px) {
   html { font-size: 9px; }
 }

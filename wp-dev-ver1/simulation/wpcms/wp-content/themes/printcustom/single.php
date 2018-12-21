@@ -136,6 +136,7 @@ endif;
               <?php get_template_part('template/custom-order', 'info'); ?>
             </div>
           </div>
+
           <div class="custom-display">
             <div class="custom-display-core js-base-display">
             <?php

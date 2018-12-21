@@ -288,10 +288,7 @@
     li {
       width: calc(50% - 4px);
       margin-bottom: 12px;
-
-      &:nth-child(2n + 1) {
-        margin-left: 0;
-      }
+      &:nth-child(2n + 1) { margin-left: 0; }
     }
   }
 
@@ -414,10 +411,7 @@
 .print-item-list--multi-row {
   .print-item {
     margin: 0.5rem 0;
-
-    img {
-      width: 76.5%;
-    }
+    img { width: 76.5%; }
   }
 }
 
@@ -425,6 +419,7 @@
   display: inline-block;
   margin: 0 4px;
   transition: opacity 0.4s ease;
+  &:hover { opacity: 0.6; }
 
   @mixin breakpoint phone {
     width: 10%;
@@ -437,13 +432,7 @@
     }
   }
 
-  img {
-    width: 68.5%;
-  }
-
-  &:hover {
-    opacity: 0.6;
-  }
+  img { width: 68.5%; }
 }
 
 .product-info {
@@ -454,13 +443,8 @@
   font-size: 14px;
   overflow: auto;
 
-  strong {
-    font-size: 18px;
-  }
-
-  p {
-    margin-top: 0;
-  }
+  strong { font-size: 18px; }
+  p { margin-top: 0; }
 
   &__head {
     margin-bottom: 26px;
@@ -491,25 +475,19 @@
     text-align: center;
 
     &__image {
-      img {
-        max-width: 100%;
-      }
+      img { max-width: 100%; }
     }
   }
 }
 
-#text-canvas {
-  display: none;
-}
+#text-canvas { display: none; }
 
 .mark-check {
   padding: 1em;
   color: #fff;
   font-size: 14px;
 
-  p {
-    margin-top: 0;
-  }
+  p { margin-top: 0; }
 
   &__head {
     font-size: 16px;
@@ -519,15 +497,10 @@
   &__image {
     margin: 64px 0;
     text-align: center;
-
-    img {
-      background-color: #232b2e;
-    }
+    img { background-color: #232b2e; }
   }
 
-  &__desc {
-    padding: 0 16px;
-  }
+  &__desc { padding: 0 16px; }
 
   &__notes {
     margin-top: 24px;

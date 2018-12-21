@@ -55,4 +55,24 @@
   &__name {
     margin-bottom: 0.5rem;
   }
+
+  &__code {
+    width: 30%;
+    float: right;
+
+    @mixin breakpoint phone {
+      width: auto;
+      float: none;
+    }
+
+    &--collection {
+      width: 70%;
+      float: left;
+
+      @mixin breakpoint phone {
+        width: auto;
+        float: none;
+      }
+    }
+  }
 }
