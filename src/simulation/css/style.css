@@ -32,6 +32,7 @@
 @import 'modules/_typography.css';
 @import 'modules/_misc.css';
 @import 'modules/_app.css';
+@import 'modules/_ie.css';
 @import 'modules/_breakpoints.css';
 @import 'modules/_print.css';
 
